@@ -1,4 +1,5 @@
 import {ReactNode} from "react"
+import {Analytics} from "@vercel/analytics/react"
 
 const RootLayout = ({
   children,
@@ -6,7 +7,10 @@ const RootLayout = ({
   children: ReactNode
 }) => (
   <html lang="en">
-    <body>{children}</body>
+    <body>
+      {children}
+      <Analytics />
+    </body>
   </html>
 )
 
