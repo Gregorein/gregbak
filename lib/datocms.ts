@@ -4,7 +4,7 @@ const graphqlQuery = {
     "variables": {}
 };
 
-const api = async (query: string, variables={}): any => {
+const api = async (query: string, variables={}) => {
   const response = await fetch(
     "https://graphql.datocms.com", {
     method: "POST",
