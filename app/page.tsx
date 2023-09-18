@@ -5,9 +5,6 @@ import UI from "components/UI/UI"
 
 const getData = () => api(`
   query MyQuery {
-    nav {
-      title
-    }
     home {
       background {
         responsiveImage(imgixParams: {}) {
