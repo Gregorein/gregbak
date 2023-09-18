@@ -9,6 +9,7 @@ module.exports = {
       fixStyle: "separate-type-imports",
       prefer: "type-imports"
     }],
-    quotes: ["error", "double"]
+    quotes: ["error", "double"],
+    "react/no-unescaped-entities": [0]
   }
 }
