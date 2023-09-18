@@ -7,7 +7,7 @@ import "styles/global.css"
 
 export const metadata = {
   title: "Greg Bak Portfolio | coming soon",
-  description: "Lorem ipsum heheh"
+  description: "portfolio is under construction but the reveal is coming soon"
 }
 
 const RootLayout = ({
