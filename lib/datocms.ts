@@ -1,16 +1,25 @@
-const graphqlQuery = {
-    "operationName": "fetchAuthor",
-    "query": `query fetchAuthor { author { id name } }`,
-    "variables": {}
-};
+// const graphqlQuery = {
+//     "operationName": "fetchAuthor",
+//     "query": "query fetchAuthor { author { id name } }",
+//     "variables": {}
+// }
 
-const api = async (query: string, variables={}) => {
+const api = async (
+  query="",
+  variables={},
+  includeDrafts = false
+) => {
+  if (query === "") {
+    return null
+  }
+
   const response = await fetch(
     "https://graphql.datocms.com", {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      "authorization": `Bearer ${process.env.NEXT_DATOCMS_API_TOKEN}`
+      "authorization": `Bearer ${process.env.NEXT_DATOCMS_API_TOKEN}`,
+      ...(includeDrafts ? { "X-Include-Drafts": "true" } : {}),
     },
     body: JSON.stringify({
       query,
@@ -18,11 +27,13 @@ const api = async (query: string, variables={}) => {
     })
   })
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch data")
-  }
+  const data = await response.json()
 
-  return response.json()
+  if (!response.ok || data.errors?.length > 0) {
+    throw new Error(`${response.status} ${response.statusText}: ${JSON.stringify(data)}`)
+  }
+  
+  return data
 }
 
 export default api

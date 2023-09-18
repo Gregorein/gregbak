@@ -22,28 +22,18 @@
         "name": "next"
       }
     ],
-    "incremental": true
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "components/*": ["components/*"],
+      "lib/*": ["lib/*"],
+      "styles/*": ["styles/*"],
+      "assets/*": ["assets/*"],
+      "icons/*": ["assets/icons/*"],
+      "images/*": ["assets/images/*" ]
+    },
   },
-  "paths": {
-    "components/*": [
-      "components/*"
-    ],
-    "lib/*": [
-      "lib/*"
-    ],
-    "assets/*": [
-      "assets/*"
-    ],
-    "icons/*": [
-      "assets/icons/*"
-    ],
-    "images/*": [
-      "assets/images/*"
-    ],
-    "fonts/*": [
-      "assets/fons/*"
-    ]
-  },
+
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",

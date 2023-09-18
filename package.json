@@ -16,23 +16,27 @@
   "author": "greg bak",
   "homepage": "https://gregbak.com",
   "dependencies": {
-    "@emotion/react": "^11.11.0",
+    "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/joy": "^5.0.0-alpha.80",
-    "@vercel/analytics": "^1.0.1",
-    "framer-motion": "^10.12.12",
-    "next": "^13.4.2",
+    "@mui/joy": "^5.0.0-beta.7",
+    "@vercel/analytics": "^1.0.2",
+    "framer-motion": "^10.16.4",
+    "next": "^13.4.19",
+    "normalize.css": "^8.0.1",
     "react": "^18.2.0",
+    "react-datocms": "^4.1.3",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.6.3",
-    "@commitlint/config-conventional": "^17.6.3",
-    "@types/node": "^20.1.7",
-    "@types/react": "^18.2.6",
-    "@types/react-dom": "^18.2.4",
-    "eslint": "^8.40.0",
-    "eslint-config-next": "^13.4.2",
-    "typescript": "^5.0.4"
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@types/node": "^20.6.2",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "eslint": "^8.49.0",
+    "eslint-config-next": "^13.4.19",
+    "typescript": "^5.2.2"
   }
 }
