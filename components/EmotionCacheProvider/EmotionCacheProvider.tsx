@@ -1,7 +1,7 @@
 "use client"
 import type { Options } from "@emotion/cache"
 import type { EmotionCache } from "@emotion/react"
-import type { ReactNode, JSX } from "react"
+import type { ReactNode } from "react"
 import { useState } from "react"
 import { CacheProvider as DefaultCacheProvider } from "@emotion/react"
 import createCache from "@emotion/cache"
@@ -14,7 +14,7 @@ type CacheProviderProps = {
 
 export type EmotionCacheProviderProps = {
   children: ReactNode,
-  CacheProvider?: (props: CacheProviderProps) => JSX.Element | null
+  CacheProvider?: (props: CacheProviderProps) => ReactNode | null
   options: Omit<Options, "insertionPoint">
 }
 
