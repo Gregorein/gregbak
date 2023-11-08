@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Gregorein/gregbak.git"
+    "url": "git@github.com:Gregorein/gregbak.git"
   },
   "author": "greg bak",
   "homepage": "https://gregbak.com",
