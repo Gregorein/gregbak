@@ -1,0 +1,86 @@
+const palette = {
+  primary: {
+    50: "#fffefd",
+    100: "#f6ebdf",
+    200: "#edd8c0",
+    300: "#e3c4a0",
+    400: "#dab080",
+    500: "#c88941",
+    600: "#9e6a2e",
+    700: "#6f4a20",
+    800: "#3f2a12",
+    900: "#100a05"
+  },
+  secondary: {
+    50: "#fdfeff",
+    100: "#def4f5",
+    200: "#beeaec",
+    300: "#9fdfe3",
+    400: "#7fd5da",
+    500: "#40c0c7",
+    600: "#2e969c",
+    700: "#20696d",
+    800: "#123b3d",
+    900: "#040e0e",
+    solidBg: "var(--joy-palette-secondary-400)",
+    solidActiveBg: "var(--joy-palette-secondary-500)",
+    outlinedBorder: "var(--joy-palette-secondary-500)",
+    outlinedColor: "var(--joy-palette-secondary-700)",
+    outlinedActiveBg: "var(--joy-palette-secondary-100)",
+    softColor: "var(--joy-palette-secondary-800)",
+    softBg: "var(--joy-palette-secondary-200)",
+    softActiveBg: "var(--joy-palette-secondary-300)",
+    plainColor: "var(--joy-palette-secondary-700)",
+    plainActiveBg: "var(--joy-palette-secondary-100)",
+  },
+  danger: {
+    50: "#fcf7f5",
+    100: "#f4ddd5",
+    200: "#ebc2b5",
+    300: "#e2a895",
+    400: "#da8d75",
+    500: "#c75936",
+    600: "#9b452a",
+    700: "#6f321e",
+    800: "#6f321e",
+    900: "#6f321e"
+  },
+  success: {
+    50: "#edeffb",
+    100: "#cbd2f4",
+    200: "#aab6ec",
+    300: "#8999e5",
+    400: "#677cdd",
+    500: "#2c47c7",
+    600: "#223799",
+    700: "#18266b",
+    800: "#0e163d",
+    900: "#03050f"
+  },
+  warning: {
+    50: "#fffffe",
+    100: "#f8f2dc",
+    200: "#f1e6ba",
+    300: "#eada99",
+    400: "#eada99",
+    500: "#d5b533",
+    600: "#ac9123",
+    700: "#7e6a1a",
+    800: "#4f4310",
+    900: "#211c07"
+  },
+  neutral: {
+    50: "#ffffff",
+    100: "#e5e8e8",
+    200: "#d0d4d4",
+    300: "#bac1c1",
+    400: "#a5adae",
+    500: "#7a8687",
+    600: "#5d6667",
+    700: "#404647",
+    800: "#232627",
+    900: "#060506"
+  }
+}
+
+export default palette

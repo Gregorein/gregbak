@@ -2,7 +2,7 @@
 import { CssBaseline, CssVarsProvider } from "@mui/joy"
 import EmotionCacheProvider from "components/EmotionCacheProvider/EmotionCacheProvider"
 import type { ReactNode } from "react"
-import theme from "./theme"
+import theme from "theme/theme"
 
 export type ThemeProviderProps = {
   children: ReactNode
@@ -10,7 +10,12 @@ export type ThemeProviderProps = {
 
 const ThemeProvider = ({ children }: ThemeProviderProps) => (
   <EmotionCacheProvider options={{ key: "joy" }}>
-    <CssVarsProvider theme={theme}>
+    <CssVarsProvider
+      theme={theme}
+      defaultMode="system"
+      modeStorageKey="themeMode"
+      disableNestedContext
+    >
       <CssBaseline />
       {children}
     </CssVarsProvider>
