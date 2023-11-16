@@ -31,7 +31,8 @@
       "assets/*": ["assets/*"],
       "icons/*": ["assets/icons/*"],
       "images/*": ["assets/images/*" ],
-      "types/*": ["types/*"]
+      "types/*": ["types/*"],
+      "views/*": ["views/*"],
     },
   },
   "include": [

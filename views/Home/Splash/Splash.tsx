@@ -4,8 +4,8 @@ import Section from "components/Section/Section"
 
 import Experience from "./Experience"
 import Greeting from "./Greeting"
-import MoreButton from "./MoreButton"
 import Professions from "./Professions"
+import CtaButton from "components/CtaButton/CtaButton"
 
 type SplashProps = {
   labels: {
@@ -48,7 +48,16 @@ const Splash = ({
       <Greeting splashTitle={splashTitle} />
       <Professions splashProfessions={splashProfessions} />
       <Experience splashExperience={splashExperience} />
-      <MoreButton splashButton={splashButton} target={target} />
+      <Box
+        sx={{
+          gridArea: "cta",
+          display: "flex",
+          alignItems: "flex-end",
+          justifyContent: "flex-end",
+        }}
+      >
+        <CtaButton title={splashButton} target={target} />
+      </Box>
 
       <Head />
     </Box>

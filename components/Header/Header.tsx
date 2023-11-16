@@ -52,7 +52,7 @@ const Header = ({
       left: 0,
       right: 0,
       zIndex: 1,
-      backdropFilter: "blur(10px)"
+      backdropFilter: "blur(50px)"
     }}
   >
     <LogoLink />
