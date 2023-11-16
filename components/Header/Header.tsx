@@ -4,7 +4,43 @@ import LogoLink from "components/LogoLink/LogoLink"
 import NavigationMain from "components/NavigationMain/NavigationMain"
 import NavigationSocial from "components/NavigationSocial/NavigationSocial"
 
-const Header = () => (
+type HeaderProps = {
+  labels: {
+    navContact: string
+    navResume: string
+    navPortfolio: string
+
+    socialMail: string
+    socialLinkedin: string
+    socialGithub: string
+    socialDribble: string
+
+    cookiesButton: string
+    codeButton: string
+    uiToggle: {
+      text: string
+    }[]
+    languagesMenu: string
+  }
+}
+
+const Header = ({
+  labels: {
+    navContact,
+    navResume,
+    navPortfolio,
+
+    socialMail,
+    socialLinkedin,
+    socialGithub,
+    socialDribble,
+
+    cookiesButton,
+    codeButton,
+    uiToggle,
+    languagesMenu
+  }
+}: HeaderProps) => (
   <Box
     component="header"
     sx={{
@@ -21,11 +57,25 @@ const Header = () => (
   >
     <LogoLink />
 
-    <NavigationMain />
+    <NavigationMain labels={{
+      navContact,
+      navResume,
+      navPortfolio
+    }} />
 
-    <NavigationSocial />
+    <NavigationSocial labels={{
+      socialMail,
+      socialLinkedin,
+      socialGithub,
+      socialDribble
+    }} />
 
-    <HeaderActions />
+    <HeaderActions labels={{
+      cookiesButton,
+      codeButton,
+      uiToggle,
+      languagesMenu
+    }} />
   </Box>
 )
 export default Header

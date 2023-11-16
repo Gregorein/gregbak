@@ -1,15 +1,18 @@
 "use client"
 
 import { MenuButton } from "@mui/base"
-import { Dropdown, Menu, MenuItem, Box } from "@mui/joy"
+import { Dropdown, Menu, MenuItem, Box, Tooltip } from "@mui/joy"
 import { Languages } from "lucide-react"
 import { transition } from "theme/utils"
 
 type NavLanguageMenuProps = {
+  title: string
   langs?: string[]
 }
 
-const NavLanguageMenu = () => {
+const NavLanguageMenu = ({
+  title
+}: NavLanguageMenuProps) => {
 
   return (
     <Dropdown>
@@ -32,7 +35,9 @@ const NavLanguageMenu = () => {
           }
         }}
       >
-        <Languages />
+        <Tooltip title={title} variant="outlined">
+          <Languages />
+        </Tooltip>
       </MenuButton>
       <Menu
         placement="bottom-end"

@@ -10,7 +10,6 @@ const Main = ({ children }: MainProps) => (
   <Box
     component="main"
     sx={{
-      paddingTop: 9,
       minHeight: `calc(100vh - ${90 + 570}px)`
     }}
   >

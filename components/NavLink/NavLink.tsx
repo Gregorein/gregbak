@@ -8,11 +8,13 @@ import { transition } from "theme/utils"
 type NavLinkProps = {
   href: string
   title: string
+  scroll?: boolean
 }
 
 export const NavLink = ({
   href,
-  title
+  title,
+  scroll = true
 }: NavLinkProps) => {
   const pathname = usePathname()
 
@@ -20,6 +22,7 @@ export const NavLink = ({
     <Box
       component={Link}
       href={href}
+      scroll={scroll}
       sx={({
         display: "flex",
         gap: 3,

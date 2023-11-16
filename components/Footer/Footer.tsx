@@ -4,7 +4,35 @@ import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 import { transition } from "theme/utils"
 
-const Footer = () => (
+type FooterProps = {
+  labels: {
+    socialMail: string
+    socialLinkedin: string
+    socialGithub: string
+    socialDribble: string
+
+    ctaText: string
+    ctaTitle: string
+
+    policyButton: string
+    copyrights: string
+  }
+}
+
+const Footer = ({
+  labels: {
+    socialMail,
+    socialLinkedin,
+    socialGithub,
+    socialDribble,
+
+    ctaTitle,
+    ctaText,
+
+    policyButton,
+    copyrights,
+  }
+}: FooterProps) => (
   <Box
     component="footer"
     sx={{
@@ -12,6 +40,9 @@ const Footer = () => (
     }}
   >
     <Typography
+      component={Link}
+      href="?contact"
+      scroll={false}
       sx={{
         display: "flex",
         position: "relative",
@@ -21,7 +52,8 @@ const Footer = () => (
         margin: "0 auto 240px",
         cursor: "pointer",
         color: "primary.50",
-        whiteSpace: "pre"
+        whiteSpace: "pre",
+        textDecoration: "none"
       }}
     >
       <Typography
@@ -29,7 +61,7 @@ const Footer = () => (
         fontSize={36}
         fontFamily="anivers"
       >
-        _ready to dive in?_
+        {ctaTitle}
       </Typography>
       <Typography
         lineHeight={1}
@@ -37,17 +69,17 @@ const Footer = () => (
         fontWeight="100"
         textTransform="uppercase"
       >
-        say hello!
+        {ctaText}
       </Typography>
       <Typography
         sx={{
           position: "absolute",
-          left: "calc(50% - 125px)",
+          left: "252px",
           bottom: "-144px",
         }}
       >
         <ArrowUpRight
-          size={170}
+          size={160}
           strokeWidth={1}
           strokeLinecap="butt"
           strokeLinejoin="miter"
@@ -75,11 +107,19 @@ const Footer = () => (
           }
         }}
       >
-        __cookies & privacy policy__
+        {policyButton}
       </Typography>
 
 
-      <NavigationSocial secondary />
+      <NavigationSocial
+        labels={{
+          socialMail,
+          socialLinkedin,
+          socialGithub,
+          socialDribble
+        }}
+        secondary
+      />
 
       <Typography
         sx={{
@@ -90,7 +130,7 @@ const Footer = () => (
           color: "primary.700"
         }}
       >
-        &copy; 2013-2023 greg bak, all rights reserved.
+        {copyrights}
       </Typography>
     </Box>
   </Box>

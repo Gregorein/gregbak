@@ -20,6 +20,7 @@ const NavThemeToggle = ({ titleOn, titleOff }: NavThemeToggleProps) => {
   }, [])
 
   if (!mounted) {
+    // TODO: CircularProgress is not centered vertically
     return (
       <CircularProgress
         variant="soft"

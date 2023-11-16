@@ -1,7 +1,21 @@
 import { Box } from "@mui/joy"
 import NavLink from "components/NavLink/NavLink"
 
-const NavigationMain = () => (
+type NavigationMainProps = {
+  labels: {
+    navContact: string
+    navResume: string
+    navPortfolio: string
+  }
+}
+
+const NavigationMain = ({
+  labels: {
+    navContact,
+    navResume,
+    navPortfolio
+  }
+}: NavigationMainProps) => (
   <Box
     component="nav"
     sx={{
@@ -10,9 +24,9 @@ const NavigationMain = () => (
       gap: 3
     }}
   >
-    <NavLink href="/portfolio" title="__portfolio__" />
-    <NavLink href="/resume" title="__resume__" />
-    <NavLink href="?contact" title="__contact__" />
+    <NavLink href="/portfolio" title={navPortfolio} />
+    <NavLink href="/resume" title={navResume} />
+    <NavLink href="?contact" title={navContact} scroll={false} />
   </Box>
 )
 

@@ -4,10 +4,22 @@ import { Dribbble, Github, Linkedin, MailIcon } from "lucide-react"
 
 type NavigationSocialProps = {
   secondary?: boolean
+  labels: {
+    socialMail: string
+    socialLinkedin: string
+    socialGithub: string
+    socialDribble: string
+  }
 }
 
 const NavigationSocial = ({
-  secondary = false
+  secondary = false,
+  labels: {
+    socialMail,
+    socialLinkedin,
+    socialGithub,
+    socialDribble,
+  }
 }: NavigationSocialProps) => (
   <Box
     component="nav"
@@ -18,25 +30,25 @@ const NavigationSocial = ({
   >
     <SocialLink
       href="mailto:contact@gregbak.com"
-      title="__mail__"
+      title={socialMail}
       icon={<MailIcon />}
       secondary={secondary}
     />
     <SocialLink
       href="https://github.com/Gregorein"
-      title="__github__"
+      title={socialGithub}
       icon={<Github />}
       secondary={secondary}
     />
     <SocialLink
       href="https://dribbble.com/Gregorein"
-      title="__dribbble__"
+      title={socialDribble}
       icon={<Dribbble />}
       secondary={secondary}
     />
     <SocialLink
       href="https://www.linkedin.com/in/gregorein/"
-      title="__linkedin__"
+      title={socialLinkedin}
       icon={<Linkedin />}
       secondary={secondary}
     />

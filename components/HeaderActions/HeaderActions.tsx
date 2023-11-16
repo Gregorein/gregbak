@@ -4,7 +4,25 @@ import { Cookie, FileCode2 } from "lucide-react"
 import NavThemeToggle from "components/NavThemeToggle/NavThemeToggle"
 import NavLanguageMenu from "components/NavLanguageMenu/NavLanguageMenu"
 
-const HeaderActions = () => (
+type HeaderActionsProps = {
+  labels: {
+    cookiesButton: string
+    codeButton: string
+    uiToggle: {
+      text: string
+    }[]
+    languagesMenu: string
+  }
+}
+
+const HeaderActions = ({
+  labels: {
+    cookiesButton,
+    codeButton,
+    uiToggle,
+    languagesMenu,
+  }
+}: HeaderActionsProps) => (
   <Box
     component="nav"
     sx={{
@@ -12,10 +30,10 @@ const HeaderActions = () => (
       gap: 3
     }}
   >
-    <SocialLink href="/policy" title="__policy__" icon={<Cookie />} />
-    <SocialLink href="https://github.com/Gregorein/gregbak" title="__code__" icon={<FileCode2 />} />
-    <NavThemeToggle titleOn="ON" titleOff="OFF" />
-    <NavLanguageMenu />
+    <SocialLink href="/policy" title={cookiesButton} icon={<Cookie />} />
+    <SocialLink href="https://github.com/Gregorein/gregbak" title={codeButton} icon={<FileCode2 />} />
+    <NavThemeToggle titleOn={uiToggle[0].text} titleOff={uiToggle[1].text} />
+    <NavLanguageMenu title={languagesMenu} />
   </Box>
 )
 
