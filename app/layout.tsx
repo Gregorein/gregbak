@@ -35,9 +35,9 @@ export const generateMetadata = async (): Promise<Metadata> => {
           fallbackSeo: {
             description,
             title,
-            image: {
-              url
-            }
+            // image: {
+            //   url
+            // }
           },
           siteName
         }
@@ -51,17 +51,17 @@ export const generateMetadata = async (): Promise<Metadata> => {
       template: `%s | ${title}`
     },
     description,
-    openGraph: {
-      type: "website",
-      title,
-      description,
-      siteName,
-      images: [
-        {
-          url
-        }
-      ]
-    },
+    // openGraph: {
+    //   type: "website",
+    //   title,
+    //   description,
+    //   siteName,
+    //   images: [
+    //     {
+    //       url
+    //     }
+    //   ]
+    // },
     applicationName: siteName,
     authors: {
       name: "Greg Bak",

@@ -1,7 +1,9 @@
 import Section from "components/Section/Section"
 import api from "lib/datocms"
 import type { Metadata, ResolvingMetadata } from "next"
+import About from "views/About/About"
 import Splash from "views/Home/Splash/Splash"
+import Testimonials from "views/Testimonials/Testimonials"
 
 const getConfig = () => api(`
   query Home {
@@ -89,10 +91,10 @@ const Home = async () => {
   const {
     data: {
       home: {
-        testimonialsTitle,
-        testimonialsRandomButton,
-        testimonialsButton,
-        testimonials,
+        splashButton,
+        splashTitle,
+        splashProfessions,
+        splashExperience,
 
         aboutButton,
         aboutTitle,
@@ -100,19 +102,20 @@ const Home = async () => {
         aboutSloganRight,
         aboutSloganLeft,
 
-        expertiseCtaButton,
-        expertiseTitle,
-        expertiseCtaTitle,
-        expertiseCtaText,
-        expertiseShowcase,
+        testimonialsTitle,
+        testimonialsRandomButton,
+        testimonialsButton,
+        testimonials,
 
-        projectsButton,
-        resumeButton,
+        // expertiseCtaButton,
+        // expertiseTitle,
+        // expertiseCtaTitle,
+        // expertiseCtaText,
+        // expertiseShowcase,
 
-        splashButton,
-        splashTitle,
-        splashProfessions,
-        splashExperience,
+        // projectsButton,
+        // resumeButton,
+
       }
     }
   } = await getData()
@@ -128,12 +131,29 @@ const Home = async () => {
         }}
         target={pageIds.ABOUT}
       />
-      <Section id={pageIds.ABOUT}> target={pageIds.TESTIMONIALS}
-        About
-      </Section>
-      <Section id={pageIds.TESTIMONIALS}> taget={pageIds.EXPERTISE}
-        Testimonials
-      </Section>
+      <About
+        labels={{
+          aboutButton,
+          aboutTitle,
+          aboutText,
+          aboutSloganRight,
+          aboutSloganLeft,
+        }}
+        id={pageIds.ABOUT}
+        target={pageIds.TESTIMONIALS}
+      />
+
+      <Testimonials
+        labels={{
+          testimonialsTitle,
+          testimonialsRandomButton,
+          testimonialsButton,
+          testimonials
+        }}
+        id={pageIds.TESTIMONIALS}
+        target={pageIds.EXPERTISE}
+      />
+
       <Section id={pageIds.EXPERTISE}>
         Expertise
       </Section>

@@ -22,6 +22,7 @@ const NavLanguageMenu = ({
         }}
         slotProps={{
           root: {
+            // @ts-expect-error // disabling because typescript doesn't properly map changed slot type to slot props
             variant: "plain",
             sx: {
               cursor: "pointer",
