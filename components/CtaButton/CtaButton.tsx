@@ -20,6 +20,27 @@ const CtaButton = ({ title, target }: CtaButtonProps) => {
     })
   }
 
+  const label = title
+    .split(/(\*\*.*\*\*)/g)
+    .map(str => {
+      if (str.length == 0) {
+        return null
+      }
+      if (!str.includes("*")) {
+        return str
+      }
+
+      const parsedStr = str.replace(/(\*\*)/g, "")
+      return (
+        <Typography
+          key={parsedStr}
+          fontWeight={800}
+        >
+          {parsedStr}
+        </Typography>
+      )
+    })
+
   return (
     <Typography
       sx={{
@@ -38,7 +59,7 @@ const CtaButton = ({ title, target }: CtaButtonProps) => {
       textTransform="uppercase"
       onClick={onClick}
     >
-      {title}
+      {label}
       <ArrowDown
         size={48}
         strokeWidth={1}
