@@ -33,7 +33,7 @@ export const NavLink = ({
     >
       <Typography
         fontFamily="anivers"
-        fontSize="18px"
+        fontSize={18}
         sx={{
           transition: transition("color"),
           color: href.includes(pathname) && pathname !== "/" && "primary.500",

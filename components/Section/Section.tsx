@@ -6,12 +6,14 @@ type SectionProps = {
   height?: string
   centered?: boolean
   id?: string
+  trim?: boolean
 }
 
 const Section = ({
   children,
   height = "100vh",
   centered = false,
+  trim = false,
   id,
 }: SectionProps) => (
   <Box
@@ -22,6 +24,7 @@ const Section = ({
       minHeight: height,
       paddingTop: 9,
       display: "flex",
+      overflowX: trim ? "hidden" : "none"
     }}
   >
     <Box
@@ -32,10 +35,10 @@ const Section = ({
         margin: "0 auto",
         display: "flex",
         flexDirection: "column",
-        ...(centered ? {
+        ...(centered && {
           justifyContent: "center",
           alignItems: "center"
-        } : {})
+        })
       }}
     >
       {children}

@@ -56,7 +56,7 @@ const TestimonialsDisplay = ({
           <Typography
             fontSize={24}
             textTransform="uppercase"
-            fontWeight="bold"
+            fontWeight={800}
             sx={{
               color: mode === "dark" ? "neutral.50" : "neutral.900"
             }}
@@ -88,7 +88,7 @@ const TestimonialsDisplay = ({
             }
           }}
           fontSize={24}
-          fontWeight="bold"
+          fontWeight={800}
           textTransform="uppercase"
           onClick={handleShuffle}
         >

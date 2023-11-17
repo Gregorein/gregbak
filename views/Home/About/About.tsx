@@ -33,7 +33,7 @@ const About = ({
   const [firstParagraph, ...restOfText] = aboutText.split("\n\n")
 
   return (
-    <Section id={id} centered>
+    <Section id={id} centered trim>
       <Box
         sx={{
           position: "relative",
@@ -48,7 +48,7 @@ const About = ({
             color: "primary.500"
           }}
           fontSize={48}
-          fontWeight="bold"
+          fontWeight={800}
         >
           {aboutTitle}
         </Typography>

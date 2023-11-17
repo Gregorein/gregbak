@@ -66,7 +66,7 @@ const Footer = ({
       <Typography
         lineHeight={1}
         fontSize={144}
-        fontWeight="100"
+        fontWeight={100}
         textTransform="uppercase"
       >
         {ctaText}

@@ -1,9 +1,9 @@
-import Section from "components/Section/Section"
 import api from "lib/datocms"
 import type { Metadata, ResolvingMetadata } from "next"
-import About from "views/About/About"
+import About from "views/Home/About/About"
+import Expertise from "views/Home/Expertise/Expertise"
 import Splash from "views/Home/Splash/Splash"
-import Testimonials from "views/Testimonials/Testimonials"
+import Testimonials from "views/Home/Testimonials/Testimonials"
 
 const getConfig = () => api(`
   query Home {
@@ -71,6 +71,7 @@ const getData = () => api(`
         skills {
           title
         }
+        primary
       }
       projectsButton
       resumeButton
@@ -107,15 +108,13 @@ const Home = async () => {
         testimonialsButton,
         testimonials,
 
-        // expertiseCtaButton,
-        // expertiseTitle,
-        // expertiseCtaTitle,
-        // expertiseCtaText,
-        // expertiseShowcase,
-
-        // projectsButton,
-        // resumeButton,
-
+        expertiseCtaButton,
+        expertiseTitle,
+        expertiseCtaTitle,
+        expertiseCtaText,
+        expertiseShowcase,
+        projectsButton,
+        resumeButton,
       }
     }
   } = await getData()
@@ -154,9 +153,18 @@ const Home = async () => {
         target={pageIds.EXPERTISE}
       />
 
-      <Section id={pageIds.EXPERTISE}>
-        Expertise
-      </Section>
+      <Expertise
+        labels={{
+          expertiseCtaButton,
+          expertiseTitle,
+          expertiseCtaTitle,
+          expertiseCtaText,
+          expertiseShowcase,
+          projectsButton,
+          resumeButton,
+        }}
+        id={pageIds.EXPERTISE}
+      />
     </>
   )
 }

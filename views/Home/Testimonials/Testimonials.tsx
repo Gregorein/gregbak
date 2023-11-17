@@ -52,7 +52,7 @@ const Testimonials = ({
             color: "primary.500"
           }}
           fontSize={48}
-          fontWeight="bold"
+          fontWeight={800}
         >
           {testimonialsTitle}
         </Typography>

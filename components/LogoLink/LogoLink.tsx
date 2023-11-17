@@ -20,7 +20,7 @@ const LogoLink = () => {
     >
       <Typography
         fontFamily="anivers"
-        fontSize="21px"
+        fontSize={21}
         sx={{
           transition: transition("color"),
           display: "flex",
