@@ -62,7 +62,8 @@ const Header = ({
         navContact,
         navResume,
         navPortfolio
-      }} />
+      }}
+    />
 
     <NavigationSocial
       labels={{
@@ -70,7 +71,8 @@ const Header = ({
         socialLinkedin,
         socialGithub,
         socialDribble
-      }} />
+      }}
+    />
 
     <HeaderActions
       labels={{
@@ -78,7 +80,8 @@ const Header = ({
         codeButton,
         uiToggle,
         languagesMenu
-      }} />
+      }}
+    />
   </Box>
 )
 export default Header

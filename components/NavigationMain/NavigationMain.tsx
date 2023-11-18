@@ -24,9 +24,20 @@ const NavigationMain = ({
       gap: 3
     }}
   >
-    <NavLink href="/portfolio" title={navPortfolio} />
-    <NavLink href="/resume" title={navResume} />
-    <NavLink href="?contact" title={navContact} scroll={false} />
+    <NavLink
+      href="/portfolio"
+      title={navPortfolio}
+    // badge=""
+    />
+    <NavLink
+      href="/resume"
+      title={navResume}
+    />
+    <NavLink
+      href="?contact"
+      title={navContact}
+      scroll={false}
+    />
   </Box>
 )
 

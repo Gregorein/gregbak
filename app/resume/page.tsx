@@ -35,7 +35,6 @@ const Resume = async () => {
     resume: {
       avatar,
 
-      aboutTitle,
       aboutText,
       aboutSlug,
 
