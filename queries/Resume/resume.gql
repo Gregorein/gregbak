@@ -12,8 +12,8 @@ query Resume {
       }
     }
     
-    aboutText
     aboutSlug
+    aboutText
 
     awardsTitle
     awardsSlug
@@ -106,5 +106,8 @@ query Resume {
     }
     
     cvButton
+    cv {
+      url
+    }
   }
 }

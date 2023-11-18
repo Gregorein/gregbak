@@ -11,10 +11,8 @@ type CtaButtonProps = {
 }
 
 const CtaButton = ({ title, target }: CtaButtonProps) => {
-  const onClick = () => {
+  const handleScrollTo = () => {
     const element = document.getElementById(target)
-
-    console.log({ target, element })
 
     element?.scrollIntoView({
       behavior: "smooth"
@@ -36,7 +34,7 @@ const CtaButton = ({ title, target }: CtaButtonProps) => {
       fontSize={48}
       fontWeight={100}
       textTransform="uppercase"
-      onClick={onClick}
+      onClick={handleScrollTo}
     >
       <ExtendedTypography>
         {title}
@@ -47,7 +45,8 @@ const CtaButton = ({ title, target }: CtaButtonProps) => {
         style={{
           position: "relative",
           top: "3px"
-        }} />
+        }}
+      />
     </Typography>
   )
 }

@@ -3,7 +3,8 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   plugins: [
     "@typescript-eslint",
-    "@stylistic/eslint-plugin-jsx"
+    "@stylistic/eslint-plugin-jsx",
+    "@stylistic/eslint-plugin-js",
   ],
   root: true,
   rules: {
@@ -20,11 +21,13 @@ module.exports = {
     "@stylistic/jsx/jsx-props-no-multi-spaces": ["error"],
     "@stylistic/jsx/jsx-max-props-per-line": ["error", {
       "maximum": {
-        single: 2,
+        single: 1,
         multi: 1
       }
     }],
-    "@stylistic/jsx/jsx-closing-bracket-location": ["error", "line-aligned"]
+    "@stylistic/jsx/jsx-closing-bracket-location": ["error", "line-aligned"],
+
+    "@stylistic/js/object-property-newline": ["error"],
     
     // "sort-imports": ["error", {
     //   "ignoreCase": true,

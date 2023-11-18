@@ -152,18 +152,20 @@ const RootLayout = async ({
           <Main>
             {children}
           </Main>
-          <Footer labels={{
-            socialMail,
-            socialLinkedin,
-            socialGithub,
-            socialDribble,
+          <Footer
+            labels={{
+              socialMail,
+              socialLinkedin,
+              socialGithub,
+              socialDribble,
 
-            ctaText,
-            ctaTitle,
+              ctaText,
+              ctaTitle,
 
-            policyButton,
-            copyrights
-          }} />
+              policyButton,
+              copyrights
+            }}
+          />
         </ThemeProvider>
         <Analytics />
       </body>
