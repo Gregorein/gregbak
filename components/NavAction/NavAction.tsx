@@ -13,7 +13,7 @@ export const NavAction = ({
   icon,
   title,
 }: NavActionProps) => (
-  <Tooltip title={title} variant="outlined">
+  <Tooltip title={title} variant="solid" arrow>
     <Button
       onClick={onClick}
       sx={({

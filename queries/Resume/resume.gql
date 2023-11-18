@@ -1,0 +1,110 @@
+query Resume {
+  resume {
+    avatar {
+      responsiveImage(imgixParams: { fit: crop, w: 325, h: 440, auto: format }) {
+        sizes
+        src
+        width
+        height
+        alt
+        title
+        base64
+      }
+    }
+    
+    aboutText
+    aboutSlug
+
+    awardsTitle
+    awardsSlug
+    awardsEntries {
+      title
+      text
+      date {
+        end
+        start
+      }
+      url
+    }
+
+    contributionsTitle
+    contributionsSlug
+    contributionsEntries {
+      title
+      text
+      date {
+        end
+        start
+      }
+      url
+    }
+
+    projectsTitle
+    projectsSlug
+    projectsEntries {
+      count
+      subject
+    }
+
+    skillsTitle
+    skillsSlug
+    skillsText
+    skillsEntries {
+      title
+      entries {
+        title
+        text
+        level {
+          text
+          title
+          value
+        }
+      }
+    }
+
+    toolsTitle
+    toolsSlug
+    toolsEntries {
+      title
+      _allReferencingTools(
+        filter: {skill:{eq:false}},
+      	orderBy:title_ASC
+      ) {
+        title
+        text
+        level {
+          text
+          title
+        }
+      }
+    }
+
+    experienceTitle
+    experienceSlug
+    experienceEntries {
+      title
+      projects {
+        title
+        clients {
+          name
+          url
+        }
+        role
+      }
+    }
+
+    testimonialsTitle
+    testimonialsSlug
+    testimonialsRandomButton
+    testimonialsEntries {
+      text
+      name
+      client {
+        name
+        url
+      }
+    }
+    
+    cvButton
+  }
+}

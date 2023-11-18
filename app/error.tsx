@@ -1,14 +1,16 @@
 "use client"
 
+import Section from "components/Section/Section"
+
 const Error = (
   // props: any
 ) => {
   // console.log({ props })
 
   return (
-    <div>
+    <Section centered height="calc(100vh - 30px)">
       error happened lol
-    </div>
+    </Section>
   )
 }
 

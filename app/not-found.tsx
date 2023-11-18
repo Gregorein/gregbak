@@ -1,7 +1,9 @@
+import Section from "components/Section/Section"
+
 const NotFound = () => (
-  <div>
+  <Section centered height="calc(100vh - 30px)">
     here be NotFound
-  </div>
+  </Section>
 )
 
 export default NotFound

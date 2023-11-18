@@ -1,0 +1,14 @@
+query SEO {
+  _site {
+    globalSeo {
+      fallbackSeo {
+        description
+        title
+        image {
+          url
+        }
+      }
+      siteName
+    }
+  }
+}

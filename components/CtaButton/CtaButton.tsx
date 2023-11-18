@@ -1,6 +1,7 @@
 "use client"
 
 import { Typography } from "@mui/joy"
+import ExtendedTypography from "components/ExtendedTypography/ExtendedTypography"
 import { ArrowDown } from "lucide-react"
 import { transition } from "theme/utils"
 
@@ -19,28 +20,6 @@ const CtaButton = ({ title, target }: CtaButtonProps) => {
       behavior: "smooth"
     })
   }
-
-  const label = title
-    .split(/(\*\*.*\*\*)/g)
-    .map(str => {
-      if (str.length == 0) {
-        return null
-      }
-      if (!str.includes("*")) {
-        return str
-      }
-
-      const parsedStr = str.replace(/(\*\*)/g, "")
-      return (
-        <Typography
-          key={parsedStr}
-          fontWeight={800}
-        >
-          {parsedStr}
-        </Typography>
-      )
-    })
-
   return (
     <Typography
       sx={{
@@ -59,7 +38,9 @@ const CtaButton = ({ title, target }: CtaButtonProps) => {
       textTransform="uppercase"
       onClick={onClick}
     >
-      {label}
+      <ExtendedTypography>
+        {title}
+      </ExtendedTypography>
       <ArrowDown
         size={48}
         strokeWidth={1}

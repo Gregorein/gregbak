@@ -17,7 +17,7 @@ export const SocialLink = ({
   title,
   secondary = false
 }: SocialLinkProps) => (
-  <Tooltip title={title} variant="outlined">
+  <Tooltip title={title} variant="solid" arrow>
     <Box
       component={Link}
       href={href}

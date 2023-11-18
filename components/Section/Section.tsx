@@ -1,5 +1,6 @@
-import { Box } from "@mui/system"
 import type { ReactNode } from "react"
+
+import { Box } from "@mui/system"
 
 type SectionProps = {
   children: ReactNode
@@ -7,6 +8,10 @@ type SectionProps = {
   centered?: boolean
   id?: string
   trim?: boolean
+  maxWidth?: string
+  sx?: {
+    [key: string]: string | number
+  }
 }
 
 const Section = ({
@@ -15,6 +20,8 @@ const Section = ({
   centered = false,
   trim = false,
   id,
+  maxWidth,
+  sx
 }: SectionProps) => (
   <Box
     id={id}
@@ -29,7 +36,7 @@ const Section = ({
   >
     <Box
       sx={{
-        maxWidth: "1745px",
+        maxWidth: maxWidth || "1745px",
         flex: 1,
         width: "100%",
         margin: "0 auto",
@@ -38,7 +45,8 @@ const Section = ({
         ...(centered && {
           justifyContent: "center",
           alignItems: "center"
-        })
+        }),
+        ...(sx)
       }}
     >
       {children}

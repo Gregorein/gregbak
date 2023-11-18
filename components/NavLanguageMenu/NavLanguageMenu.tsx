@@ -1,7 +1,6 @@
 "use client"
 
-import { MenuButton } from "@mui/base"
-import { Dropdown, Menu, MenuItem, Box, Tooltip } from "@mui/joy"
+import { Dropdown, Menu, MenuItem, Box, Tooltip, MenuButton } from "@mui/joy"
 import { Languages } from "lucide-react"
 import { transition } from "theme/utils"
 
@@ -22,7 +21,6 @@ const NavLanguageMenu = ({
         }}
         slotProps={{
           root: {
-            // @ts-expect-error // disabling because typescript doesn't properly map changed slot type to slot props
             variant: "plain",
             sx: {
               cursor: "pointer",
@@ -36,7 +34,7 @@ const NavLanguageMenu = ({
           }
         }}
       >
-        <Tooltip title={title} variant="outlined">
+        <Tooltip title={title} variant="solid" arrow>
           <Languages />
         </Tooltip>
       </MenuButton>

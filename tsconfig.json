@@ -26,13 +26,14 @@
     "baseUrl": ".",
     "paths": {
       "components/*": ["components/*"],
-      "lib/*": ["lib/*"],
+      "util/*": ["util/*"],
       "theme/*": ["theme/*"],
       "assets/*": ["assets/*"],
       "icons/*": ["assets/icons/*"],
       "images/*": ["assets/images/*" ],
       "types/*": ["types/*"],
-      "views/*": ["views/*"],
+      "queries/*": ["queries/*"],
+      "views/*": ["views/*"]
     },
   },
   "include": [
@@ -43,5 +44,5 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
 }

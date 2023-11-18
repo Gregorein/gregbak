@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/joy"
 import CtaButton from "components/CtaButton/CtaButton"
 import Section from "components/Section/Section"
+import SectionTitle from "components/SectionTitle/SectionTitle"
 import TestimonialsDisplay from "components/TestimonialsDisplay/TestimonialsDisplay"
 
 type TestimonialsProps = {
@@ -47,15 +48,9 @@ const Testimonials = ({
           gap: 1,
         }}
       >
-        <Typography
-          sx={{
-            color: "primary.500"
-          }}
-          fontSize={48}
-          fontWeight={800}
-        >
+        <SectionTitle>
           {testimonialsTitle}
-        </Typography>
+        </SectionTitle>
 
         <TestimonialsDisplay
           testimonials={testimonials}

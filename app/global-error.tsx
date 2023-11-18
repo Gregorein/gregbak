@@ -1,9 +1,11 @@
 "use client"
 
+import Section from "components/Section/Section"
+
 const GlobalError = () => (
-  <div>
+  <Section centered height="calc(100vh - 30px)">
     here be GlobalError
-  </div>
+  </Section>
 )
 
 export default GlobalError

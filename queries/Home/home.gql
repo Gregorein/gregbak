@@ -1,0 +1,46 @@
+query Home {
+  home {
+    testimonialsTitle
+    testimonialsRandomButton
+    testimonialsButton
+    testimonials {
+      text
+      name
+      client {
+        name
+        url
+      }
+    }
+    aboutButton
+    aboutTitle
+    aboutText
+    aboutSloganRight {
+      text
+    }
+    aboutSloganLeft {
+      text
+    }
+    expertiseCtaButton
+    expertiseTitle
+    expertiseCtaTitle
+    expertiseCtaText
+    expertiseShowcase {
+      title
+      skills {
+        title
+      }
+      primary
+    }
+    projectsButton
+    resumeButton
+    splashButton
+    splashTitle
+    splashProfessions {
+      text
+    }
+    splashExperience {
+      count
+      subject
+    }
+  }
+}

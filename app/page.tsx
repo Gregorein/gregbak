@@ -1,35 +1,30 @@
-import api from "lib/datocms"
+import api from "util/datocms"
 import type { Metadata, ResolvingMetadata } from "next"
-import About from "views/Home/About/About"
-import Expertise from "views/Home/Expertise/Expertise"
-import Splash from "views/Home/Splash/Splash"
-import Testimonials from "views/Home/Testimonials/Testimonials"
 
-const getConfig = () => api(`
-  query Home {
-    home {
-      title
-    }
-  }
-`)
+import About from "sections/Home/About/About"
+import Expertise from "sections/Home/Expertise/Expertise"
+import Splash from "sections/Home/Splash/Splash"
+import Testimonials from "sections/Home/Testimonials/Testimonials"
+
+import config from "queries/Home/config.gql"
+import home from "queries/Home/home.gql"
 
 export const generateMetadata = async (
   _: unknown,
   parent: ResolvingMetadata
 ): Promise<Metadata> => {
   const {
-    data: {
-      home: {
-        title
-      }
+    home: {
+      title
     }
-  } = await getConfig()
+  } = await api(config)
 
   const metadata = await parent
 
   return {
     ...metadata,
     title: metadata.title.template.replace("%s", title)
+    // had to hack it because titleTemplate doesn't work for a page using the same-level layout 
   }
 }
 
@@ -39,85 +34,34 @@ const pageIds = {
   EXPERTISE: "#expertise"
 }
 
-const getData = () => api(`
-  query Home {
-    home {
-      testimonialsTitle
-      testimonialsRandomButton
-      testimonialsButton
-      testimonials {
-        text
-        name
-        client {
-          name
-          url
-        }
-      }
-      aboutButton
-      aboutTitle
-      aboutText
-      aboutSloganRight {
-        text
-      }
-      aboutSloganLeft {
-        text
-      }
-      expertiseCtaButton
-      expertiseTitle
-      expertiseCtaTitle
-      expertiseCtaText
-      expertiseShowcase {
-        title
-        skills {
-          title
-        }
-        primary
-      }
-      projectsButton
-      resumeButton
-      splashButton
-      splashTitle
-      splashProfessions {
-        text
-      }
-      splashExperience {
-        count
-        subject
-      }
-    }
-  } 
-`)
-
 const Home = async () => {
   const {
-    data: {
-      home: {
-        splashButton,
-        splashTitle,
-        splashProfessions,
-        splashExperience,
+    home: {
+      splashButton,
+      splashTitle,
+      splashProfessions,
+      splashExperience,
 
-        aboutButton,
-        aboutTitle,
-        aboutText,
-        aboutSloganRight,
-        aboutSloganLeft,
+      aboutButton,
+      aboutTitle,
+      aboutText,
+      aboutSloganRight,
+      aboutSloganLeft,
 
-        testimonialsTitle,
-        testimonialsRandomButton,
-        testimonialsButton,
-        testimonials,
+      testimonialsTitle,
+      testimonialsRandomButton,
+      testimonialsButton,
+      testimonials,
 
-        expertiseCtaButton,
-        expertiseTitle,
-        expertiseCtaTitle,
-        expertiseCtaText,
-        expertiseShowcase,
-        projectsButton,
-        resumeButton,
-      }
+      expertiseCtaButton,
+      expertiseTitle,
+      expertiseCtaTitle,
+      expertiseCtaText,
+      expertiseShowcase,
+      projectsButton,
+      resumeButton,
     }
-  } = await getData()
+  } = await api(home)
 
   return (
     <>

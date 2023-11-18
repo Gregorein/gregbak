@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/joy"
 import Section from "components/Section/Section"
+import SectionTitle from "components/SectionTitle/SectionTitle"
 import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 import Showcase from "./Showcase"
@@ -48,15 +49,9 @@ const Expertise = ({
         alignItems: "center"
       }}
     >
-      <Typography
-        sx={{
-          color: "primary.500"
-        }}
-        fontSize={48}
-        fontWeight={800}
-      >
+      <SectionTitle>
         {expertiseTitle}
-      </Typography>
+      </SectionTitle>
 
       <Box
         sx={{

@@ -1,6 +1,9 @@
 import { Box, Typography } from "@mui/joy"
+
 import CtaButton from "components/CtaButton/CtaButton"
 import Section from "components/Section/Section"
+import SectionTitle from "components/SectionTitle/SectionTitle"
+
 import Slogans from "./Slogans"
 
 type AboutProps = {
@@ -43,15 +46,10 @@ const About = ({
           width: "840px"
         }}
       >
-        <Typography
-          sx={{
-            color: "primary.500"
-          }}
-          fontSize={48}
-          fontWeight={800}
-        >
+        <SectionTitle>
           {aboutTitle}
-        </Typography>
+        </SectionTitle>
+
         <Typography
           fontFamily="anivers"
           fontSize={24}

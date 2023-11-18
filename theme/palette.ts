@@ -9,7 +9,7 @@ const palette = {
     600: "#9e6a2e",
     700: "#6f4a20",
     800: "#3f2a12",
-    900: "#100a05"
+    900: "#2E1F0D"
   },
   secondary: {
     50: "#fdfeff",

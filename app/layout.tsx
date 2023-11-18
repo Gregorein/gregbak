@@ -8,42 +8,27 @@ import Header from "components/Header/Header"
 import Footer from "components/Footer/Footer"
 import ColorSchemeInit from "components/ColorSchemeInit/ColorSchemeInit"
 import Main from "components/Main/Main"
-import api from "lib/datocms"
+import api from "util/datocms"
 import type { Metadata } from "next"
 
-const getSEO = () => api(`
-  query SEO {
-    _site {
-      globalSeo {
-        fallbackSeo {
-          description
-          title
-          image {
-            url
-          }
-        }
+import seo from "queries/root/seo.gql"
+import config from "queries/root/config.gql"
+
+export const generateMetadata = async (): Promise<Metadata> => {
+  const {
+    _site: {
+      globalSeo: {
+        fallbackSeo: {
+          description,
+          title,
+          // image: {
+          //   url
+          // }
+        },
         siteName
       }
     }
-  }
-`)
-export const generateMetadata = async (): Promise<Metadata> => {
-  const {
-    data: {
-      _site: {
-        globalSeo: {
-          fallbackSeo: {
-            description,
-            title,
-            // image: {
-            //   url
-            // }
-          },
-          siteName
-        }
-      }
-    }
-  } = await getSEO()
+  } = await api(seo)
 
   return {
     title: {
@@ -75,31 +60,6 @@ export const generateMetadata = async (): Promise<Metadata> => {
   }
 }
 
-const getConfig = () => api(`
-  query Config {
-    config {
-      maintenance
-      navContact
-      navResume
-      navPortfolio
-      socialMail
-      socialLinkedin
-      socialGithub
-      socialDribble
-      cookiesButton
-      codeButton
-      languagesMenu
-      copyrights
-      ctaText
-      ctaTitle
-      policyButton
-      uiToggle {
-        text
-      }
-    }
-  }
-`)
-
 type RootLayoutProps = {
   children: ReactNode
 }
@@ -108,32 +68,30 @@ const RootLayout = async ({
   children,
 }: RootLayoutProps) => {
   const {
-    data: {
-      config: {
-        maintenance,
+    config: {
+      maintenance,
 
-        navContact,
-        navResume,
-        navPortfolio,
+      navContact,
+      navResume,
+      navPortfolio,
 
-        socialMail,
-        socialLinkedin,
-        socialGithub,
-        socialDribble,
+      socialMail,
+      socialLinkedin,
+      socialGithub,
+      socialDribble,
 
-        cookiesButton,
-        codeButton,
-        uiToggle,
-        languagesMenu,
+      cookiesButton,
+      codeButton,
+      uiToggle,
+      languagesMenu,
 
-        ctaText,
-        ctaTitle,
+      ctaText,
+      ctaTitle,
 
-        policyButton,
-        copyrights
-      }
+      policyButton,
+      copyrights
     }
-  } = await getConfig()
+  } = await api(config)
 
   if (maintenance) {
     // TODO implement maintenance mode

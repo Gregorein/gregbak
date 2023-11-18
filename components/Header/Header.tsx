@@ -57,25 +57,28 @@ const Header = ({
   >
     <LogoLink />
 
-    <NavigationMain labels={{
-      navContact,
-      navResume,
-      navPortfolio
-    }} />
+    <NavigationMain
+      labels={{
+        navContact,
+        navResume,
+        navPortfolio
+      }} />
 
-    <NavigationSocial labels={{
-      socialMail,
-      socialLinkedin,
-      socialGithub,
-      socialDribble
-    }} />
+    <NavigationSocial
+      labels={{
+        socialMail,
+        socialLinkedin,
+        socialGithub,
+        socialDribble
+      }} />
 
-    <HeaderActions labels={{
-      cookiesButton,
-      codeButton,
-      uiToggle,
-      languagesMenu
-    }} />
+    <HeaderActions
+      labels={{
+        cookiesButton,
+        codeButton,
+        uiToggle,
+        languagesMenu
+      }} />
   </Box>
 )
 export default Header

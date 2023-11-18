@@ -18,8 +18,11 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@mui/base": "^5.0.0-beta.24",
     "@mui/joy": "^5.0.0-beta.7",
+    "@types/d3": "^7.4.3",
     "@vercel/analytics": "^1.0.2",
+    "d3": "^7.8.5",
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.292.0",
     "next": "^13.4.19",
@@ -31,6 +34,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
+    "@stylistic/eslint-plugin-jsx": "^1.3.3",
     "@types/node": "^20.6.2",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.7",

@@ -1,0 +1,22 @@
+query Config {
+  config {
+    maintenance
+    navContact
+    navResume
+    navPortfolio
+    socialMail
+    socialLinkedin
+    socialGithub
+    socialDribble
+    cookiesButton
+    codeButton
+    languagesMenu
+    copyrights
+    ctaText
+    ctaTitle
+    policyButton
+    uiToggle {
+      text
+    }
+  }
+}
