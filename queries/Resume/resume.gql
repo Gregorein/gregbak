@@ -85,6 +85,10 @@ query Resume {
       title
       projects {
         title
+        text
+        stack {
+          title
+        }
         clients {
           name
           url

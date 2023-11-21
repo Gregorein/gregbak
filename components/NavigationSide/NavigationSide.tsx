@@ -26,14 +26,14 @@ const NavigationSide = ({
           // visible
           (bounds.top >= 0 && bounds.bottom <= window.innerHeight) ||
           // clipped top
-          (bounds.top >= 0 && bounds.top <= window.innerHeight - 120)
+          (bounds.top >= 0 && bounds.top <= window.innerHeight - 120) ||
+          // covering everything
+          (bounds.top < 0 && bounds.bottom >= window.innerHeight)
         )
       })
     )
   }
   const debouncedScrollCheck = useDebounce(handleScrollCheck, 100)
-
-  console.log(visibleLinks)
 
   const handleScrollTo = (target: string) => {
     const element = document.getElementById(target)

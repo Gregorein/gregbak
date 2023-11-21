@@ -34,13 +34,15 @@ const NavLanguageMenu = ({
           }
         }}
       >
-        <Tooltip title={title} variant="solid" arrow>
+        <Tooltip
+          title={title}
+          variant="solid"
+          arrow
+        >
           <Languages />
         </Tooltip>
       </MenuButton>
-      <Menu
-        placement="bottom-end"
-      >
+      <Menu placement="bottom-end">
         <MenuItem>__lang_1__</MenuItem>
         <MenuItem>__lang_2__</MenuItem>
         <MenuItem>__lang_3__</MenuItem>

@@ -106,8 +106,8 @@ const Resume = async () => {
             projectsSlug,
             skillsSlug,
             toolsSlug,
+            testimonialsSlug,
             experienceSlug,
-            testimonialsSlug
           ]}
         />
 
@@ -270,6 +270,18 @@ const Resume = async () => {
         ))}
       </SubSection>
 
+      <SubSection
+        id={testimonialsSlug}
+        sx={{ width: "710px" }}
+      >
+        <SectionTitle textAlign="center">{testimonialsTitle}</SectionTitle>
+
+        <TestimonialsDisplay
+          testimonials={testimonialsEntries}
+          randomiseButton={testimonialsRandomButton}
+        />
+      </SubSection>
+
       <SubSection id={experienceSlug}>
         <SectionTitle textAlign="center">{experienceTitle}</SectionTitle>
 
@@ -317,7 +329,8 @@ const Resume = async () => {
                   <Box
                     sx={{
                       display: "flex",
-                      flexDirection: "column"
+                      flexDirection: "column",
+                      gap: 1
                     }}
                   >
                     <Typography
@@ -325,6 +338,19 @@ const Resume = async () => {
                       fontSize={21}
                     >
                       {project.role}
+                    </Typography>
+                    <Typography
+                      fontFamily="anivers"
+                      fontSize={18}
+                    >
+                      {project.text}
+                    </Typography>
+
+                    <Typography
+                      fontFamily="europa"
+                      fontSize={14}
+                    >
+                      {project.stack.map(({ title }) => title).join(", ")}
                     </Typography>
 
                     {project.clients.map(client => (
@@ -351,18 +377,6 @@ const Resume = async () => {
             </Box>
           ))}
         </Box>
-      </SubSection>
-
-      <SubSection
-        id={testimonialsSlug}
-        sx={{ width: "710px" }}
-      >
-        <SectionTitle textAlign="center">{testimonialsTitle}</SectionTitle>
-
-        <TestimonialsDisplay
-          testimonials={testimonialsEntries}
-          randomiseButton={testimonialsRandomButton}
-        />
       </SubSection>
     </Section >
   )

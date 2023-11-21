@@ -51,13 +51,15 @@ const Splash = ({
     >
         {splashTitle}
       </Typography>
-      <Box sx={{
-        gridArea: "professions",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-end",
-        gap: 1
-      }}>
+      <Box
+        sx={{
+          gridArea: "professions",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          gap: 1
+        }}
+      >
         {splashProfessions.map(({ text }) => (
           <Typography
             key={text}
@@ -68,12 +70,14 @@ const Splash = ({
           </Typography>
         ))}
       </Box>
-      <Box sx={{
-        gridArea: "experience",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-end"
-      }}>
+      <Box
+        sx={{
+          gridArea: "experience",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-end"
+        }}
+      >
         {splashExperience.map(({ count, subject }) => (
           <Box
             key={subject}
@@ -106,7 +110,10 @@ const Splash = ({
           justifyContent: "flex-end",
         }}
       >
-        <CtaButton title={splashButton} target={target} />
+        <CtaButton
+          title={splashButton}
+          target={target}
+        />
       </Box>
 
       <Head />

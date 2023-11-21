@@ -12,7 +12,10 @@ import { Fragment, useState } from "react"
 const polarToCartesian = (angle: number, distance: number) => {
   const x = distance * Math.cos(angle)
   const y = distance * Math.sin(angle)
-  return { x, y }
+  return {
+    x,
+    y
+  }
 }
 
 const layerColors = [
@@ -180,13 +183,16 @@ export const Radar = ({
         alignItems: "center"
       }}
     >
-      <svg height={size} width={size}>
+      <svg
+        height={size}
+        width={size}
+      >
         <g transform={`translate(${size / 2}, ${size / 2})`}>
           <circle
             cx={0}
             cy={0}
             r={RADIUS_OUTER - RING_SIZE / 2}
-            stroke={mode === "dark" ? palette.primary[900] : palette.neutral[200]}
+            stroke={mode === "dark" ? palette.primary[900] : palette.neutral[100]}
             strokeWidth={RING_SIZE}
             opacity={0.67}
             fill="none"

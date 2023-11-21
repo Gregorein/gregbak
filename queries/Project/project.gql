@@ -1,0 +1,75 @@
+query Portfolio($slug: String!) {
+  portfolio {
+    servicesTitle
+    dateTitle
+    toolsTitle
+    clientTitle
+    urlTitle
+
+    returnToPortfolioButton
+    nextProjectButton
+  }
+
+  project(filter: {slug: {eq: $slug}}) {
+    url
+    categories {
+      title
+    }
+    tools {
+      title
+    }
+    title
+    text
+    splash {
+      responsiveImage(imgixParams: {
+        fit: max,
+        auto: format,
+        maxW: "3020",
+      }) {
+        sizes
+        src
+        width
+        height
+        alt
+        title
+        base64
+      }
+    }
+    optionalText {
+      title
+      text
+    }
+    gallery {
+      mimeType
+      responsiveImage(imgixParams: {
+        fit: min,
+        auto: format,
+        maxH: "710",
+        maxW: "710",
+      }) {
+        sizes
+        src
+        width
+        height
+        alt
+        title
+        base64
+      }
+      video {
+        muxPlaybackId
+      }
+      blurhash
+      title
+      alt
+      width
+      height
+    }
+    date {
+      start
+      end
+    }
+    client {
+      name
+    }
+  }
+}

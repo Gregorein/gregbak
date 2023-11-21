@@ -1,0 +1,10 @@
+query ProjectConfig {
+  portfolio {
+    servicesTitle
+    dateTitle
+    toolsTitle
+    clientTitle
+    returnToPortfolioButton
+    nextProjectButton
+  }
+}

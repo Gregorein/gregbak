@@ -1,0 +1,40 @@
+query Portfolio {
+  portfolio {
+    title
+    text
+    filters {
+      title
+    }
+  }
+
+  allProjects {
+    slug
+    splash {
+      responsiveImage(
+        imgixParams: {
+          fit: crop,
+          crop: focalpoint,
+          h: 710,
+          w: 710,
+          auto: format
+        }
+      ) {
+        sizes
+        src
+        width
+        height
+        alt
+        title
+        base64
+      }
+    }
+    title
+    categories {
+      title
+    }
+    date {
+      start
+      end
+    }
+  }  
+}
