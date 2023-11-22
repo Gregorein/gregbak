@@ -1,27 +1,19 @@
 "use client"
 import type { Options } from "@emotion/cache"
-import type { EmotionCache } from "@emotion/react"
 import type { ReactNode } from "react"
 import { useState } from "react"
-import { CacheProvider as DefaultCacheProvider } from "@emotion/react"
+import { CacheProvider } from "@emotion/react"
 import createCache from "@emotion/cache"
 import { useServerInsertedHTML } from "next/navigation"
 
-type CacheProviderProps = {
-  value: EmotionCache,
-  children: ReactNode
-}
-
 export type EmotionCacheProviderProps = {
   children: ReactNode,
-  CacheProvider?: (props: CacheProviderProps) => JSX.Element | null
   options: Omit<Options, "insertionPoint">
 }
 
 const EmotionCacheProvider = ({
   children,
   options,
-  CacheProvider = DefaultCacheProvider,
 }: EmotionCacheProviderProps) => {
   const [registry] = useState(() => {
     const cache = createCache(options)
@@ -108,11 +100,9 @@ const EmotionCacheProvider = ({
     )
   })
 
-  return (
-    <CacheProvider value={registry.cache}>
-      {children}
-    </CacheProvider>
-  )
+  return <CacheProvider value={registry.cache}>
+    {children}
+  </CacheProvider>
 }
 
 export default EmotionCacheProvider
