@@ -24,6 +24,7 @@ const Portfolio = async () => {
       title,
       text,
       filters,
+      wip
     },
     allProjects
   } = await api(portfolio)
@@ -56,6 +57,7 @@ const Portfolio = async () => {
       <ProjectsList
         filters={filters}
         projects={allProjects}
+        wip={wip}
       />
     </Section>
   )

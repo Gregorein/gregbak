@@ -2,14 +2,13 @@ import Section from "components/Section/Section"
 import api from "util/datocms"
 
 import projectQuery from "queries/Project/project.gql"
-import { Box, Typography } from "@mui/joy"
+import { Box, Chip, Typography } from "@mui/joy"
 import ExtendedTypography from "components/ExtendedTypography/ExtendedTypography"
 import Link from "next/link"
-import { ArrowUpRight, Undo2 } from "lucide-react"
+import { ArrowUpRight, TrafficCone, Undo2 } from "lucide-react"
 import localiseDate from "util/localiseDate"
 import { transition } from "theme/utils"
 import { Image as DatoImage } from "react-datocms"
-import ReactPlayer from "react-player"
 import VideoPlayer from "components/VideoPlayer/VideoPlayer"
 
 export const generateStaticParams = async () => {
@@ -36,6 +35,7 @@ const Project = async ({
       urlTitle,
       returnToPortfolioButton,
       nextProjectButton,
+      wip
     },
     project: {
       url,
@@ -56,13 +56,10 @@ const Project = async ({
   })
 
   const stats = [
-    [servicesTitle, categories.map(category => category.title).join(", ")],
+    [servicesTitle, categories.filter(category => category.id !== wip.id).map(category => category.title).join(", ")],
     [dateTitle, date.map(dateRange => localiseDate(dateRange.start) + (dateRange.end ? ` — ${localiseDate(dateRange.end)}` : "")).join(", ")],
     [toolsTitle, tools.map(tool => tool.title).join(", ")],
   ]
-  if (client) {
-    stats.push([clientTitle, JSON.stringify(client)])
-  }
 
   return (
     <Section
@@ -72,7 +69,6 @@ const Project = async ({
         paddingBottom: 6
       }}
     >
-
       <Box
         sx={{
           display: "flex",
@@ -125,7 +121,7 @@ const Project = async ({
             gridGap: 6,
           }}
         >
-          <Typography
+          <ExtendedTypography
             fontFamily="anivers"
             fontSize={28}
             sx={{
@@ -134,7 +130,7 @@ const Project = async ({
             }}
           >
             {text}
-          </Typography>
+          </ExtendedTypography>
 
           <Box
             sx={{
@@ -144,6 +140,24 @@ const Project = async ({
               gap: 3
             }}
           >
+            {categories.find(category => category.id === wip.id) !== undefined && (
+              <Chip
+                color="primary"
+                variant="soft"
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: .5
+                  }}
+                >
+                  <TrafficCone size={16} />
+                  {wip.title}
+                </Box>
+              </Chip>
+            )}
+
             {stats.map(([title, content]) => (
               <Box
                 key={title}
@@ -170,6 +184,55 @@ const Project = async ({
               </Box>
             ))}
 
+            {client && (
+              <Box
+                sx={{
+                  flex: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <Typography
+                  fontSize={24}
+                  fontWeight={100}
+                  textTransform="lowercase"
+                >
+                  {clientTitle}
+                </Typography>
+
+                {client.url ? (
+                  <Typography
+                    component={Link}
+                    href={client.url}
+                    fontFamily="anivers"
+                    fontSize={21}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      color: "primary.500",
+                      "&:hover": {
+                        color: "primary.600"
+                      },
+                      textDecoration: "none"
+                    }}
+                  >
+                    {client.name}
+                    <ArrowUpRight
+                      size={48}
+                      strokeWidth={1.5}
+                    />
+                  </Typography>
+                ) : (
+                  <Typography
+                    fontFamily="anivers"
+                    fontSize={21}
+                  >
+                    {client.name}
+                  </Typography>
+                )}
+              </Box>
+            )}
+
             {url && (
               <Box
                 sx={{
@@ -194,11 +257,18 @@ const Project = async ({
                   sx={{
                     display: "flex",
                     alignItems: "center",
-                    gap: 1
+                    color: "primary.500",
+                    "&:hover": {
+                      color: "primary.600"
+                    },
+                    textDecoration: "none"
                   }}
                 >
                   {url}
-                  <ArrowUpRight />
+                  <ArrowUpRight
+                    size={48}
+                    strokeWidth={1.5}
+                  />
                 </Typography>
               </Box>
 

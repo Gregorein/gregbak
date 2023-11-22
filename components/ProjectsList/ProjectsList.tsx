@@ -6,6 +6,7 @@ import { useState } from "react"
 import intersection from "lodash/intersection"
 import Link from "next/link"
 import { Image as DatoImage } from "react-datocms"
+import { TrafficCone, X } from "lucide-react"
 
 type ProjectsListProps = {
   filters: {
@@ -19,17 +20,27 @@ type ProjectsListProps = {
     title: string
     categories: {
       title: string
+      id: string
     }[]
     date: {
       start: string
       end: string
     }[]
   }[]
+  wip: {
+    title: string
+    id: string
+  }
 }
 
 const ProjectsList = ({
-  filters,
-  projects
+  filters: [
+    filterAll,
+    filterWip,
+    ...filters
+  ],
+  projects,
+  wip
 }: ProjectsListProps) => {
   const [activeFilters, setActiveFilters] = useState<string[]>([])
 
@@ -52,19 +63,14 @@ const ProjectsList = ({
     return -1
   })
 
-  const handleToggleFilter = (i: number) => {
-    if (i === 0) {
-      setActiveFilters([])
-      return
-    }
-
-    if (!activeFilters.includes(filters[i].title)) {
+  const handleToggleFilter = (filter: string) => {
+    if (!activeFilters.includes(filter)) {
       setActiveFilters([
         ...activeFilters,
-        filters[i].title
+        filter
       ])
     } else {
-      setActiveFilters(activeFilters.filter(activeFilter => activeFilter !== filters[i].title))
+      setActiveFilters(activeFilters.filter(activeFilter => activeFilter !== filter))
     }
   }
 
@@ -76,23 +82,52 @@ const ProjectsList = ({
           gap: 1
         }}
       >
-        {filters.map((filter, i) => {
-          const isActive = (
-            i === 0 && activeFilters.length === 0 ||
-            i !== 0 && activeFilters.includes(filter.title)
-          )
+        <Chip
+          color="primary"
+          onClick={() => setActiveFilters([])}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: .5,
+            }}
+          >
+            <X
+              size={16}
+              strokeWidth={1.5}
+              absoluteStrokeWidth
+            />
+            {filterAll.title}
+          </Box>
+        </Chip>
 
-          return (
-            <Chip
-              key={filter.title}
-              variant={isActive ? "solid" : "plain"}
-              color={isActive ? "primary" : "neutral"}
-              onClick={() => handleToggleFilter(i)}
-            >
-              {filter.title}
-            </Chip>
-          )
-        })}
+        <Chip
+          onClick={() => handleToggleFilter(filterWip.title)}
+          variant={activeFilters.includes(filterWip.title) ? "solid" : "plain"}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: .5
+            }}
+          >
+            <TrafficCone size={16} />
+            {filterWip.title}
+          </Box>
+        </Chip>
+
+        {filters.map((filter) => (
+          <Chip
+            key={filter.title}
+            variant={activeFilters.includes(filter.title) ? "solid" : "plain"}
+            color={activeFilters.includes(filter.title) ? "primary" : "neutral"}
+            onClick={() => handleToggleFilter(filter.title)}
+          >
+            {filter.title}
+          </Chip>
+        ))}
       </Box>
 
       <Box
@@ -112,9 +147,34 @@ const ProjectsList = ({
               display: "flex",
               flexDirection: "column",
               gap: 1.5,
-              textDecoration: "none"
+              textDecoration: "none",
+              position: "relative"
             }}
           >
+            {project.categories.find(category => category.id === wip.id) !== undefined && (
+              <Chip
+                variant="soft"
+                sx={{
+                  position: "absolute",
+                  zIndex: 1,
+                  top: 0,
+                  right: 0,
+                  transform: "translate(10px, -50%)"
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: .5
+                  }}
+                >
+                  <TrafficCone size={16} />
+                  {wip.title}
+                </Box>
+              </Chip>
+            )}
+
             <Box
               sx={(theme: Theme) => ({
                 aspectRatio: "1 / 1",
@@ -131,7 +191,7 @@ const ProjectsList = ({
                 gap: 1
               }}
             >
-              {project.categories.map(category => (
+              {project.categories.filter(category => category.id !== wip.id).map(category => (
                 <Chip
                   key={category.title}
                   variant="plain"

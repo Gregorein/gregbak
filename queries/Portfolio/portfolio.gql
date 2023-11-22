@@ -5,9 +5,13 @@ query Portfolio {
     filters {
       title
     }
+    wip {
+      title
+      id
+    }
   }
 
-  allProjects {
+  allProjects(first:50) {
     slug
     splash {
       responsiveImage(
@@ -31,6 +35,7 @@ query Portfolio {
     title
     categories {
       title
+      id
     }
     date {
       start

@@ -5,14 +5,18 @@ query Portfolio($slug: String!) {
     toolsTitle
     clientTitle
     urlTitle
-
     returnToPortfolioButton
     nextProjectButton
+    wip {
+      id
+      title
+    }
   }
 
   project(filter: {slug: {eq: $slug}}) {
     url
     categories {
+      id
       title
     }
     tools {
