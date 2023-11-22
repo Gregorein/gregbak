@@ -1,4 +1,4 @@
-import { Box, Tooltip, Typography } from "@mui/joy"
+import { Box, Typography } from "@mui/joy"
 import { Image as DatoImage } from "react-datocms"
 
 import api from "util/datocms"
@@ -17,6 +17,9 @@ import NavigationSide from "components/NavigationSide/NavigationSide"
 import AchievementList from "components/AchievementList/AchievementList"
 import { FileBadge } from "lucide-react"
 import { transition } from "theme/utils"
+import Experience from "sections/Resume/Experience/Experience"
+import Tools from "sections/Resume/Tools/Tools"
+import Projects from "sections/Resume/Projects/Projects"
 
 export const generateMetadata = async () => {
   const {
@@ -170,105 +173,24 @@ const Resume = async () => {
         <AchievementList entries={contributionsEntries} />
       </SubSection>
 
-      <SubSection id={projectsSlug}>
-        <SectionTitle textAlign="center">{projectsTitle}</SectionTitle>
-
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap"
-          }}
-        >
-          {projectsEntries.map((project, i) => (
-            <>
-              <Typography
-                sx={{
-                  display: "inline-flex",
-                  alignItems: "center"
-                }}
-              >
-                <Typography
-                  fontSize={72}
-                  fontWeight={800}
-                >
-                  {project.count}
-                </Typography>
-                <Typography
-                  fontSize={72}
-                  fontFamily="anivers"
-                  textTransform="uppercase"
-                >
-                  {project.subject}
-                </Typography>
-              </Typography>
-              {i !== projectsEntries.length - 1 && (
-                <Typography
-                  fontSize={72}
-                  fontWeight={100}
-                  sx={{
-                    paddingLeft: 3,
-                    paddingRight: 3
-                  }}
-                >
-                  /
-                </Typography>
-              )}
-            </>
-          ))}
-        </Box>
-      </SubSection>
-
-      <Skills
-        skillsEntries={skillsEntries}
-        skillsSlug={skillsSlug}
-        skillsText={skillsText}
-        skillsTitle={skillsTitle}
+      <Projects
+        projectsSlug={projectsSlug}
+        projectsTitle={projectsTitle}
+        projectsEntries={projectsEntries}
       />
 
-      <SubSection id={toolsSlug}>
-        <SectionTitle textAlign="center">{toolsTitle}</SectionTitle>
+      <Skills
+        skillsSlug={skillsSlug}
+        skillsTitle={skillsTitle}
+        skillsText={skillsText}
+        skillsEntries={skillsEntries}
+      />
 
-        {toolsEntries.map(group => (
-          <Box key={group.title}>
-            <Typography
-              fontFamily="anivers"
-              fontSize={28}
-              fontWeight={800}
-              sx={{
-                color: "primary.500"
-              }}
-              textTransform="lowercase"
-            >
-              {group.title}:
-            </Typography>
-            <Box
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 1,
-                paddingLeft: 3
-              }}
-            >
-              {group._allReferencingTools.map((tool, i) => (
-                <Tooltip
-                  key={tool.title}
-                  title={`${tool.level?.title} (${tool.level?.text})`}
-                  variant="solid"
-                  arrow
-                >
-                  <Typography
-                    fontFamily="anivers"
-                    fontSize={24}
-                  >
-                    {tool.title}{i !== group._allReferencingTools.length - 1 && ","}
-                  </Typography>
-
-                </Tooltip>
-              ))}
-            </Box>
-          </Box>
-        ))}
-      </SubSection>
+      <Tools
+        toolsSlug={toolsSlug}
+        toolsTitle={toolsTitle}
+        toolsEntries={toolsEntries}
+      />
 
       <SubSection
         id={testimonialsSlug}
@@ -282,102 +204,11 @@ const Resume = async () => {
         />
       </SubSection>
 
-      <SubSection id={experienceSlug}>
-        <SectionTitle textAlign="center">{experienceTitle}</SectionTitle>
-
-        <Box
-          sx={{
-            display: "flex",
-            gap: 6,
-            justifyContent: "space-between"
-          }}
-        >
-          {experienceEntries.map(group => (
-            <Box
-              key={group.title}
-              sx={{
-                width: "325px",
-                display: "flex",
-                gap: 3,
-                flexDirection: "column"
-              }}
-            >
-              <Typography
-                fontSize={24}
-                fontWeight={100}
-                textAlign="center"
-              >
-                {group.title}
-              </Typography>
-
-              {group.projects.map(project => (
-                <Box
-                  key={project.title}
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column"
-                  }}
-                >
-                  <Typography
-                    fontFamily="anivers"
-                    fontSize={32}
-                    fontWeight={800}
-                  >
-                    {project.title}
-                  </Typography>
-
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: 1
-                    }}
-                  >
-                    <Typography
-                      fontFamily="anivers"
-                      fontSize={21}
-                    >
-                      {project.role}
-                    </Typography>
-                    <Typography
-                      fontFamily="anivers"
-                      fontSize={18}
-                    >
-                      {project.text}
-                    </Typography>
-
-                    <Typography
-                      fontFamily="europa"
-                      fontSize={14}
-                    >
-                      {project.stack.map(({ title }) => title).join(", ")}
-                    </Typography>
-
-                    {project.clients.map(client => (
-                      <Typography
-                        component={Link}
-                        key={client.name}
-                        fontFamily="anivers"
-                        fontSize={21}
-                        href={client.url}
-                        sx={{
-                          textDecoration: "none",
-                          color: "primary.500",
-                          "&:hover": {
-                            color: "primary.600"
-                          }
-                        }}
-                      >
-                        @{client.name}
-                      </Typography>
-                    ))}
-                  </Box>
-                </Box>
-              ))}
-            </Box>
-          ))}
-        </Box>
-      </SubSection>
+      <Experience
+        experienceSlug={experienceSlug}
+        experienceTitle={experienceTitle}
+        experienceEntries={experienceEntries}
+      />
     </Section >
   )
 }

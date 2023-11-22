@@ -1,17 +1,9 @@
 import Section from "components/Section/Section"
 
-type LoadingProps = {}
-
-const Loading = ({ ...loadingProps
-
-}: LoadingProps) => {
-  console.log({ loadingProps })
-
-  return (
-    <Section>
-      Loading yo!
-    </Section>
-  )
-}
+const Loading = () => (
+  <Section centered>
+    Loading yo!
+  </Section>
+)
 
 export default Loading

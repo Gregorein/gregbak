@@ -38,7 +38,11 @@ const Expertise = ({
   },
   id
 }: ExpertiseProps) => (
-  <Section id={id} centered height="calc(100vh - 30px)">
+  <Section
+    id={id}
+    centered
+    height="calc(100vh - 30px)"
+  >
     <Box
       sx={{
         display: "flex",
@@ -57,7 +61,8 @@ const Expertise = ({
         sx={{
           display: "flex",
           gap: 3
-        }}>
+        }}
+      >
         {expertiseShowcase.map(expertise => (
           <Showcase
             key={expertise.title}
@@ -144,7 +149,8 @@ const Expertise = ({
           style={{
             position: "relative",
             top: "3px"
-          }} />
+          }}
+        />
       </Typography>
       <Typography
         component={Link}
@@ -167,7 +173,8 @@ const Expertise = ({
           style={{
             position: "relative",
             top: "3px"
-          }} />
+          }}
+        />
       </Typography>
     </Box>
   </Section>

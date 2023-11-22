@@ -17,7 +17,11 @@ export const SocialLink = ({
   title,
   secondary = false
 }: SocialLinkProps) => (
-  <Tooltip title={title} variant="solid" arrow>
+  <Tooltip
+    title={title}
+    variant="solid"
+    arrow
+  >
     <Box
       component={Link}
       href={href}
@@ -25,6 +29,8 @@ export const SocialLink = ({
         display: "flex",
         alignItems: "center"
       }}
+      target="_blank"
+      rel="noopener noreferrer"
     >
       <Typography
         sx={{

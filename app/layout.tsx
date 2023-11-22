@@ -18,6 +18,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
   const {
     _site: {
       globalSeo: {
+        //TODO: finish global seo
         fallbackSeo: {
           description,
           title,
@@ -36,6 +37,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
       template: `%s | ${title}`
     },
     description,
+    // TODO: finish openGraph
     // openGraph: {
     //   type: "website",
     //   title,
@@ -126,8 +128,10 @@ const RootLayout = async ({
           content="#060506"
         />
 
-        <link rel="stylesheet" href="https://use.typekit.net/vrv7gnc.css" />
-        {/*<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;700&display=optional" />*/}
+        <link
+          rel="stylesheet"
+          href="https://use.typekit.net/vrv7gnc.css"
+        />
       </head>
       <body>
         <ColorSchemeInit />

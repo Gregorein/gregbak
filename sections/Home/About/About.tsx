@@ -36,7 +36,11 @@ const About = ({
   const [firstParagraph, ...restOfText] = aboutText.split("\n\n")
 
   return (
-    <Section id={id} centered trim>
+    <Section
+      id={id}
+      centered
+      trim
+    >
       <Box
         sx={{
           position: "relative",
@@ -62,9 +66,15 @@ const About = ({
             </>
           ))}
         </Typography>
-        <CtaButton title={aboutButton} target={target} />
+        <CtaButton
+          title={aboutButton}
+          target={target}
+        />
 
-        <Slogans aboutSloganLeft={aboutSloganLeft} aboutSloganRight={aboutSloganRight} />
+        <Slogans
+          aboutSloganLeft={aboutSloganLeft}
+          aboutSloganRight={aboutSloganRight}
+        />
       </Box>
     </Section >
   )

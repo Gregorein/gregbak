@@ -14,7 +14,10 @@ type ProjectsListProps = {
   }[],
   projects: {
     splash: {
-      responsiveImage: object
+      responsiveImage: {
+        [key: string]: string | number | boolean
+        width: number
+      }
     }
     slug: string
     title: string

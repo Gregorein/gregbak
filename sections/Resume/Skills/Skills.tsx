@@ -64,7 +64,7 @@ const Skills = (
                 {activeEntry.title}
               </Typography>
 
-              {/* <Typography
+              <Typography
                 fontSize={18}
                 fontWeight={100}
                 textTransform="lowercase"
@@ -73,7 +73,7 @@ const Skills = (
                 }}
               >
                 {activeEntry.level.text}
-              </Typography> */}
+              </Typography>
               <Typography
                 fontSize={24}
                 fontFamily="anivers"

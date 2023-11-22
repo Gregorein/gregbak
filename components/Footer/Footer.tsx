@@ -110,7 +110,6 @@ const Footer = ({
         {policyButton}
       </Typography>
 
-
       <NavigationSocial
         labels={{
           socialMail,
@@ -135,4 +134,5 @@ const Footer = ({
     </Box>
   </Box>
 )
+
 export default Footer

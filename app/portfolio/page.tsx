@@ -47,6 +47,7 @@ const Portfolio = async () => {
       >
         {title}
       </Typography>
+
       <Typography
         fontFamily="anivers"
         fontSize={28}

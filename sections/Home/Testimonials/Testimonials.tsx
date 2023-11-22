@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/joy"
+import { Box } from "@mui/joy"
 import CtaButton from "components/CtaButton/CtaButton"
 import Section from "components/Section/Section"
 import SectionTitle from "components/SectionTitle/SectionTitle"
@@ -32,7 +32,10 @@ const Testimonials = ({
   id,
   target
 }: TestimonialsProps) => (
-  <Section id={id} centered>
+  <Section
+    id={id}
+    centered
+  >
     <Box
       sx={{
         display: "flex",
@@ -57,7 +60,10 @@ const Testimonials = ({
           randomiseButton={testimonialsRandomButton}
         />
       </Box>
-      <CtaButton title={testimonialsButton} target={target} />
+      <CtaButton
+        title={testimonialsButton}
+        target={target}
+      />
     </Box>
   </Section>
 )

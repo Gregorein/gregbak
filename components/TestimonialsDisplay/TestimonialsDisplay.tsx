@@ -38,7 +38,10 @@ const TestimonialsDisplay = ({
         gap: 3
       }}
     >
-      <Typography fontSize={56} fontFamily="anivers">
+      <Typography
+        fontSize={56}
+        fontFamily="anivers"
+      >
         "{testimonials[index].text}"
       </Typography>
 

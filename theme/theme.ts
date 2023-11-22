@@ -1,4 +1,4 @@
-import type { PaletteRange } from "@mui/joy/styles"
+ import type { PaletteRange } from "@mui/joy/styles"
 import { extendTheme } from "@mui/joy/styles"
 import palette from "theme/palette"
 
@@ -27,13 +27,6 @@ const extendedTheme = extendTheme({
     display: "anivers",
     body: "europa",
     code: "Fira Code"
-  },
-  components: {
-    JoyBox: {
-      styleOverrides: {
-        
-      }
-    }
   }
 })
 

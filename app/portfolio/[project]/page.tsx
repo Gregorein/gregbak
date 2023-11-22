@@ -2,14 +2,19 @@ import Section from "components/Section/Section"
 import api from "util/datocms"
 
 import projectQuery from "queries/Project/project.gql"
-import { Box, Chip, Typography } from "@mui/joy"
+import { Box, Typography } from "@mui/joy"
 import ExtendedTypography from "components/ExtendedTypography/ExtendedTypography"
 import Link from "next/link"
-import { ArrowUpRight, TrafficCone, Undo2 } from "lucide-react"
+import { ArrowUpRight, Undo2 } from "lucide-react"
 import localiseDate from "util/localiseDate"
 import { transition } from "theme/utils"
 import { Image as DatoImage } from "react-datocms"
-import VideoPlayer from "components/VideoPlayer/VideoPlayer"
+import Gallery from "sections/Project/Gallery/Gallery"
+import OptionalSection from "sections/Project/OptionalSection/OptionalSection"
+import StatsURL from "sections/Project/StatsURL/StatsURL"
+import StatsClient from "sections/Project/StatsClient/StatsClient"
+import StatsGeneric from "sections/Project/StatsGeneric/StatsGeneric"
+import StatsWip from "sections/Project/StatsWip/StatsWip"
 
 export const generateStaticParams = async () => {
   const { allProjects } = await api("query allProjectSlugs { allProjects { slug } }")
@@ -55,7 +60,9 @@ const Project = async ({
     },
   })
 
-  const stats = [
+  const isWip = categories.find(category => category.id === wip.id) !== undefined
+
+  const stats: string[][] = [
     [servicesTitle, categories.filter(category => category.id !== wip.id).map(category => category.title).join(", ")],
     [dateTitle, date.map(dateRange => localiseDate(dateRange.start) + (dateRange.end ? ` — ${localiseDate(dateRange.end)}` : "")).join(", ")],
     [toolsTitle, tools.map(tool => tool.title).join(", ")],
@@ -140,139 +147,19 @@ const Project = async ({
               gap: 3
             }}
           >
-            {categories.find(category => category.id === wip.id) !== undefined && (
-              <Chip
-                color="primary"
-                variant="soft"
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: .5
-                  }}
-                >
-                  <TrafficCone size={16} />
-                  {wip.title}
-                </Box>
-              </Chip>
-            )}
+            {isWip && <StatsWip wip={wip} />}
 
-            {stats.map(([title, content]) => (
-              <Box
-                key={title}
-                sx={{
-                  flex: 1,
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <Typography
-                  fontSize={24}
-                  fontWeight={100}
-                  textTransform="lowercase"
-                >
-                  {title}
-                </Typography>
+            <StatsGeneric stats={stats} />
 
-                <Typography
-                  fontFamily="anivers"
-                  fontSize={21}
-                >
-                  {content}
-                </Typography>
-              </Box>
-            ))}
+            <StatsClient
+              client={client}
+              clientTitle={clientTitle}
+            />
 
-            {client && (
-              <Box
-                sx={{
-                  flex: 1,
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <Typography
-                  fontSize={24}
-                  fontWeight={100}
-                  textTransform="lowercase"
-                >
-                  {clientTitle}
-                </Typography>
-
-                {client.url ? (
-                  <Typography
-                    component={Link}
-                    href={client.url}
-                    fontFamily="anivers"
-                    fontSize={21}
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      color: "primary.500",
-                      "&:hover": {
-                        color: "primary.600"
-                      },
-                      textDecoration: "none"
-                    }}
-                  >
-                    {client.name}
-                    <ArrowUpRight
-                      size={48}
-                      strokeWidth={1.5}
-                    />
-                  </Typography>
-                ) : (
-                  <Typography
-                    fontFamily="anivers"
-                    fontSize={21}
-                  >
-                    {client.name}
-                  </Typography>
-                )}
-              </Box>
-            )}
-
-            {url && (
-              <Box
-                sx={{
-                  flex: 1,
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <Typography
-                  fontSize={24}
-                  fontWeight={100}
-                  textTransform="lowercase"
-                >
-                  {urlTitle}
-                </Typography>
-
-                <Typography
-                  component={Link}
-                  href={url}
-                  fontFamily="anivers"
-                  fontSize={21}
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    color: "primary.500",
-                    "&:hover": {
-                      color: "primary.600"
-                    },
-                    textDecoration: "none"
-                  }}
-                >
-                  {url}
-                  <ArrowUpRight
-                    size={48}
-                    strokeWidth={1.5}
-                  />
-                </Typography>
-              </Box>
-
-            )}
+            <StatsURL
+              url={url}
+              urlTitle={urlTitle}
+            />
           </Box>
         </Box>
       </Box>
@@ -286,84 +173,9 @@ const Project = async ({
         <DatoImage data={splash.responsiveImage} />
       </Box>
 
-      {optionalText.length > 0 && (
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gridAutoColumns: "1fr",
-            gap: 3
-          }}
-        >
-          {optionalText.map(({ title, text }) => (
-            <Box
-              key={title}
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 3
-              }}
-            >
-              <Typography
-                fontSize={48}
-                fontWeight={800}
-                sx={{
-                  color: "primary.500"
-                }}
-              >
-                {title}
-              </Typography>
+      <OptionalSection optionalText={optionalText} />
 
-              <Typography
-                fontFamily="anivers"
-                fontSize={28}
-              >
-                {text}
-              </Typography>
-            </Box>
-          ))}
-        </Box>
-      )}
-
-      {gallery.length > 0 && (
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: 3,
-            alignItems: "flex-start",
-            justifyContent: "center",
-          }}
-        >
-          {gallery.map(({
-            mimeType,
-            responsiveImage,
-            video,
-            blurhash,
-            title,
-            alt,
-            height,
-            width
-          }, i) => (
-            mimeType.includes("image") ? (
-              <DatoImage
-                key={i}
-                data={responsiveImage}
-              />
-            ) : (
-              <VideoPlayer
-                key={i}
-                video={video}
-                blurhash={blurhash}
-                title={title}
-                alt={alt}
-                height={height}
-                width={width}
-              />
-            )
-          ))}
-        </Box>
-      )}
+      <Gallery gallery={gallery} />
 
       <Typography
         component={Link}

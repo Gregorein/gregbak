@@ -1,0 +1,6 @@
+query Policy {
+  policy {
+    title
+    text
+  }
+}

@@ -30,7 +30,11 @@ const NavThemeToggle = ({ titleOn, titleOff }: NavThemeToggleProps) => {
   }
 
   return (
-    <Tooltip title={isDark ? titleOn : titleOff} variant="solid" arrow>
+    <Tooltip
+      title={isDark ? titleOn : titleOff}
+      variant="solid"
+      arrow
+    >
       <Box
         onClick={() => setMode(isDark ? "light" : "dark")}
         sx={{

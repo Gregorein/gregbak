@@ -30,9 +30,20 @@ const HeaderActions = ({
       gap: 3
     }}
   >
-    <SocialLink href="/policy" title={cookiesButton} icon={<Cookie />} />
-    <SocialLink href="https://github.com/Gregorein/gregbak" title={codeButton} icon={<FileCode2 />} />
-    <NavThemeToggle titleOn={uiToggle[0].text} titleOff={uiToggle[1].text} />
+    <SocialLink
+      href="/policy"
+      title={cookiesButton}
+      icon={<Cookie />}
+    />
+    <SocialLink
+      href="https://github.com/Gregorein/gregbak"
+      title={codeButton}
+      icon={<FileCode2 />}
+    />
+    <NavThemeToggle
+      titleOn={uiToggle[0].text}
+      titleOff={uiToggle[1].text}
+    />
     <NavLanguageMenu title={languagesMenu} />
   </Box>
 )

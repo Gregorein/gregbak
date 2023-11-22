@@ -14,7 +14,7 @@ type CacheProviderProps = {
 
 export type EmotionCacheProviderProps = {
   children: ReactNode,
-  CacheProvider?: (props: CacheProviderProps) => ReactNode | null
+  CacheProvider?: (props: CacheProviderProps) => JSX.Element | null
   options: Omit<Options, "insertionPoint">
 }
 
@@ -52,7 +52,10 @@ const EmotionCacheProvider = ({
       return prevInserted
     }
 
-    return { cache, flush }
+    return {
+      cache,
+      flush
+    }
   })
 
   useServerInsertedHTML(() => {
@@ -75,7 +78,10 @@ const EmotionCacheProvider = ({
 
       if (typeof style !== "boolean") {
         if (isGlobal) {
-          globals.push({ name, style })
+          globals.push({
+            name,
+            style
+          })
         } else {
           styles += style
           dataEmotionAttribute += ` ${name}`
@@ -102,9 +108,11 @@ const EmotionCacheProvider = ({
     )
   })
 
-  return <CacheProvider value={registry.cache}>
-    {children}
-  </CacheProvider>
+  return (
+    <CacheProvider value={registry.cache}>
+      {children}
+    </CacheProvider>
+  )
 }
 
 export default EmotionCacheProvider
