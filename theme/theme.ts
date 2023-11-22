@@ -14,6 +14,7 @@ declare module "@mui/joy/styles" {
 
 
 const extendedTheme = extendTheme({
+  cssVarPrefix: "",
   colorSchemes: {
     light: {
       palette

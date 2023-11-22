@@ -1,18 +1,18 @@
 import type { ReactNode } from "react"
 import { Analytics } from "@vercel/analytics/react"
-import ThemeProvider from "../components/ThemeProvider/ThemeProvider"
+import StyleProvider from "../components/StyleProvider/StyleProvider"
 
 import "normalize.css"
 import "theme/global.css"
 import Header from "components/Header/Header"
 import Footer from "components/Footer/Footer"
-import ColorSchemeInit from "components/ColorSchemeInit/ColorSchemeInit"
 import Main from "components/Main/Main"
 import api from "util/datocms"
 import type { Metadata } from "next"
 
 import seo from "queries/root/seo.gql"
 import config from "queries/root/config.gql"
+import ColorSchemeInit from "components/ColorSchemeInit/ColorSchemeInit"
 
 export const generateMetadata = async (): Promise<Metadata> => {
   const {
@@ -101,41 +101,41 @@ const RootLayout = async ({
 
   return (
     <html lang="en">
-      <head>
-        <link
-          rel="icon"
-          type="image/ico"
-          sizes="32x32"
-          href="/favicon.ico"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="favicon/apple-touch-icon.png"
-        />
-        <link
-          rel="manifest"
-          href="favicon/site.webmanifest"
-        />
-        <link
-          rel="mask-icon"
-          href="favicon/safari-pinned-tab.svg"
-          color="#C88941"
-        />
+      <StyleProvider>
+        <head>
+          <ColorSchemeInit />
+          <link
+            rel="icon"
+            type="image/ico"
+            sizes="32x32"
+            href="/favicon.ico"
+          />
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="favicon/apple-touch-icon.png"
+          />
+          <link
+            rel="manifest"
+            href="favicon/site.webmanifest"
+          />
+          <link
+            rel="mask-icon"
+            href="favicon/safari-pinned-tab.svg"
+            color="#C88941"
+          />
 
-        <meta
-          name="msapplication-TileColor"
-          content="#060506"
-        />
+          <meta
+            name="msapplication-TileColor"
+            content="#060506"
+          />
 
-        <link
-          rel="stylesheet"
-          href="https://use.typekit.net/vrv7gnc.css"
-        />
-      </head>
-      <body>
-        <ColorSchemeInit />
-        <ThemeProvider>
+          <link
+            rel="stylesheet"
+            href="https://use.typekit.net/vrv7gnc.css"
+          />
+        </head>
+        <body>
           <Header
             labels={{
               navContact,
@@ -170,9 +170,9 @@ const RootLayout = async ({
               copyrights
             }}
           />
-        </ThemeProvider>
-        <Analytics />
-      </body>
+          <Analytics />
+        </body>
+      </StyleProvider>
     </html>
   )
 }

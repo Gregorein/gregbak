@@ -1,6 +1,7 @@
 "use client"
 
-import { Typography, useColorScheme } from "@mui/joy"
+import type { Theme } from "@mui/joy"
+import { Typography } from "@mui/joy"
 import { Box } from "@mui/system"
 import { Shuffle } from "lucide-react"
 import Link from "next/link"
@@ -23,7 +24,6 @@ const TestimonialsDisplay = ({
   testimonials,
   randomiseButton
 }: TestimonialsDisplayProps) => {
-  const { mode } = useColorScheme()
   const [index, setIndex] = useState(0)
 
   const handleShuffle = () => {
@@ -60,18 +60,24 @@ const TestimonialsDisplay = ({
             fontSize={24}
             textTransform="uppercase"
             fontWeight={800}
-            sx={{
-              color: mode === "dark" ? "neutral.50" : "neutral.900"
-            }}
+            sx={(theme: Theme) => ({
+              color: theme.palette.text.primary
+            })}
           >
             {testimonials[index].name}
             <Typography
               component={Link}
               href={testimonials[index].client.url}
-              sx={{
-                color: mode === "dark" ? "neutral.300" : "neutral.600",
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={(theme: Theme) => ({
+                transition: transition("color"),
+                color: theme.palette.text.tertiary,
+                "&:hover": {
+                  color: "primary.600"
+                },
                 textDecoration: "none"
-              }}
+              })}
             >
               @{testimonials[index].client.name}
             </Typography>

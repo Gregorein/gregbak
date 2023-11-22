@@ -1,6 +1,7 @@
 "use client"
 
-import { Box, Typography, useColorScheme } from "@mui/joy"
+import type { Theme } from "@mui/joy"
+import { Box, Typography } from "@mui/joy"
 
 type SlogansProps = {
   aboutSloganLeft: {
@@ -11,35 +12,30 @@ type SlogansProps = {
   }[]
 }
 
-const sloganColors = [
-  // [thin, bold][dark, light]
-  ["neutral.300", "neutral.600"],
-  ["neutral.900", "neutral.50"]
-]
-
-
 const Slogans = ({ aboutSloganLeft, aboutSloganRight }: SlogansProps) => {
-  const { mode } = useColorScheme()
+  const rightSlogan = aboutSloganRight.map(({ text }) => {
+    const isBold = Number(text.includes("**"))
 
-  const rightSlogan = aboutSloganRight.map(({ text }) => (
-    <Typography
-      key={text}
-      sx={{
-        color: sloganColors[Number(text.includes("**"))][Number(mode == "dark")]
-      }}
-      fontSize={144}
-      fontWeight={text.includes("**") ? 800 : 100}
-      textTransform="lowercase"
-    >
-      {text.split("**")}
-    </Typography>
-  ))
+    return (
+      <Typography
+        key={text}
+        sx={(theme: Theme) => ({
+          color: isBold ? theme.palette.text.primary : theme.palette.background.level2
+        })}
+        fontSize={144}
+        fontWeight={isBold ? 800 : 100}
+        textTransform="lowercase"
+      >
+        {text.split("**")}
+      </Typography>
+    )
+  })
   const leftSlogan = aboutSloganLeft.map(({ text }) => (
     <Typography
       key={text}
-      sx={{
-        color: sloganColors[0][Number(mode == "dark")]
-      }}
+      sx={(theme: Theme) => ({
+        color: theme.palette.background.level2
+      })}
       fontSize={144}
       fontWeight={100}
       textTransform="lowercase"
