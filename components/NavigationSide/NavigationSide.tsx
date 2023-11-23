@@ -1,6 +1,5 @@
 "use client"
 
-import type { Theme } from "@mui/joy"
 import { Box, Typography } from "@mui/joy"
 import { useEffect, useState } from "react"
 import { transition } from "theme/utils"
@@ -72,14 +71,14 @@ const NavigationSide = ({
           fontFamily="europa"
           key={link}
           onClick={() => handleScrollTo(link)}
-          sx={(theme: Theme) => ({
+          sx={{
             transition: transition("color"),
             cursor: "pointer",
-            color: visibleLinks.includes(link) ? "primary.500" : theme.palette.text.primary,
+            color: visibleLinks.includes(link) ? "primary.500" : "text.primary",
             "&:hover": {
               color: "primary.600"
             }
-          })}
+          }}
         >
           {link}
         </Typography>

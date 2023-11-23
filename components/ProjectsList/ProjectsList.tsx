@@ -1,12 +1,10 @@
 "use client"
 
-import type { Theme } from "@mui/joy"
-import { Box, Chip, Typography } from "@mui/joy"
+import { Box, Chip } from "@mui/joy"
 import { useState } from "react"
 import intersection from "lodash/intersection"
-import Link from "next/link"
-import { Image as DatoImage } from "react-datocms"
 import { TrafficCone, X } from "lucide-react"
+import ProjectTile from "components/ProjectTile/ProjectTile"
 
 type ProjectsListProps = {
   filters: {
@@ -141,78 +139,12 @@ const ProjectsList = ({
           gridAutoRows: "min(710px, 1fr)"
         }}
       >
-        {sortedProjects.map(project => (
-          <Box
+        {sortedProjects.map((project) => (
+          <ProjectTile
             key={project.title}
-            component={Link}
-            href={`/portfolio/${project.slug}`}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 1.5,
-              textDecoration: "none",
-              position: "relative"
-            }}
-          >
-            {project.categories.find(category => category.id === wip.id) !== undefined && (
-              <Chip
-                variant="soft"
-                sx={{
-                  position: "absolute",
-                  zIndex: 1,
-                  top: 0,
-                  right: 0,
-                  transform: "translate(10px, -50%)"
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: .5
-                  }}
-                >
-                  <TrafficCone size={16} />
-                  {wip.title}
-                </Box>
-              </Chip>
-            )}
-
-            <Box
-              sx={(theme: Theme) => ({
-                aspectRatio: "1 / 1",
-                backgroundColor: theme.palette.background.level1
-              })}
-            >
-              <DatoImage data={project.splash.responsiveImage} />
-            </Box>
-
-            <Box
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 1
-              }}
-            >
-              {project.categories.filter(category => category.id !== wip.id).map(category => (
-                <Chip
-                  key={category.title}
-                  variant="plain"
-                >
-                  {category.title}
-                </Chip>
-              ))}
-            </Box>
-
-            <Typography
-              fontFamily="anivers"
-              fontSize={28}
-              fontWeight={800}
-              textTransform="uppercase"
-            >
-              {project.title}
-            </Typography>
-          </Box>
+            data={project}
+            wip={wip}
+          />
         ))}
       </Box>
     </>

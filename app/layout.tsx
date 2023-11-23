@@ -130,6 +130,11 @@ const RootLayout = async ({
             content="#060506"
           />
 
+          <meta
+            name="format-detection"
+            content="telephone=no, date=no, email=no, address=no"
+          />
+
           <link
             rel="stylesheet"
             href="https://use.typekit.net/vrv7gnc.css"

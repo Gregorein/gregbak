@@ -40,7 +40,7 @@ const ExtendedTypography = ({
       }
 
       if (str.match(/(\*.*\*)/)) { // italic
-        const parsedStr = str.replace(/(\*\*)/g, "")
+        const parsedStr = str.replace(/(\*)/g, "")
         return (
           <Typography
             key={i}

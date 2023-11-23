@@ -1,6 +1,5 @@
 "use client"
 
-import type { Theme } from "@mui/joy"
 import { Box, Typography } from "@mui/joy"
 import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
@@ -44,13 +43,13 @@ const AchievementList = ({
           href={entry.url || undefined}
           fontSize={28}
           fontFamily="anivers"
-          sx={(theme: Theme) => ({
+          sx={{
             display: "flex",
             gap: 1,
             alignItems: "center",
-            color: entry.url ? "primary.500" : theme.palette.text.primary,
+            color: entry.url ? "primary.500" : "text.primary",
             textDecoration: "none"
-          })}
+          }}
         >
           {entry.title} {entry.url && <ArrowUpRight />}
         </Typography>

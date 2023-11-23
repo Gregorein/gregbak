@@ -1,6 +1,5 @@
 "use client"
 
-import type { Theme } from "@mui/joy"
 import { Typography } from "@mui/joy"
 import { Box } from "@mui/system"
 import { Shuffle } from "lucide-react"
@@ -60,9 +59,9 @@ const TestimonialsDisplay = ({
             fontSize={24}
             textTransform="uppercase"
             fontWeight={800}
-            sx={(theme: Theme) => ({
-              color: theme.palette.text.primary
-            })}
+            sx={{
+              color: "text.primary"
+            }}
           >
             {testimonials[index].name}
             <Typography
@@ -70,14 +69,14 @@ const TestimonialsDisplay = ({
               href={testimonials[index].client.url}
               target="_blank"
               rel="noopener noreferrer"
-              sx={(theme: Theme) => ({
+              sx={{
                 transition: transition("color"),
-                color: theme.palette.text.tertiary,
+                color: "text.tertiary",
                 "&:hover": {
                   color: "primary.600"
                 },
                 textDecoration: "none"
-              })}
+              }}
             >
               @{testimonials[index].client.name}
             </Typography>

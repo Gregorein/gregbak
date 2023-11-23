@@ -1,9 +1,7 @@
 "use client"
 
-import type { Theme } from "@mui/joy"
 import { Typography } from "@mui/joy"
-import { Box, Radio, radioClasses, RadioGroup, Tooltip, useColorScheme } from "@mui/joy"
-import palette from "theme/palette"
+import { Box, Radio, radioClasses, RadioGroup, Tooltip } from "@mui/joy"
 import * as d3 from "d3"
 import { transition } from "theme/utils"
 import type { ChangeEvent } from "react"
@@ -18,16 +16,10 @@ const polarToCartesian = (angle: number, distance: number) => {
   }
 }
 
-const layerColors = [
-  palette.neutral[500],
-  palette.primary[500],
-  palette.secondary[500],
-]
-
-const buttonColors: ("neutral" | "primary" | "secondary")[] = [
+const variant: Array<"neutral" | "primary" | "secondary"> = [
   "neutral",
   "primary",
-  "secondary"
+  "secondary",
 ]
 
 export type RadarEntry = {
@@ -56,7 +48,6 @@ export const Radar = ({
   onPointClick,
   activeEntry
 }: RadarProps) => {
-  const { mode } = useColorScheme()
   const [activeLayer, setActiveLayer] = useState<number | undefined>(undefined)
   const [activeCoordinates, setCoordinates] = useState<[number, number]>(undefined)
 
@@ -66,11 +57,6 @@ export const Radar = ({
   }
 
   const handleToggleLayer = (layer: number | undefined) => {
-    console.log({
-      activeLayer,
-      layer
-    })
-
     if (activeLayer === layer) {
       setActiveLayer(undefined)
     } else {
@@ -118,8 +104,8 @@ export const Radar = ({
           cx={x}
           cy={y}
           r={activeEntry === entry ? 15 : 7.5}
-          fill={layerColors[l]}
-          fillOpacity={activeLayer !== l ? 0.5 : 1}
+          fill={`var(--palette-${variant[l]}-500)`}
+          fillOpacity={activeLayer !== l ? 0.3 : 1}
           sx={{
             cursor: "pointer",
             transition: transition("r", "fillOpacity"),
@@ -157,11 +143,11 @@ export const Radar = ({
         <Box
           component="path"
           d={d(coordinates)}
-          stroke={layerColors[l]}
+          stroke={`var(--palette-${variant[l]}-500)`}
           strokeWidth={4}
-          fill={layerColors[l]}
-          fillOpacity={0.5}
-          opacity={activeLayer !== l ? 0.5 : 1}
+          fill={`var(--palette-${variant[l]}-500)`}
+          fillOpacity={0.3}
+          opacity={activeLayer !== l ? 0.3 : 1}
           sx={{
             position: "relative",
             pointerEvents: "none",
@@ -192,7 +178,7 @@ export const Radar = ({
             cx={0}
             cy={0}
             r={RADIUS_OUTER - RING_SIZE / 2}
-            stroke={mode === "dark" ? palette.primary[900] : palette.neutral[100]}
+            stroke="var(--palette-background-radar)"
             strokeWidth={RING_SIZE}
             opacity={0.67}
             fill="none"
@@ -231,26 +217,26 @@ export const Radar = ({
         {data.map((group, i) => (
           <Box
             key={i}
-            sx={(theme: Theme) => ({
+            sx={{
               position: "relative",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               height: "30px",
               [`&[data-first-child] .${radioClasses.action}`]: {
-                borderTopLeftRadius: `calc(${theme.vars.radius.sm} - 1px)`,
-                borderBottomLeftRadius: `calc(${theme.vars.radius.sm} - 1px)`,
+                borderTopLeftRadius: "calc(var(--radius-sm) - 1px)",
+                borderBottomLeftRadius: "calc(var(--radius-sm) - 1px)",
               },
               [`&[data-last-child] .${radioClasses.action}`]: {
-                borderTopRightRadius: `calc(${theme.vars.radius.sm} - 1px)`,
-                borderBottomRightRadius: `calc(${theme.vars.radius.sm} - 1px)`,
+                borderTopRightRadius: "calc(var(--radius-sm) - 1px)",
+                borderBottomRightRadius: "calc(var(--radius-sm) - 1px)",
               },
-            })}
+            }}
           >
             <Radio
               value={i}
               disableIcon
-              color={buttonColors[i]}
+              color={variant[i]}
               label={
                 <Typography
                   sx={{

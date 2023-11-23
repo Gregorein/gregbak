@@ -1,3 +1,6 @@
+"use client"
+
+import type { Theme } from "@mui/joy"
 import { Box } from "@mui/joy"
 import HeaderActions from "components/HeaderActions/HeaderActions"
 import LogoLink from "components/LogoLink/LogoLink"
@@ -51,8 +54,8 @@ const Header = ({
       top: 0,
       left: 0,
       right: 0,
-      zIndex: 1,
-      backdropFilter: "blur(50px)"
+      zIndex: 2,
+      backdropFilter: "brightness( var(--palette-background-header) ) blur(50px)"
     }}
   >
     <LogoLink />
@@ -84,4 +87,5 @@ const Header = ({
     />
   </Box>
 )
+
 export default Header

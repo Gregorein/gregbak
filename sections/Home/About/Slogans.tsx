@@ -1,6 +1,5 @@
 "use client"
 
-import type { Theme } from "@mui/joy"
 import { Box, Typography } from "@mui/joy"
 
 type SlogansProps = {
@@ -19,9 +18,9 @@ const Slogans = ({ aboutSloganLeft, aboutSloganRight }: SlogansProps) => {
     return (
       <Typography
         key={text}
-        sx={(theme: Theme) => ({
-          color: isBold ? theme.palette.text.primary : theme.palette.background.level2
-        })}
+        sx={{
+          color: isBold ? "text.primary" : "background.level2"
+        }}
         fontSize={144}
         fontWeight={isBold ? 800 : 100}
         textTransform="lowercase"
@@ -33,9 +32,9 @@ const Slogans = ({ aboutSloganLeft, aboutSloganRight }: SlogansProps) => {
   const leftSlogan = aboutSloganLeft.map(({ text }) => (
     <Typography
       key={text}
-      sx={(theme: Theme) => ({
-        color: theme.palette.background.level2
-      })}
+      sx={{
+        color: "background.level2"
+      }}
       fontSize={144}
       fontWeight={100}
       textTransform="lowercase"

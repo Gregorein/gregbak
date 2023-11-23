@@ -2,8 +2,8 @@
 
 import { CircularProgress, Tooltip, useColorScheme, Box } from "@mui/joy"
 import { Moon, SunDim } from "lucide-react"
-import { useEffect, useState } from "react"
 import { transition } from "theme/utils"
+import useMounted from "util/useMounted"
 
 type NavThemeToggleProps = {
   titleOn: string
@@ -14,12 +14,8 @@ const NavThemeToggle = ({ titleOn, titleOff }: NavThemeToggleProps) => {
   const { mode, setMode } = useColorScheme()
   const isDark = mode === "dark"
 
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
+  const isMounted = useMounted()
+  if (!isMounted) {
     return (
       <Box
         sx={{
