@@ -1,10 +1,9 @@
 "use client"
 
-import { Typography } from "@mui/joy"
-import { Box, Radio, radioClasses, RadioGroup, Tooltip } from "@mui/joy"
+import { Button, ButtonGroup } from "@mui/joy"
+import { Box, Tooltip } from "@mui/joy"
 import * as d3 from "d3"
 import { transition } from "theme/utils"
-import type { ChangeEvent } from "react"
 import { Fragment, useState } from "react"
 
 const polarToCartesian = (angle: number, distance: number) => {
@@ -48,12 +47,17 @@ export const Radar = ({
   onPointClick,
   activeEntry
 }: RadarProps) => {
-  const [activeLayer, setActiveLayer] = useState<number | undefined>(undefined)
+  const [activeLayer, setActiveLayer] = useState<number>(undefined)
   const [activeCoordinates, setCoordinates] = useState<[number, number]>(undefined)
 
   const handlePointClick = (entry: RadarEntry, coordinates: [number, number]) => {
-    onPointClick(entry)
-    setCoordinates(coordinates)
+    if (activeEntry === entry) {
+      onPointClick(undefined)
+      setCoordinates(undefined)
+    } else {
+      onPointClick(entry)
+      setCoordinates(coordinates)
+    }
   }
 
   const handleToggleLayer = (layer: number | undefined) => {
@@ -90,16 +94,17 @@ export const Radar = ({
 
     const coordinates = layer.entries.map((entry, i) => {
       const { level: { value }, title } = entry
-      const angle = xScales[l](i)
+      const angle = xScales[l](i) + (l * Math.PI / 12)
       const radius = yScale(value)
 
       const { x, y } = polarToCartesian(
-        angle - Math.PI / 2,
+        angle - (Math.PI / 2),
         yScale(value)
       )
 
       const Point = (
         <Box
+          key={i}
           component="circle"
           cx={x}
           cy={y}
@@ -122,6 +127,7 @@ export const Radar = ({
       } else {
         labels.push(
           <Tooltip
+            key={i}
             title={title}
             variant="plain"
             placement="top"
@@ -198,6 +204,7 @@ export const Radar = ({
                 cx={activeCoordinates[0]}
                 cy={activeCoordinates[1]}
                 r={7}
+                style={{ pointerEvents: "none" }}
                 stroke="transparent"
                 opacity="0"
               />
@@ -206,62 +213,21 @@ export const Radar = ({
         </g>
       </svg>
 
-      <RadioGroup
-        orientation="horizontal"
-        aria-label="chart legend"
-        name="chart legend"
-        value={undefined}
-        variant="plain"
-        onChange={(e: ChangeEvent<HTMLInputElement>) => handleToggleLayer(Number(e.target.value))}
+      <ButtonGroup
+        aria-label="chart selector"
+        size="sm"
       >
         {data.map((group, i) => (
-          <Box
+          <Button
             key={i}
-            sx={{
-              position: "relative",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "30px",
-              [`&[data-first-child] .${radioClasses.action}`]: {
-                borderTopLeftRadius: "calc(var(--radius-sm) - 1px)",
-                borderBottomLeftRadius: "calc(var(--radius-sm) - 1px)",
-              },
-              [`&[data-last-child] .${radioClasses.action}`]: {
-                borderTopRightRadius: "calc(var(--radius-sm) - 1px)",
-                borderBottomRightRadius: "calc(var(--radius-sm) - 1px)",
-              },
-            }}
+            color={variant[i]}
+            variant={activeLayer === i ? "solid" : "soft"}
+            onClick={() => handleToggleLayer(i)}
           >
-            <Radio
-              value={i}
-              disableIcon
-              color={variant[i]}
-              label={
-                <Typography
-                  sx={{
-                    padding: "10px"
-                  }}
-                >
-                  {group.title}
-                </Typography>
-              }
-              variant={activeLayer === i ? "solid" : "soft"}
-              slotProps={{
-                input: { "aria-label": group.title },
-                action: {
-                  sx: {
-                    boxSizing: "content-box",
-                    borderRadius: 0,
-                    // transition: "none"
-                  },
-                },
-                label: { sx: { lineHeight: "30px" } },
-              }}
-            />
-          </Box>
+            {group.title}
+          </Button>
         ))}
-      </RadioGroup>
+      </ButtonGroup>
     </Box>
   )
 }
