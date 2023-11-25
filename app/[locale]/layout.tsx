@@ -1,6 +1,8 @@
 import type { ReactNode } from "react"
 import { Analytics } from "@vercel/analytics/react"
-import StyleProvider from "../components/StyleProvider/StyleProvider"
+import StyleProvider from "components/StyleProvider/StyleProvider"
+
+import { unstable_setRequestLocale } from "next-intl/server"
 
 import "normalize.css"
 import "theme/global.css"
@@ -13,8 +15,22 @@ import type { Metadata } from "next"
 import seo from "queries/root/seo.gql"
 import config from "queries/root/config.gql"
 import ColorSchemeInit from "components/ColorSchemeInit/ColorSchemeInit"
+import { locales, matchLocale } from "i18n"
 
-export const generateMetadata = async (): Promise<Metadata> => {
+export const generateStaticParams = async () => locales.map(locale => ({ locale }))
+
+type RootLayoutProps = {
+  children: ReactNode
+  params: {
+    locale: string
+  }
+}
+
+export const generateMetadata = async ({
+  params: {
+    locale
+  }
+}: RootLayoutProps): Promise<Metadata> => {
   const {
     _site: {
       globalSeo: {
@@ -29,7 +45,11 @@ export const generateMetadata = async (): Promise<Metadata> => {
         siteName
       }
     }
-  } = await api(seo)
+  } = await api(seo, {
+    variables: {
+      locale
+    }
+  })
 
   return {
     title: {
@@ -54,6 +74,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
       name: "Greg Bak",
       url: "gregbak.com"
     },
+    publisher: "Greg Bak",
     themeColor: "#060506",
     colorScheme: "dark",
     viewport: "initial-scale=1, width=device-width",
@@ -62,13 +83,14 @@ export const generateMetadata = async (): Promise<Metadata> => {
   }
 }
 
-type RootLayoutProps = {
-  children: ReactNode
-}
-
 const RootLayout = async ({
   children,
+  params: {
+    locale
+  }
 }: RootLayoutProps) => {
+  unstable_setRequestLocale(matchLocale(locale))
+
   const {
     config: {
       maintenance,
@@ -93,14 +115,18 @@ const RootLayout = async ({
       policyButton,
       copyrights
     }
-  } = await api(config)
+  } = await api(config, {
+    variables: {
+      locale
+    }
+  })
 
   if (maintenance) {
     // TODO implement maintenance mode
   }
 
   return (
-    <html lang="en">
+    <html lang={locale}>
       <StyleProvider>
         <head>
           <ColorSchemeInit />

@@ -1,10 +1,8 @@
-query ProjectConfig {
-  portfolio {
-    servicesTitle
-    dateTitle
-    toolsTitle
-    clientTitle
-    returnToPortfolioButton
-    nextProjectButton
+query ProjectConfig($slug: String!, $locale:SiteLocale = en) {
+  project(filter: {slug: {eq: $slug}}, locale: $locale) {
+    title
+  }
+  portfolio(locale: $locale) {
+    title
   }
 }

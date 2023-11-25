@@ -1,5 +1,5 @@
-query Config {
-  config {
+query Config($locale:SiteLocale = en) {
+  config(locale: $locale) {
     maintenance
     navContact
     navResume

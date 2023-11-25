@@ -1,5 +1,5 @@
-query Resume {
-  resume {
+query Resume($locale:SiteLocale = en) {
+  resume(locale: $locale) {
     avatar {
       responsiveImage(imgixParams: { fit: crop, w: 325, h: 440, auto: format }) {
         sizes

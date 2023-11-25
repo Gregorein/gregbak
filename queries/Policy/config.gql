@@ -1,5 +1,5 @@
-query PolicyConfig {
-  policy {
+query PolicyConfig($locale:SiteLocale = en) {
+  policy(locale: $locale) {
     title
   }
 }

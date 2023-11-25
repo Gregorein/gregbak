@@ -16,9 +16,9 @@ const polarToCartesian = (angle: number, distance: number) => {
 }
 
 const variant: Array<"neutral" | "primary" | "secondary"> = [
-  "neutral",
   "primary",
   "secondary",
+  "neutral",
 ]
 
 export type RadarEntry = {

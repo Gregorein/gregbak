@@ -5,20 +5,44 @@ import config from "queries/Portfolio/config.gql"
 import portfolio from "queries/Portfolio/portfolio.gql"
 import api from "util/datocms"
 
-export const generateMetadata = async () => {
+import { unstable_setRequestLocale } from "next-intl/server"
+import { locales, matchLocale } from "i18n"
+
+export const generateStaticParams = async () => locales.map(locale => ({ locale }))
+
+type PortfolioProps = {
+  params: {
+    locale: string
+  }
+}
+
+export const generateMetadata = async ({
+  params: {
+    locale
+  }
+}: PortfolioProps) => {
   const {
     portfolio: {
       title
     }
-  } = await api(config)
+  } = await api(config, {
+    variables: {
+      locale
+    }
+  })
 
   return {
     title
   }
 }
 
+const Portfolio = async ({
+  params: {
+    locale
+  }
+}: PortfolioProps) => {
+  unstable_setRequestLocale(matchLocale(locale))
 
-const Portfolio = async () => {
   const {
     portfolio: {
       title,
@@ -27,7 +51,11 @@ const Portfolio = async () => {
       wip
     },
     allProjects
-  } = await api(portfolio)
+  } = await api(portfolio, {
+    variables: {
+      locale
+    }
+  })
 
   return (
     <Section

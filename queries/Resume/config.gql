@@ -1,5 +1,5 @@
-query ResumeConfig {
-  resume {
+query ResumeConfig($locale:SiteLocale = en) {
+  resume(locale: $locale) {
     title
   }
 }

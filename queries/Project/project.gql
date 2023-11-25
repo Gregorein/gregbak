@@ -1,5 +1,5 @@
-query Portfolio($slug: String!) {
-  portfolio {
+query Portfolio($slug: String!, $locale: SiteLocale = en) {
+  portfolio(locale: $locale) {
     servicesTitle
     dateTitle
     toolsTitle
@@ -13,7 +13,7 @@ query Portfolio($slug: String!) {
     }
   }
 
-  project(filter: {slug: {eq: $slug}}) {
+  project(filter: {slug: {eq: $slug}}, locale: $locale) {
     url
     categories {
       id

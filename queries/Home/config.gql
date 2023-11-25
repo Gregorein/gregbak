@@ -1,5 +1,5 @@
-query HomeConfig {
-  home {
+query HomeConfig($locale:SiteLocale = en) {
+  home(locale: $locale) {
     title
   }
 }

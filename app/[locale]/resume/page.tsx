@@ -21,19 +21,44 @@ import Experience from "sections/Resume/Experience/Experience"
 import Tools from "sections/Resume/Tools/Tools"
 import Projects from "sections/Resume/Projects/Projects"
 
-export const generateMetadata = async () => {
+import { unstable_setRequestLocale } from "next-intl/server"
+import { locales, matchLocale } from "i18n"
+
+export const generateStaticParams = async () => locales.map(locale => ({ locale }))
+
+type ResumeProps = {
+  params: {
+    locale: string
+  }
+}
+
+export const generateMetadata = async ({
+  params: {
+    locale
+  }
+}: ResumeProps) => {
   const {
     resume: {
       title
     }
-  } = await api(config)
+  } = await api(config, {
+    variables: {
+      locale
+    }
+  })
 
   return {
     title
   }
 }
 
-const Resume = async () => {
+const Resume = async ({
+  params: {
+    locale
+  }
+}: ResumeProps) => {
+  unstable_setRequestLocale(matchLocale(locale))
+
   const {
     resume: {
       avatar,
@@ -76,7 +101,11 @@ const Resume = async () => {
         url: cvUrl
       }
     },
-  } = await api(resume)
+  } = await api(resume, {
+    variables: {
+      locale
+    }
+  })
 
   return (
     <Section

@@ -1,5 +1,5 @@
-query PortfolioConfig {
-  portfolio {
+query PortfolioConfig($locale:SiteLocale = en) {
+  portfolio(locale: $locale) {
     title
   }
 }

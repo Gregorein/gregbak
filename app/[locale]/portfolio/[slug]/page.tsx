@@ -1,7 +1,10 @@
 import Section from "components/Section/Section"
 import api from "util/datocms"
 
-import projectQuery from "queries/Project/project.gql"
+import { unstable_setRequestLocale } from "next-intl/server"
+
+import project from "queries/Project/project.gql"
+import config from "queries/Project/config.gql"
 import { Box, Typography } from "@mui/joy"
 import ExtendedTypography from "components/ExtendedTypography/ExtendedTypography"
 import Link from "next/link"
@@ -15,22 +18,61 @@ import StatsURL from "sections/Project/StatsURL/StatsURL"
 import StatsClient from "sections/Project/StatsClient/StatsClient"
 import StatsGeneric from "sections/Project/StatsGeneric/StatsGeneric"
 import StatsWip from "sections/Project/StatsWip/StatsWip"
+import { locales, matchLocale } from "i18n"
 
 export const generateStaticParams = async () => {
   const { allProjects } = await api("query allProjectSlugs { allProjects { slug } }")
 
-  return allProjects.map(({ slug }) => slug)
+  return allProjects.map(
+    ({ slug }) => locales.map(
+      locale => ({
+        locale,
+        slug
+      })
+    )
+  )
 }
 
 type ProjectProps = {
   params: {
-    project: string
+    slug: string
+    locale: string
+  }
+}
+
+export const generateMetadata = async ({
+  params: {
+    slug,
+    locale
+  }
+}: ProjectProps) => {
+  const {
+    project: {
+      title
+    },
+    portfolio: {
+      title: portfolioTitle
+    }
+  } = await api(config, {
+    variables: {
+      slug,
+      locale
+    }
+  })
+
+  return {
+    title: `${title} | ${portfolioTitle}`
   }
 }
 
 const Project = async ({
-  params
+  params: {
+    slug,
+    locale,
+  }
 }: ProjectProps) => {
+  unstable_setRequestLocale(matchLocale(locale))
+
   const {
     portfolio: {
       servicesTitle,
@@ -54,9 +96,10 @@ const Project = async ({
       date,
       client,
     }
-  } = await api(projectQuery, {
+  } = await api(project, {
     variables: {
-      slug: params.project
+      slug,
+      locale
     },
   })
 

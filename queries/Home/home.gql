@@ -1,5 +1,5 @@
-query Home {
-  home {
+query Home($locale:SiteLocale = en) {
+  home(locale: $locale) {
     testimonialsTitle
     testimonialsRandomButton
     testimonialsButton

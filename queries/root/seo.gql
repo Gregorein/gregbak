@@ -1,5 +1,5 @@
-query SEO {
-  _site {
+query SEO($locale:SiteLocale = en) {
+  _site(locale: $locale) {
     globalSeo {
       fallbackSeo {
         description
