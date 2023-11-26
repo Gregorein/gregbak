@@ -4,6 +4,7 @@ import { Dropdown, Menu, MenuItem, Box, Tooltip, MenuButton, Typography } from "
 import { Languages } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useState } from "react"
 import { transition } from "theme/utils"
 
 type NavLanguageMenuProps = {
@@ -18,10 +19,17 @@ const NavLanguageMenu = ({
   title,
   locales
 }: NavLanguageMenuProps) => {
-  const path = usePathname().slice(3)
+  const path = usePathname()
+  const parsedPath = path.match(/^\/(en|pl)/) ? path.slice(3) : path
+
+  const [open, setOpen] = useState(false)
+  const handleToggleOpen = () => setOpen(!open)
 
   return (
-    <Dropdown>
+    <Dropdown
+      open={open}
+      onOpenChange={handleToggleOpen}
+    >
       <MenuButton
         slots={{
           root: Box
@@ -41,21 +49,33 @@ const NavLanguageMenu = ({
           }
         }}
       >
-        <Tooltip
-          title={title}
-          variant="solid"
-          arrow
-        >
+        {open ? (
           <Languages />
-        </Tooltip>
+        ) : (
+          <Tooltip
+            title={title}
+            variant="solid"
+            arrow
+          >
+            <Languages />
+          </Tooltip>
+        )}
       </MenuButton>
-      <Menu placement="bottom-end">
+      <Menu
+        placement="bottom-end"
+        variant="soft"
+      >
         {locales.map(({ title, code }) => (
           <MenuItem key={code}>
             <Typography
               component={Link}
-              href={`/${code}${path}`}
+              href={`/${code}${parsedPath}`}
               locale={code}
+              sx={{
+                width: "100%",
+                textDecoration: "none"
+              }}
+              textAlign="right"
             >
               {title}
             </Typography>

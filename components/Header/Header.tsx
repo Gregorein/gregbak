@@ -1,6 +1,5 @@
 "use client"
 
-import type { Theme } from "@mui/joy"
 import { Box } from "@mui/joy"
 import HeaderActions from "components/HeaderActions/HeaderActions"
 import LogoLink from "components/LogoLink/LogoLink"

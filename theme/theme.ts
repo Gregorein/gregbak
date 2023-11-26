@@ -100,7 +100,7 @@ const extendedTheme = extendTheme({
           darkChannel: "111 74 32",
         },
         background: {
-          header: "0.7",
+          header: "0.5",
           radar: "var(--palette-primary-900)"
         }
       }
