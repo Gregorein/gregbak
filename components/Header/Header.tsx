@@ -25,6 +25,10 @@ type HeaderProps = {
     }[]
     languagesMenu: string
   }
+  locales: {
+    code: string
+    title: string
+  }[]
 }
 
 const Header = ({
@@ -42,7 +46,8 @@ const Header = ({
     codeButton,
     uiToggle,
     languagesMenu
-  }
+  },
+  locales,
 }: HeaderProps) => (
   <Box
     component="header"
@@ -84,6 +89,7 @@ const Header = ({
         uiToggle,
         languagesMenu
       }}
+      locales={locales}
     />
   </Box>
 )

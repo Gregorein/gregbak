@@ -19,4 +19,8 @@ query Config($locale:SiteLocale = en) {
       text
     }
   }
+  allLocales(locale: $locale) {
+    title
+    code
+  }
 }

@@ -13,6 +13,10 @@ type HeaderActionsProps = {
     }[]
     languagesMenu: string
   }
+  locales: {
+    code: string
+    title: string
+  }[]
 }
 
 const HeaderActions = ({
@@ -21,7 +25,8 @@ const HeaderActions = ({
     codeButton,
     uiToggle,
     languagesMenu,
-  }
+  },
+  locales
 }: HeaderActionsProps) => (
   <Box
     component="nav"
@@ -44,7 +49,10 @@ const HeaderActions = ({
       titleOn={uiToggle[0].text}
       titleOff={uiToggle[1].text}
     />
-    <NavLanguageMenu title={languagesMenu} />
+    <NavLanguageMenu
+      title={languagesMenu}
+      locales={locales}
+    />
   </Box>
 )
 

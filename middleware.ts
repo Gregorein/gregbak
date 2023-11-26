@@ -9,6 +9,6 @@ export const middleware = createMiddleware({
 export const config = {
   matcher: [
     "/",
-    `/${locales.join("|")}/:path`
+    "/$(en|pl)/:path"
   ],
 }

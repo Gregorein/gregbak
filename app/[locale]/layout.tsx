@@ -114,7 +114,8 @@ const RootLayout = async ({
 
       policyButton,
       copyrights
-    }
+    },
+    allLocales
   } = await api(config, {
     variables: {
       locale
@@ -183,6 +184,7 @@ const RootLayout = async ({
               uiToggle,
               languagesMenu
             }}
+            locales={allLocales}
           />
           <Main>
             {children}
