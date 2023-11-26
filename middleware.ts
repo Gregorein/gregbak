@@ -3,12 +3,15 @@ import createMiddleware from "next-intl/middleware"
 
 export const middleware = createMiddleware({
   locales,
-  defaultLocale
+  defaultLocale,
+  localePrefix: "as-needed",
+
 })
 
 export const config = {
   matcher: [
     "/",
-    "/$(en|pl)/:path"
+    // "/(en|pl)/:path*",
+    "/((?!api|_next|_vercel|.*\\..*).*)",
   ],
 }
