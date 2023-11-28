@@ -22,16 +22,26 @@ const style: Style = {
     alignItems: "flex-end",
     transform: "translate(-100%, 0)",
     pointerEvents: "none",
+
+    [mq.under.laptop]: {
+      position: "static",
+      left: "unset",
+      top: "unset",
+      bottom: "unset",
+      transform: "unset",
+      alignItems: "flex-start"
+    }
   },
   leftSlogan: {
     color: "background.level2",
-
+    lineHeight: 1.25,
     fontSize: 144,
+
     [mq.under.laptop]: {
       fontSize: 96
     },
     [mq.under.tablet]: {
-      fontSize: 72
+      fontSize: 56
     }
   },
   rightSloganContainer: {
@@ -43,15 +53,26 @@ const style: Style = {
     justifyContent: "space-between",
     flexDirection: "column",
     transform: "translate(100%, 0)",
-    pointerEvents: "none"
+    pointerEvents: "none",
+
+    [mq.under.laptop]: {
+      position: "static",
+      right: "unset",
+      top: "unset",
+      bottom: "unset",
+      transform: "unset",
+      alignItems: "flex-end"
+    }
   },
   rightSlogan: {
     fontSize: 144,
+    lineHeight: 1.25,
+
     [mq.under.laptop]: {
       fontSize: 96
     },
     [mq.under.tablet]: {
-      fontSize: 72
+      fontSize: 56
     }
   }
 }

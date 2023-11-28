@@ -5,6 +5,7 @@ import { Box } from "@mui/system"
 import { Shuffle } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
+import mq from "theme/mediaQueries"
 import { transition } from "theme/utils"
 
 type TestimonialsDisplayProps = {
@@ -25,9 +26,22 @@ const style = {
     flexDirection: "column",
     gap: 3
   },
+  text: {
+    fontSize: 36,
+    fontFamily: "anivers",
+
+    [mq.under.tablet]: {
+      fontSize: 21
+    }
+  },
   footer: {
     display: "flex",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+
+    [mq.under.tablet]: {
+      flexDirection: "column",
+      gap: 1,
+    }
   },
   author: {
     display: "flex",
@@ -65,10 +79,7 @@ const TestimonialsDisplay = ({
 
   return (
     <Box sx={style.container}>
-      <Typography
-        fontSize={36}
-        fontFamily="anivers"
-      >
+      <Typography sx={style.text}>
         "{testimonials[index].text}"
       </Typography>
 

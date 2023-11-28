@@ -23,34 +23,33 @@ type SplashProps = {
 
 const style: Style = {
   container: {
+    overflowX: "hidden",
     display: "grid",
     position: "relative",
-    maxHeight: "850px",
-    paddingLeft: 3,
-    paddingRight: 3,
+    p: 3,
+    height: "100%",
+    maxHeight: 850,
     width: "100%",
     flex: 1,
-    gridTemplateColumns: "1fr 550px 1fr",
+    gridTemplateColumns: "1fr 1fr",
     gridTemplateRows: "1fr 1fr",
     gridTemplateAreas:
-      `"greeting head experience"
-      "professions head cta"`,
-    [mq.under.laptop]: {
-      maxHeight: "unset",
-      gridTemplateColumns: "1fr 1fr",
-      gridTemplateRows: "1fr 300px 1fr",
-      gridTemplateAreas:
-        `"greeting experience"
-        "head head"
-        "professions cta"`,
-    },
-    [mq.under.tablet]: {
+      `"greeting experience"
+      "professions cta"`,
 
-    }
+    [mq.under.laptop]: {
+      maxHeight: "unset"
+    },
   },
   title: {
     gridArea: "greeting",
-    color: "primary.500"
+    color: "primary.500",
+    fontSize: 64,
+    fontWeight: 800,
+
+    [mq.under.laptop]: {
+      fontSize: 48
+    }
   },
   professions: {
     gridArea: "professions",
@@ -59,16 +58,50 @@ const style: Style = {
     justifyContent: "flex-end",
     gap: 1
   },
-  experience: {
+  profession: {
+    fontSize: 24,
+    fontFamily: "anivers",
+    whiteSpace: "pre",
+
+    [mq.under.laptop]: {
+      fontSize: 16
+    }
+  },
+  experiences: {
     gridArea: "experience",
     display: "flex",
     flexDirection: "column",
-    alignItems: "flex-end"
+    alignItems: "flex-end",
+
+    [mq.under.laptop]: {
+      paddingTop: 1.5
+    }
   },
-  experienceSubject: {
+  experience: {
     display: "flex",
     alignItems: "center",
-    gap: 1
+    gap: 1,
+
+    [mq.under.laptop]: {
+      gap: 0.5
+    }
+  },
+  experienceCount: {
+    fontSize: 48,
+    fontWeight: 100,
+
+    [mq.under.laptop]: {
+      fontSize: 28
+    }
+  },
+  experienceSubject: {
+    fontSize: 24,
+    fontFamily: "anivers",
+    whiteSpace: "pre",
+
+    [mq.under.laptop]: {
+      fontSize: 12
+    }
   },
   cta: {
     gridArea: "cta",
@@ -100,8 +133,6 @@ const Splash = ({
         <Typography
           sx={style.title}
           component="h1"
-          fontSize={64}
-          fontWeight={800}
         >
           {splashTitle}
         </Typography>
@@ -109,31 +140,22 @@ const Splash = ({
           {splashProfessions.map(({ text }) => (
             <Typography
               key={text}
-              fontSize={24}
-              fontFamily="anivers"
-              whiteSpace="pre"
+              sx={style.profession}
             >
               {text}
             </Typography>
           ))}
         </Box>
-        <Box sx={style.experience}>
+        <Box sx={style.experiences}>
           {sortedExperience.map(({ count, subject }) => (
             <Box
               key={subject}
-              sx={style.experienceSubject}
+              sx={style.experience}
             >
-              <Typography
-                fontSize={48}
-                fontWeight={100}
-              >
+              <Typography sx={style.experienceCount}>
                 {count}
               </Typography>
-              <Typography
-                fontSize={24}
-                fontFamily="anivers"
-                whiteSpace="pre"
-              >
+              <Typography sx={style.experienceSubject}>
                 {subject}
               </Typography>
             </Box>

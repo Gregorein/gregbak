@@ -3,6 +3,8 @@ import { Box, Typography } from "@mui/joy"
 import CtaButton from "components/CtaButton/CtaButton"
 import Section from "components/Section/Section"
 import SectionTitle from "components/SectionTitle/SectionTitle"
+import mq from "theme/mediaQueries"
+import type Style from "types/style"
 
 import { SloganLeft, SloganRight } from "./Slogans"
 
@@ -20,6 +22,23 @@ type AboutProps = {
   }
   id: string
   target: string
+}
+
+const style: Style = {
+  container: {
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+    gap: 3,
+    width: "600px",
+
+    [mq.under.laptop]: {
+      padding: 3,
+    },
+    [mq.under.tablet]: {
+      width: "unset"
+    }
+  }
 }
 
 const About = ({
@@ -41,15 +60,7 @@ const About = ({
       centered
       trim
     >
-      <Box
-        sx={{
-          position: "relative",
-          display: "flex",
-          flexDirection: "column",
-          gap: 3,
-          width: "600px"
-        }}
-      >
+      <Box sx={style.container}>
         <SloganLeft words={aboutSloganLeft} />
 
         <SectionTitle>

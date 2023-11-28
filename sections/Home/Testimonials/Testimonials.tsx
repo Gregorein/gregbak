@@ -3,6 +3,7 @@ import CtaButton from "components/CtaButton/CtaButton"
 import Section from "components/Section/Section"
 import SectionTitle from "components/SectionTitle/SectionTitle"
 import TestimonialsDisplay from "components/TestimonialsDisplay/TestimonialsDisplay"
+import mq from "theme/mediaQueries"
 import type Style from "types/style"
 
 type TestimonialsProps = {
@@ -28,7 +29,15 @@ const style: Style = {
     display: "flex",
     flexDirection: "column",
     gap: 6,
-    width: "840px"
+    width: 840,
+
+    [mq.under.laptop]: {
+      width: 768,
+      p: 3
+    },
+    [mq.under.tablet]: {
+      width: "unset"
+    }
   },
   content: {
     display: "flex",

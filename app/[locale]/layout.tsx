@@ -195,9 +195,9 @@ const RootLayout = async ({
             }}
             locales={allLocales}
           />
-          {/* <Main>
+          <Main>
             {children}
-          </Main> */}
+          </Main>
           <Footer
             labels={{
               socialMail,

@@ -29,7 +29,6 @@ query Home($locale:SiteLocale = en) {
       skills {
         title
       }
-      primary
     }
     projectsButton
     resumeButton

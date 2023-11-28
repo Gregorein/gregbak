@@ -55,6 +55,7 @@ const style: Style = {
     lineHeight: 0.5,
 
     [mq.under.tablet]: {
+      lineHeight: 1,
       fontSize: 21
     }
   },
@@ -65,18 +66,19 @@ const style: Style = {
     textTransform: "uppercase",
 
     [mq.under.tablet]: {
-      fontSize: 72
+      lineHeight: "unset",
+      fontSize: 48
     }
   },
   ctaIcon: {
     position: "absolute",
-    left: "252px",
-    bottom: "-144px",
+    left: 252,
+    bottom: -144,
   },
   ctaIconMobile: {
     position: "relative",
-    left: -22,
-    bottom: "0"
+    left: 0,
+    bottom: 0
   },
   nav: {
     padding: 3,
@@ -149,7 +151,7 @@ const Footer = ({
           {ctaText}
         </Typography>
         <ArrowUpRight
-          size={width.under.tablet ? 72 : 160}
+          size={width.under.tablet ? 56 : 160}
           strokeWidth={width.under.tablet ? 1.2 : 1}
           strokeLinecap="butt"
           strokeLinejoin="miter"
