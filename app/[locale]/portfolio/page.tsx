@@ -7,6 +7,7 @@ import api from "util/datocms"
 
 import { unstable_setRequestLocale } from "next-intl/server"
 import { locales, matchLocale } from "i18n"
+import mq from "theme/mediaQueries"
 
 export const generateStaticParams = async () => locales.map(locale => ({ locale }))
 
@@ -36,6 +37,36 @@ export const generateMetadata = async ({
   }
 }
 
+const style = {
+  container: {
+    gap: 3,
+    p: 3,
+  },
+  title: {
+    fontSize: 72,
+    fontWeight: 800,
+    color: "primary.500",
+
+    [mq.under.laptop]: {
+      fontSize: 64
+    },
+    [mq.under.tablet]: {
+      fontSize: 48
+    }
+  },
+  text: {
+    fontFamily: "anivers",
+    fontSize: 28,
+
+    [mq.under.laptop]: {
+      fontSize: 21
+    },
+    [mq.under.tablet]: {
+      fontSize: 18
+    }
+  }
+}
+
 const Portfolio = async ({
   params: {
     locale
@@ -60,26 +91,13 @@ const Portfolio = async ({
   return (
     <Section
       maxWidth="1480px"
-      sx={{
-        paddingTop: 18,
-        gap: 3,
-        paddingBottom: 12,
-      }}
+      sx={style.container}
     >
-      <Typography
-        fontSize={72}
-        fontWeight={800}
-        sx={{
-          color: "primary.500"
-        }}
-      >
+      <Typography sx={style.title}>
         {title}
       </Typography>
 
-      <Typography
-        fontFamily="anivers"
-        fontSize={28}
-      >
+      <Typography sx={style.text}>
         {text}
       </Typography>
 

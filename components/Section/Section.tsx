@@ -9,9 +9,7 @@ type SectionProps = {
   id?: string
   trim?: boolean
   maxWidth?: string
-  sx?: {
-    [key: string]: string | number
-  }
+  sx?: object
 }
 
 const Section = ({

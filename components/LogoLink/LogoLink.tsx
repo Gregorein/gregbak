@@ -8,6 +8,7 @@ import { transition } from "theme/utils"
 
 const LogoLink = () => {
   const pathname = usePathname()
+  const isHome = pathname.split("/").length <= 2
 
   return (
     <Box
@@ -26,7 +27,7 @@ const LogoLink = () => {
           display: "flex",
           gap: 3,
           alignItems: "center",
-          color: pathname === "/" && "primary.500",
+          color: isHome && "primary.500",
           "&:hover": {
             color: "primary.500"
           }

@@ -1,9 +1,12 @@
+"use client"
+
 import { Skeleton } from "@mui/joy"
 import { Typography } from "@mui/joy"
 import { Box, Chip } from "@mui/joy"
 import { TrafficCone } from "lucide-react"
 import Link from "next/link"
 import { Image as DatoImage } from "react-datocms"
+import mq from "theme/mediaQueries"
 import useMounted from "util/useMounted"
 
 type ProjectTileProps = {
@@ -31,6 +34,107 @@ type ProjectTileProps = {
   }
 }
 
+const style = {
+  skeleton: {
+    container: {
+      display: "flex",
+      flexDirection: "column",
+      gap: 1.5,
+
+      [mq.under.tablet]: {
+        flexDirection: "row"
+      }
+    },
+    image: {
+      position: "relative",
+      width: "unset",
+      height: "unset",
+      aspectRatio: "1 / 1",
+
+      [mq.under.tablet]: {
+        flex: 1,
+      }
+    },
+    content: {
+      display: "flex",
+      flex: 2,
+      flexDirection: "column",
+      gap: 1.5,
+    },
+    text: {
+      position: "relative",
+      width: "unset",
+      height: "unset"
+    }
+  },
+  tile: {
+    container: {
+      display: "flex",
+      flexDirection: "column",
+      gap: 1.5,
+      textDecoration: "none",
+      position: "relative",
+
+      [mq.under.tablet]: {
+        flexDirection: "row",
+        alignItems: "flex-start"
+      }
+    },
+    image: {
+      aspectRatio: "1 / 1",
+      backgroundColor: "background.level1",
+
+      [mq.under.tablet]: {
+        flex: 1,
+      }
+    },
+    content: {
+      display: "flex",
+      flex: 2,
+      flexDirection: "column",
+      gap: 1.5,
+    },
+    categories: {
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 1,
+
+      [mq.under.tablet]: {
+        order: 1,
+      }
+    },
+    category: {
+      [mq.under.tablet]: {
+        fontSize: 12
+      }
+    },
+    wip: {
+      position: "absolute",
+      zIndex: 1,
+      top: 0,
+      right: 0,
+      transform: "translate(10px, -50%)",
+
+      [mq.under.tablet]: {
+        right: "unset",
+        left: 0,
+        transform: "translate(-10px, -50%)",
+      }
+    },
+    title: {
+      fontFamily: "anivers",
+      fontSize: 28,
+      fontWeight: 800,
+      textTransform: "uppercase",
+
+      [mq.under.tablet]: {
+        fontSize: 24,
+        order: 0,
+      }
+    }
+  }
+}
+
 const ProjectTile = ({ data: {
   title,
   splash,
@@ -43,46 +147,28 @@ const ProjectTile = ({ data: {
 
   if (!isMounted) {
     return (
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 1.5,
-          textDecoration: "none"
-        }}
-      >
+      <Box sx={style.skeleton.container}>
         <Skeleton
-          sx={{
-            position: "relative",
-            width: "unset",
-            height: "unset",
-            aspectRatio: "1 / 1"
-          }}
+          sx={style.skeleton.image}
           animation="wave"
         />
 
-        <Skeleton
-          sx={{
-            position: "relative",
-            width: "unset",
-            height: "unset"
-          }}
-          animation="wave"
-        >
-          <br />
-        </Skeleton>
+        <Box sx={style.skeleton.content}>
+          <Skeleton
+            sx={style.skeleton.text}
+            animation="wave"
+          >
+            <br />
+          </Skeleton>
 
-        <Skeleton
-          sx={{
-            position: "relative",
-            width: "unset",
-            height: "unset"
-          }}
-          animation="wave"
-        >
-          <br />
-          <br />
-        </Skeleton>
+          <Skeleton
+            sx={style.skeleton.text}
+            animation="wave"
+          >
+            <br />
+            <br />
+          </Skeleton>
+        </Box>
       </Box>
     )
   }
@@ -91,24 +177,12 @@ const ProjectTile = ({ data: {
     <Box
       component={Link}
       href={`/portfolio/${slug}`}
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 1.5,
-        textDecoration: "none",
-        position: "relative"
-      }}
+      sx={style.tile.container}
     >
       {categories.find(category => category.id === wip.id) !== undefined && (
         <Chip
           variant="soft"
-          sx={{
-            position: "absolute",
-            zIndex: 1,
-            top: 0,
-            right: 0,
-            transform: "translate(10px, -50%)"
-          }}
+          sx={style.tile.wip}
         >
           <Box
             sx={{
@@ -123,40 +197,29 @@ const ProjectTile = ({ data: {
         </Chip>
       )}
 
-      <Box
-        sx={{
-          aspectRatio: "1 / 1",
-          backgroundColor: "background.level1"
-        }}
-      >
+      <Box sx={style.tile.image}>
         <DatoImage data={splash.responsiveImage} />
       </Box>
 
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 1
-        }}
-      >
-        {categories.filter(category => category.id !== wip.id).map(category => (
-          <Chip
-            key={category.title}
-            variant="plain"
-          >
-            {category.title}
-          </Chip>
-        ))}
-      </Box>
+      <Box sx={style.tile.content}>
+        <Box
+          sx={style.tile.categories}
+        >
+          {categories.filter(category => category.id !== wip.id).map(category => (
+            <Chip
+              key={category.title}
+              variant="plain"
+              sx={style.tile.category}
+            >
+              {category.title}
+            </Chip>
+          ))}
+        </Box>
 
-      <Typography
-        fontFamily="anivers"
-        fontSize={28}
-        fontWeight={800}
-        textTransform="uppercase"
-      >
-        {title}
-      </Typography>
+        <Typography sx={style.tile.title}>
+          {title}
+        </Typography>
+      </Box>
     </Box>
   )
 }

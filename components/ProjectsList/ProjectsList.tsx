@@ -5,6 +5,7 @@ import { useState } from "react"
 import intersection from "lodash/intersection"
 import { TrafficCone, X } from "lucide-react"
 import ProjectTile from "components/ProjectTile/ProjectTile"
+import mq from "theme/mediaQueries"
 
 type ProjectsListProps = {
   filters: {
@@ -34,6 +35,33 @@ type ProjectsListProps = {
   }
 }
 
+const style = {
+  filters: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: 1
+  },
+  filter: {
+    display: "flex",
+    alignItems: "center",
+    gap: .5,
+  },
+  grid: {
+    display: "grid",
+    gridGap: 60,
+    gridTemplateColumns: "repeat(4, 1fr)",
+    gridAutoRows: "min(710px, 1fr)",
+
+    [mq.under.laptop]: {
+      gridTemplateColumns: "repeat(3, 1fr)",
+      gridGap: 30
+    },
+    [mq.under.tablet]: {
+      gridTemplateColumns: "1fr"
+    }
+  }
+}
+
 const ProjectsList = ({
   filters: [
     filterAll,
@@ -54,7 +82,6 @@ const ProjectsList = ({
     : projects.filter(project => intersection(activeFilters, project.categories.map(category => category.title)).length > 0)
 
   const sortedProjects = filteredProjects.sort((a, b) => {
-
     const aDate = a.date[a.date.length - 1]
     const bDate = b.date[b.date.length - 1]
 
@@ -77,23 +104,12 @@ const ProjectsList = ({
 
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          gap: 1
-        }}
-      >
+      <Box sx={style.filters}>
         <Chip
           color="primary"
           onClick={() => setActiveFilters([])}
         >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: .5,
-            }}
-          >
+          <Box sx={style.filter}>
             <X
               size={16}
               strokeWidth={1.5}
@@ -107,13 +123,7 @@ const ProjectsList = ({
           onClick={() => handleToggleFilter(filterWip.title)}
           variant={activeFilters.includes(filterWip.title) ? "solid" : "plain"}
         >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: .5
-            }}
-          >
+          <Box sx={style.filter}>
             <TrafficCone size={16} />
             {filterWip.title}
           </Box>
@@ -131,14 +141,7 @@ const ProjectsList = ({
         ))}
       </Box>
 
-      <Box
-        sx={{
-          display: "grid",
-          gridGap: 60,
-          gridTemplateColumns: "1fr 1fr 1fr 1fr",
-          gridAutoRows: "min(710px, 1fr)"
-        }}
-      >
+      <Box sx={style.grid}>
         {sortedProjects.map((project) => (
           <ProjectTile
             key={project.title}

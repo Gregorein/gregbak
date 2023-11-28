@@ -9,6 +9,7 @@ type DrawerLinkProps = {
   icon?: ReactNode
   scroll?: boolean
   external?: boolean
+  callback?: () => void
 }
 
 export const DrawerLink = ({
@@ -16,7 +17,8 @@ export const DrawerLink = ({
   icon,
   title,
   external = false,
-  scroll = true
+  scroll = true,
+  callback
 }: DrawerLinkProps) => (
   <Typography
     component={Link}
@@ -24,10 +26,13 @@ export const DrawerLink = ({
     target={external ? "_blank" : "_self"}
     rel={external ? "noopener noreferrer" : ""}
     scroll={scroll}
+    onClick={callback}
+    fontSize={21}
     sx={{
+      transition: transition("color"),
       display: "flex",
       gap: 1,
-      transition: transition("color"),
+      alignItems: "center",
       textDecoration: "none",
       color: "primary.500",
       "&:hover": {

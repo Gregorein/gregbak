@@ -74,6 +74,29 @@ const style: Style = {
   drawerButton: {
     display: "flex",
     gap: 1
+  },
+  themeToggle: {
+    fontSize: 21,
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    gap: 1,
+    transition: transition("color"),
+    textDecoration: "none",
+    color: "primary.500",
+    "&:hover": {
+      color: "primary.50"
+    }
+  },
+  languageLink: {
+    fontSize: 21,
+    transition: transition("color"),
+    width: "100%",
+    textDecoration: "none",
+    color: "primary.500",
+    "&:hover": {
+      color: "primary.50"
+    }
   }
 }
 
@@ -100,9 +123,8 @@ const NavigationDrawer = ({
   const width = useMediaQuery()
 
   const [open, setOpen] = useState(false)
-  const toggleDrawer = () => {
-    setOpen(!open)
-  }
+  const toggleDrawer = () => setOpen(!open)
+  const hideDrawer = () => setOpen(false)
 
   const { mode, setMode } = useColorScheme()
   const isDark = mode === "dark"
@@ -117,7 +139,7 @@ const NavigationDrawer = ({
       </IconButton>
       <Drawer
         open={open}
-        onClose={() => setOpen(false)}
+        onClose={hideDrawer}
         anchor="top"
         slotProps={{
           content: {
@@ -135,7 +157,7 @@ const NavigationDrawer = ({
           <Button
             variant="soft"
             sx={style.drawerButton}
-            onClick={() => setOpen(false)}
+            onClick={hideDrawer}
           >
             {closeMenu}
             <X />
@@ -152,6 +174,7 @@ const NavigationDrawer = ({
                 <List sx={style.drawerSubMenu}>
                   <ListItem>
                     <DrawerLink
+                      callback={hideDrawer}
                       href="/resume"
                       title={navResume}
                       icon={<ChevronRight />}
@@ -159,6 +182,7 @@ const NavigationDrawer = ({
                   </ListItem>
                   <ListItem>
                     <DrawerLink
+                      callback={hideDrawer}
                       href="/portfolio"
                       title={navPortfolio}
                       // badge="" // TODO add unseen projects badge 
@@ -167,6 +191,7 @@ const NavigationDrawer = ({
                   </ListItem>
                   <ListItem>
                     <DrawerLink
+                      callback={hideDrawer}
                       href="?contact"
                       title={navContact}
                       scroll={false}
@@ -185,6 +210,7 @@ const NavigationDrawer = ({
                 <List sx={style.drawerSubMenu}>
                   <ListItem>
                     <DrawerLink
+                      callback={hideDrawer}
                       external
                       href="mailto:contact@gregbak.com"
                       title={socialMail}
@@ -193,6 +219,7 @@ const NavigationDrawer = ({
                   </ListItem>
                   <ListItem>
                     <DrawerLink
+                      callback={hideDrawer}
                       external
                       href="https://github.com/Gregorein"
                       title={socialGithub}
@@ -201,6 +228,7 @@ const NavigationDrawer = ({
                   </ListItem>
                   <ListItem>
                     <DrawerLink
+                      callback={hideDrawer}
                       external
                       href="https://dribbble.com/Gregorein"
                       title={socialDribble}
@@ -209,6 +237,7 @@ const NavigationDrawer = ({
                   </ListItem>
                   <ListItem>
                     <DrawerLink
+                      callback={hideDrawer}
                       external
                       href="https://www.linkedin.com/in/gregorein/"
                       title={socialLinkedin}
@@ -226,6 +255,7 @@ const NavigationDrawer = ({
               <List sx={style.drawerSubMenu}>
                 <ListItem>
                   <DrawerLink
+                    callback={hideDrawer}
                     href="/policy"
                     title={cookiesButton}
                     icon={<Cookie />}
@@ -233,6 +263,7 @@ const NavigationDrawer = ({
                 </ListItem>
                 <ListItem>
                   <DrawerLink
+                    callback={hideDrawer}
                     external
                     href="https://github.com/Gregorein/gregbak"
                     title={codeButton}
@@ -242,17 +273,7 @@ const NavigationDrawer = ({
                 <ListItem>
                   <Typography
                     onClick={() => setMode(isDark ? "light" : "dark")}
-                    sx={{
-                      cursor: "pointer",
-                      display: "flex",
-                      gap: 1,
-                      transition: transition("color"),
-                      textDecoration: "none",
-                      color: "primary.500",
-                      "&:hover": {
-                        color: "primary.50"
-                      }
-                    }}
+                    sx={style.themeToggle}
                   >
                     {isDark
                       ? <><Moon />{uiToggle[0].text}</>
@@ -271,18 +292,11 @@ const NavigationDrawer = ({
                 {locales.map(({ title, code }) => (
                   <ListItem key={code}>
                     <Typography
+                      onClick={hideDrawer}
                       component={Link}
                       href={`/${code}${parsedPath}`}
                       locale={code}
-                      sx={{
-                        transition: transition("color"),
-                        width: "100%",
-                        textDecoration: "none",
-                        color: "primary.500",
-                        "&:hover": {
-                          color: "primary.50"
-                        }
-                      }}
+                      sx={style.languageLink}
                     >
                       {title}
                     </Typography>
