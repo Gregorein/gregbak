@@ -3,6 +3,7 @@ import CtaButton from "components/CtaButton/CtaButton"
 import Section from "components/Section/Section"
 import SectionTitle from "components/SectionTitle/SectionTitle"
 import TestimonialsDisplay from "components/TestimonialsDisplay/TestimonialsDisplay"
+import type Style from "types/style"
 
 type TestimonialsProps = {
   labels: {
@@ -22,6 +23,20 @@ type TestimonialsProps = {
   target
 }
 
+const style: Style = {
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 6,
+    width: "840px"
+  },
+  content: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 1,
+  }
+}
+
 const Testimonials = ({
   labels: {
     testimonialsTitle,
@@ -36,21 +51,8 @@ const Testimonials = ({
     id={id}
     centered
   >
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 6,
-        width: "840px"
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 1,
-        }}
-      >
+    <Box sx={style.container}>
+      <Box sx={style.content}>
         <SectionTitle>
           {testimonialsTitle}
         </SectionTitle>
@@ -65,7 +67,7 @@ const Testimonials = ({
         target={target}
       />
     </Box>
-  </Section>
+  </Section >
 )
 
 export default Testimonials

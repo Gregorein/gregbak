@@ -3,11 +3,31 @@
 import { Typography } from "@mui/joy"
 import ExtendedTypography from "components/ExtendedTypography/ExtendedTypography"
 import { ArrowDown } from "lucide-react"
+import type { CSSProperties } from "react"
 import { transition } from "theme/utils"
+import type Style from "types/style"
 
 type CtaButtonProps = {
   title: string
   target: string
+}
+
+const style: Style = {
+  text: {
+    cursor: "pointer",
+    transition: transition("color"),
+    display: "flex",
+    gap: 2,
+    alignItems: "center",
+    color: "primary.500",
+    "&:hover": {
+      color: "primary.600"
+    }
+  },
+  icon: {
+    position: "relative",
+    top: "3px"
+  }
 }
 
 const CtaButton = ({ title, target }: CtaButtonProps) => {
@@ -20,18 +40,8 @@ const CtaButton = ({ title, target }: CtaButtonProps) => {
   }
   return (
     <Typography
-      sx={{
-        cursor: "pointer",
-        transition: transition("color"),
-        display: "flex",
-        gap: 2,
-        alignItems: "center",
-        color: "primary.500",
-        "&:hover": {
-          color: "primary.600"
-        }
-      }}
-      fontSize={48}
+      sx={style.text}
+      fontSize={36}
       fontWeight={100}
       textTransform="uppercase"
       onClick={handleScrollTo}
@@ -40,12 +50,9 @@ const CtaButton = ({ title, target }: CtaButtonProps) => {
         {title}
       </ExtendedTypography>
       <ArrowDown
-        size={48}
+        size={36}
         strokeWidth={1}
-        style={{
-          position: "relative",
-          top: "3px"
-        }}
+        style={style.icon as CSSProperties}
       />
     </Typography>
   )

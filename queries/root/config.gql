@@ -18,6 +18,10 @@ query Config($locale:SiteLocale = en) {
     uiToggle {
       text
     }
+    closeMenu
+    menuNavigationTitle
+    menuSocialTitle
+    menuActionsTitle
   }
   allLocales(locale: $locale) {
     title

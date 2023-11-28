@@ -9,17 +9,19 @@ type SocialLinkProps = {
   title: string
   icon: ReactNode
   secondary?: boolean
+  external?: boolean
 }
 
 export const SocialLink = ({
   href,
   icon,
   title,
-  secondary = false
+  secondary = false,
+  external = true
 }: SocialLinkProps) => (
   <Tooltip
     title={title}
-    variant="solid"
+    variant={secondary ? "plain" : "solid"}
     arrow
   >
     <Box
@@ -29,8 +31,8 @@ export const SocialLink = ({
         display: "flex",
         alignItems: "center"
       }}
-      target="_blank"
-      rel="noopener noreferrer"
+      target={external ? "_blank" : "_self"}
+      rel={external ? "noopener noreferrer" : ""}
     >
       <Typography
         sx={{

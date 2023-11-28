@@ -43,12 +43,13 @@ const AchievementList = ({
           href={entry.url || undefined}
           fontSize={28}
           fontFamily="anivers"
+          textAlign="center"
           sx={{
             display: "flex",
             gap: 1,
             alignItems: "center",
             color: entry.url ? "primary.500" : "text.primary",
-            textDecoration: "none"
+            textDecoration: "none",
           }}
         >
           {entry.title} {entry.url && <ArrowUpRight />}

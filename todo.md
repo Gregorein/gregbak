@@ -1,15 +1,9 @@
-project loading skeleton is overlapping header
-fix console errors
-
-scale down by 20%
-make topPaddings uniform
 ostyluj /policy
 add loading page
 add contact form https://react-hook-form.com/ to mail
 fix NavigationSide going too low on scroll
+ExtendedTypography add support for links
 
-
-add RWD https://mui.com/material-ui/customization/breakpoints/ https://mui.com/material-ui/react-use-media-query/
 add head to home splash
 
 check TODOs
@@ -20,9 +14,6 @@ check sitemap
 finish SEO and OG https://www.datocms.com/docs/next-js/seo-management https://nextjs.org/docs/app/api-reference/functions/
 finish error pages https://nextjs.org/docs/app/building-your-application/routing/error-handlinggenerate-metadata#opengraph
 run tests on https://search.google.com/test/mobile-friendly and lighthouse etc
-
-osiągnięcia wycentruj długie napisy (slavangard)
-
 add more projects:
   mity antykoncepcji
   amdg.agency

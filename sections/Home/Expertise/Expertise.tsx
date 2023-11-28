@@ -24,6 +24,21 @@ type ExpertiseProps = {
   id: string
 }
 
+const style = {
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 6,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  columns: {
+    display: "flex",
+    gap: 3
+  }
+}
+
 const Expertise = ({
   labels: {
     expertiseTitle,
@@ -43,25 +58,13 @@ const Expertise = ({
     centered
     height="calc(100vh - 30px)"
   >
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 6,
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
-      }}
-    >
+    <Box sx={style.container}>
       <SectionTitle>
         {expertiseTitle}
       </SectionTitle>
 
       <Box
-        sx={{
-          display: "flex",
-          gap: 3
-        }}
+        sx={style.columns}
       >
         {expertiseShowcase.map(expertise => (
           <Showcase

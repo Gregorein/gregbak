@@ -25,13 +25,13 @@ const NavigationMain = ({
     }}
   >
     <NavLink
+      href="/resume"
+      title={navResume}
+    />
+    <NavLink
       href="/portfolio"
       title={navPortfolio}
     // badge="" // TODO add unseen projects badge 
-    />
-    <NavLink
-      href="/resume"
-      title={navResume}
     />
     <NavLink
       href="?contact"

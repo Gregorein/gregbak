@@ -148,7 +148,10 @@ const Project = async ({
               color: "primary.500",
               textDecoration: "none"
             }}
-          >{returnToPortfolioButton}<Undo2 /></Typography>
+          >
+            {returnToPortfolioButton}
+            <Undo2 />
+          </Typography>
 
           <Typography
             sx={{

@@ -36,7 +36,7 @@ const Section = ({
   >
     <Box
       sx={{
-        maxWidth: maxWidth || "1745px",
+        maxWidth: maxWidth || "1280px",
         flex: 1,
         width: "100%",
         margin: "0 auto",

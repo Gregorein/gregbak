@@ -3,8 +3,12 @@
 import { Box } from "@mui/joy"
 import HeaderActions from "components/HeaderActions/HeaderActions"
 import LogoLink from "components/LogoLink/LogoLink"
+import NavigationDrawer from "components/NavigationDrawer/NavigationDrawer"
 import NavigationMain from "components/NavigationMain/NavigationMain"
 import NavigationSocial from "components/NavigationSocial/NavigationSocial"
+import mq from "theme/mediaQueries"
+import type Style from "types/style"
+import useMediaQuery from "util/useMediaQuery"
 
 type HeaderProps = {
   labels: {
@@ -23,6 +27,11 @@ type HeaderProps = {
       text: string
     }[]
     languagesMenu: string
+
+    closeMenu: string
+    menuNavigationTitle: string
+    menuSocialTitle: string
+    menuActionsTitle: string
   }
   locales: {
     code: string
@@ -30,8 +39,56 @@ type HeaderProps = {
   }[]
 }
 
+const style: Style = {
+  header: {
+    display: "flex",
+    padding: 3,
+    gap: 6,
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 10,
+    backdropFilter: "brightness( var(--palette-background-header) ) blur(50px)",
+
+    "&::before": {
+      content: "'desktop'",
+      display: "block",
+      position: "absolute",
+
+      top: 0,
+      left: 0,
+    },
+
+    [mq.under.desktop]: {
+
+      "&::before": {
+        content: "'laptop'"
+      }
+    },
+    [mq.under.laptop]: {
+      gap: 3,
+
+      "&::before": {
+        content: "'tablet'"
+      }
+    },
+    [mq.under.tablet]: {
+      justifyContent: "space-between",
+
+      "&::before": {
+        content: "'mobile'"
+      }
+    }
+  }
+}
+
 const Header = ({
-  labels: {
+  labels,
+  locales,
+}: HeaderProps) => {
+  const width = useMediaQuery()
+  const {
     navContact,
     navResume,
     navPortfolio,
@@ -44,53 +101,61 @@ const Header = ({
     cookiesButton,
     codeButton,
     uiToggle,
-    languagesMenu
-  },
-  locales,
-}: HeaderProps) => (
-  <Box
-    component="header"
-    sx={{
-      display: "flex",
-      padding: 3,
-      gap: 6,
-      position: "fixed",
-      top: 0,
-      left: 0,
-      right: 0,
-      zIndex: 2,
-      backdropFilter: "brightness( var(--palette-background-header) ) blur(50px)"
-    }}
-  >
-    <LogoLink />
+    languagesMenu,
+    // closeMenu,
+    // menuNavigationTitle,
+    // menuSocialTitle,
+    // menuActionsTitle
+  } = labels
 
-    <NavigationMain
-      labels={{
-        navContact,
-        navResume,
-        navPortfolio
-      }}
-    />
+  return (
+    <Box
+      component="header"
+      sx={style.header}
+    >
+      <LogoLink />
 
-    <NavigationSocial
-      labels={{
-        socialMail,
-        socialLinkedin,
-        socialGithub,
-        socialDribble
-      }}
-    />
+      {!width.under.tablet && (
+        <NavigationMain
+          labels={{
+            navContact,
+            navResume,
+            navPortfolio
+          }}
+        />
+      )}
 
-    <HeaderActions
-      labels={{
-        cookiesButton,
-        codeButton,
-        uiToggle,
-        languagesMenu
-      }}
-      locales={locales}
-    />
-  </Box>
-)
+      {width.over.tablet && (
+        <NavigationSocial
+          labels={{
+            socialMail,
+            socialLinkedin,
+            socialGithub,
+            socialDribble
+          }}
+        />
+      )}
+
+      {width.over.laptop && (
+        <HeaderActions
+          labels={{
+            cookiesButton,
+            codeButton,
+            uiToggle,
+            languagesMenu
+          }}
+          locales={locales}
+        />
+      )}
+
+      {width.under.laptop && (
+        <NavigationDrawer
+          labels={labels}
+          locales={locales}
+        />
+      )}
+    </Box>
+  )
+}
 
 export default Header

@@ -17,15 +17,23 @@ module.exports = {
     
     "react/no-unescaped-entities": [0],
     
-    "@stylistic/jsx/jsx-first-prop-new-line": ["error", "multiline"],
+    // "@stylistic/jsx/jsx-first-prop-new-line": ["error", "multiprop"],
     "@stylistic/jsx/jsx-props-no-multi-spaces": ["error"],
     "@stylistic/jsx/jsx-max-props-per-line": ["error", {
-      "maximum": {
-        single: 1,
-        multi: 1
-      }
+      "maximum": 1,
+      "when": "always"
     }],
+    "@stylistic/jsx/jsx-closing-tag-location": ["error"],
     "@stylistic/jsx/jsx-closing-bracket-location": ["error", "line-aligned"],
+    "@stylistic/jsx/jsx-wrap-multilines": ["error", {
+      "declaration": "parens-new-line",
+      "assignment": "parens-new-line",
+      "return": "parens-new-line",
+      "arrow": "parens-new-line",
+      "condition": "parens-new-line",
+      "logical": "parens-new-line",
+      "prop": "parens-new-line"
+    }],
 
     "@stylistic/js/object-property-newline": ["error"],
     

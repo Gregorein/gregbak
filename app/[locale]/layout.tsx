@@ -113,7 +113,12 @@ const RootLayout = async ({
       ctaTitle,
 
       policyButton,
-      copyrights
+      copyrights,
+
+      closeMenu,
+      menuNavigationTitle,
+      menuSocialTitle,
+      menuActionsTitle
     },
     allLocales
   } = await api(config, {
@@ -182,13 +187,17 @@ const RootLayout = async ({
               cookiesButton,
               codeButton,
               uiToggle,
-              languagesMenu
+              languagesMenu,
+              closeMenu,
+              menuNavigationTitle,
+              menuSocialTitle,
+              menuActionsTitle
             }}
             locales={allLocales}
           />
-          <Main>
+          {/* <Main>
             {children}
-          </Main>
+          </Main> */}
           <Footer
             labels={{
               socialMail,

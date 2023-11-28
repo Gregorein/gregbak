@@ -13,7 +13,7 @@ const Logo = ({
     xmlns="http://www.w3.org/2000/svg"
     width={size * 1.1875}
     height={size}
-    viewBox={`0 0 ${size * 1.1875} ${size}`}
+    viewBox={`0 0 ${32 * 1.1875} ${32}`}
   >
     <line
       y1="30"

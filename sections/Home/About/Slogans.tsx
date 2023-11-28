@@ -1,81 +1,94 @@
 "use client"
 
 import { Box, Typography } from "@mui/joy"
+import mq from "theme/mediaQueries"
+import type Style from "types/style"
 
-type SlogansProps = {
-  aboutSloganLeft: {
-    text: string
-  }[]
-  aboutSloganRight: {
+type SloganProps = {
+  words: {
     text: string
   }[]
 }
 
-const Slogans = ({ aboutSloganLeft, aboutSloganRight }: SlogansProps) => {
-  const rightSlogan = aboutSloganRight.map(({ text }) => {
-    const isBold = Number(text.includes("**"))
+const style: Style = {
+  leftSloganContainer: {
+    position: "absolute",
+    left: -180,
+    top: 30,
+    bottom: 60,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
+    transform: "translate(-100%, 0)",
+    pointerEvents: "none",
+  },
+  leftSlogan: {
+    color: "background.level2",
 
-    return (
+    fontSize: 144,
+    [mq.under.laptop]: {
+      fontSize: 96
+    },
+    [mq.under.tablet]: {
+      fontSize: 72
+    }
+  },
+  rightSloganContainer: {
+    position: "absolute",
+    right: -180,
+    top: 30,
+    bottom: 60,
+    display: "flex",
+    justifyContent: "space-between",
+    flexDirection: "column",
+    transform: "translate(100%, 0)",
+    pointerEvents: "none"
+  },
+  rightSlogan: {
+    fontSize: 144,
+    [mq.under.laptop]: {
+      fontSize: 96
+    },
+    [mq.under.tablet]: {
+      fontSize: 72
+    }
+  }
+}
+
+export const SloganLeft = ({ words }: SloganProps) => (
+  <Box sx={style.leftSloganContainer}>
+    {words.map(({ text }) => (
       <Typography
         key={text}
-        sx={{
-          color: isBold ? "text.primary" : "background.level2"
-        }}
-        fontSize={144}
-        fontWeight={isBold ? 800 : 100}
+        sx={style.leftSlogan}
+        fontWeight={100}
         textTransform="lowercase"
       >
-        {text.split("**")}
+        {text}
       </Typography>
-    )
-  })
-  const leftSlogan = aboutSloganLeft.map(({ text }) => (
-    <Typography
-      key={text}
-      sx={{
-        color: "background.level2"
-      }}
-      fontSize={144}
-      fontWeight={100}
-      textTransform="lowercase"
-    >
-      {text}
-    </Typography>
-  ))
+    ))}
+  </Box>
+)
 
-  return (
-    <>
-      <Box
-        sx={{
-          position: "absolute",
-          left: -180,
-          top: 10,
-          display: "flex",
-          gap: 3,
-          flexDirection: "column",
-          alignItems: "flex-end",
-          transform: "translate(-100%, 0)",
-          pointerEvents: "none"
-        }}
-      >
-        {leftSlogan}
-      </Box>
-      <Box
-        sx={{
-          position: "absolute",
-          right: -180,
-          top: 10,
-          display: "flex",
-          gap: 3,
-          flexDirection: "column",
-          transform: "translate(100%, 0)",
-          pointerEvents: "none"
-        }}
-      >
-        {rightSlogan}
-      </Box>
-    </>
-  )
-}
+export const SloganRight = ({ words }: SloganProps) => (
+  <Box sx={style.rightSloganContainer}>
+    {words.map(({ text }) => {
+      const isBold = Number(text.includes("**"))
 
-export default Slogans
+      return (
+        <Typography
+          key={text}
+          sx={{
+            color: isBold ? "text.primary" : "background.level2",
+            ...style.rightSlogan
+          }}
+          fontWeight={isBold ? 800 : 100}
+          textTransform="lowercase"
+        >
+          {text.split("**")}
+        </Typography>
+      )
+    })}
+  </Box>
+)

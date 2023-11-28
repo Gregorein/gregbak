@@ -40,7 +40,9 @@ const Showcase = ({
             <Typography
               fontFamily="anivers"
               fontSize={24}
-            >— {skill.title}</Typography>
+            >
+              — {skill.title}
+            </Typography>
             <br />
           </>
         )

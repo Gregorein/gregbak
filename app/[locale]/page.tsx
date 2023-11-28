@@ -93,6 +93,7 @@ const Home = async ({ params: { locale } }: HomeProps) => {
         }}
         target={id(aboutTitle)}
       />
+      {/*      
       <About
         labels={{
           aboutButton,
@@ -103,9 +104,9 @@ const Home = async ({ params: { locale } }: HomeProps) => {
         }}
         id={id(aboutTitle)}
         target={id(testimonialsTitle)}
-      />
+      /> */}
 
-      <Testimonials
+      {/* <Testimonials
         labels={{
           testimonialsTitle,
           testimonialsRandomButton,
@@ -114,9 +115,9 @@ const Home = async ({ params: { locale } }: HomeProps) => {
         }}
         id={id(testimonialsTitle)}
         target={id(expertiseTitle)}
-      />
+      /> */}
 
-      <Expertise
+      {/* <Expertise
         labels={{
           expertiseCtaButton,
           expertiseTitle,
@@ -127,7 +128,7 @@ const Home = async ({ params: { locale } }: HomeProps) => {
           resumeButton,
         }}
         id={id(expertiseTitle)}
-      />
+      /> */}
     </>
   )
 }

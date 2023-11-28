@@ -11,7 +11,6 @@ export const middleware = createMiddleware({
 export const config = {
   matcher: [
     "/",
-    // "/(en|pl)/:path*",
     "/((?!api|_next|_vercel|.*\\..*).*)",
   ],
 }

@@ -19,6 +19,40 @@ type TestimonialsDisplayProps = {
   randomiseButton: string
 }
 
+const style = {
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 3
+  },
+  footer: {
+    display: "flex",
+    justifyContent: "space-between"
+  },
+  author: {
+    display: "flex",
+  },
+  link: {
+    transition: transition("color"),
+    color: "text.tertiary",
+    "&:hover": {
+      color: "primary.600"
+    },
+    textDecoration: "none"
+  },
+  randomiseButton: {
+    cursor: "pointer",
+    transition: transition("color"),
+    display: "flex",
+    gap: 1,
+    alignItems: "center",
+    color: "primary.500",
+    "&:hover": {
+      color: "primary.600"
+    }
+  }
+}
+
 const TestimonialsDisplay = ({
   testimonials,
   randomiseButton
@@ -30,31 +64,16 @@ const TestimonialsDisplay = ({
   }
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 3
-      }}
-    >
+    <Box sx={style.container}>
       <Typography
-        fontSize={56}
+        fontSize={36}
         fontFamily="anivers"
       >
         "{testimonials[index].text}"
       </Typography>
 
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between"
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-          }}
-        >
+      <Box sx={style.footer}>
+        <Box sx={style.author}>
           <Typography
             fontSize={24}
             textTransform="uppercase"
@@ -69,14 +88,7 @@ const TestimonialsDisplay = ({
               href={testimonials[index].client.url}
               target="_blank"
               rel="noopener noreferrer"
-              sx={{
-                transition: transition("color"),
-                color: "text.tertiary",
-                "&:hover": {
-                  color: "primary.600"
-                },
-                textDecoration: "none"
-              }}
+              sx={style.link}
             >
               @{testimonials[index].client.name}
             </Typography>
@@ -84,17 +96,7 @@ const TestimonialsDisplay = ({
         </Box>
 
         <Typography
-          sx={{
-            cursor: "pointer",
-            transition: transition("color"),
-            display: "flex",
-            gap: 1,
-            alignItems: "center",
-            color: "primary.500",
-            "&:hover": {
-              color: "primary.600"
-            }
-          }}
+          sx={style.randomiseButton}
           fontSize={24}
           fontWeight={800}
           textTransform="uppercase"

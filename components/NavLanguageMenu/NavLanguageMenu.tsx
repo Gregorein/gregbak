@@ -1,6 +1,6 @@
 "use client"
 
-import { Dropdown, Menu, MenuItem, Box, Tooltip, MenuButton, Typography } from "@mui/joy"
+import { Dropdown, Menu, MenuItem, Tooltip, MenuButton, Typography } from "@mui/joy"
 import { Languages } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -31,21 +31,17 @@ const NavLanguageMenu = ({
       onOpenChange={handleToggleOpen}
     >
       <MenuButton
-        slots={{
-          root: Box
-        }}
-        slotProps={{
-          root: {
-            variant: "plain",
-            sx: {
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              transition: transition("color"),
-              "&:hover": {
-                color: "primary.500"
-              }
-            }
+        variant="plain"
+        sx={{
+          cursor: "pointer",
+          display: "flex",
+          padding: "unset",
+          alignItems: "center",
+          transition: transition("color"),
+          background: "none",
+          "&:hover": {
+            color: "primary.500",
+            background: "none"
           }
         }}
       >

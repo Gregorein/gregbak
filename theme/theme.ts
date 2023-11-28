@@ -1,6 +1,7 @@
  import type { PaletteRange } from "@mui/joy/styles"
 import { extendTheme } from "@mui/joy/styles"
 import palette from "theme/palette"
+import breakpoints from "./mediaQueries"
 
 declare module "@mui/joy/styles" {
   interface ColorPalettePropOverrides {
@@ -15,8 +16,19 @@ declare module "@mui/joy/styles" {
     header: true,
     radar: true
   }
-}
 
+  interface BreakpointOverrides {
+    xs: false; // removes the `xs` breakpoint
+    sm: false;
+    md: false;
+    lg: false;
+    xl: false;
+    mobile: true; // adds the `mobile` breakpoint
+    tablet: true;
+    laptop: true;
+    desktop: true;
+  }
+}
 
 const extendedTheme = extendTheme({
   cssVarPrefix: "",
@@ -111,6 +123,10 @@ const extendedTheme = extendTheme({
     display: "anivers",
     body: "europa",
     code: "Fira Code"
+  },
+  breakpoints: {
+    //@ts-expect-error //TODO: type this better (skipping for now)
+    values: breakpoints
   }
 })
 

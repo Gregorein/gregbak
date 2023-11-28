@@ -4,7 +4,7 @@ import CtaButton from "components/CtaButton/CtaButton"
 import Section from "components/Section/Section"
 import SectionTitle from "components/SectionTitle/SectionTitle"
 
-import Slogans from "./Slogans"
+import { SloganLeft, SloganRight } from "./Slogans"
 
 type AboutProps = {
   labels: {
@@ -47,16 +47,18 @@ const About = ({
           display: "flex",
           flexDirection: "column",
           gap: 3,
-          width: "840px"
+          width: "600px"
         }}
       >
+        <SloganLeft words={aboutSloganLeft} />
+
         <SectionTitle>
           {aboutTitle}
         </SectionTitle>
 
         <Typography
           fontFamily="anivers"
-          fontSize={24}
+          fontSize={18}
         >
           {firstParagraph}
           {restOfText.map(paragraph => (
@@ -71,10 +73,7 @@ const About = ({
           target={target}
         />
 
-        <Slogans
-          aboutSloganLeft={aboutSloganLeft}
-          aboutSloganRight={aboutSloganRight}
-        />
+        <SloganRight words={aboutSloganRight} />
       </Box>
     </Section >
   )

@@ -39,6 +39,7 @@ const HeaderActions = ({
       href="/policy"
       title={cookiesButton}
       icon={<Cookie />}
+      external={false}
     />
     <SocialLink
       href="https://github.com/Gregorein/gregbak"

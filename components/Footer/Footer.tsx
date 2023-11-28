@@ -1,8 +1,13 @@
+"use client"
+
 import { Box, Typography } from "@mui/joy"
 import NavigationSocial from "components/NavigationSocial/NavigationSocial"
 import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
+import mq from "theme/mediaQueries"
 import { transition } from "theme/utils"
+import type Style from "types/style"
+import useMediaQuery from "util/useMediaQuery"
 
 type FooterProps = {
   labels: {
@@ -19,6 +24,97 @@ type FooterProps = {
   }
 }
 
+const style: Style = {
+  footer: {
+    backgroundColor: "primary.500",
+  },
+  cta: {
+    display: "flex",
+    position: "relative",
+    width: "750px",
+    flexDirection: "column",
+    paddingTop: 18,
+    margin: "0 auto",
+    marginBottom: 24,
+    cursor: "pointer",
+    color: "primary.50",
+    whiteSpace: "pre",
+    textDecoration: "none",
+
+    [mq.under.tablet]: {
+      width: "unset",
+      alignItems: "center",
+
+      paddingTop: 6,
+      marginBottom: 0
+    }
+  },
+  ctaTitle: {
+    fontSize: 36,
+    fontFamily: "anivers",
+    lineHeight: 0.5,
+
+    [mq.under.tablet]: {
+      fontSize: 21
+    }
+  },
+  ctaText: {
+    fontSize: 144,
+    fontWeight: 100,
+    lineHeight: 1,
+    textTransform: "uppercase",
+
+    [mq.under.tablet]: {
+      fontSize: 72
+    }
+  },
+  ctaIcon: {
+    position: "absolute",
+    left: "252px",
+    bottom: "-144px",
+  },
+  ctaIconMobile: {
+    position: "relative",
+    left: -22,
+    bottom: "0"
+  },
+  nav: {
+    padding: 3,
+    display: "flex",
+    justifyContent: "space-between",
+
+    [mq.under.tablet]: {
+      flexDirection: "column",
+      gap: 3,
+      alignItems: "center"
+    }
+  },
+  link: {
+    flex: 1,
+    textDecoration: "none",
+    transition: transition("color"),
+    color: "primary.700",
+    "&:hover": {
+      color: "primary.900"
+    },
+
+    [mq.under.tablet]: {
+      order: 1
+    }
+  },
+  copyrights: {
+    flex: 1,
+    fontFamily: "anivers",
+    fontWeight: "bold",
+    textAlign: "right",
+    color: "primary.700",
+
+    [mq.under.tablet]: {
+      order: 1
+    }
+  }
+}
+
 const Footer = ({
   labels: {
     socialMail,
@@ -32,107 +128,64 @@ const Footer = ({
     policyButton,
     copyrights,
   }
-}: FooterProps) => (
-  <Box
-    component="footer"
-    sx={{
-      backgroundColor: "primary.500",
-    }}
-  >
-    <Typography
-      component={Link}
-      href="?contact"
-      scroll={false}
-      sx={{
-        display: "flex",
-        position: "relative",
-        width: "750px",
-        flexDirection: "column",
-        paddingTop: 18,
-        margin: "0 auto 240px",
-        cursor: "pointer",
-        color: "primary.50",
-        whiteSpace: "pre",
-        textDecoration: "none"
-      }}
-    >
-      <Typography
-        lineHeight={0.5}
-        fontSize={36}
-        fontFamily="anivers"
-      >
-        {ctaTitle}
-      </Typography>
-      <Typography
-        lineHeight={1}
-        fontSize={144}
-        fontWeight={100}
-        textTransform="uppercase"
-      >
-        {ctaText}
-      </Typography>
-      <Typography
-        sx={{
-          position: "absolute",
-          left: "252px",
-          bottom: "-144px",
-        }}
-      >
-        <ArrowUpRight
-          size={160}
-          strokeWidth={1}
-          strokeLinecap="butt"
-          strokeLinejoin="miter"
-        />
-      </Typography>
-    </Typography>
+}: FooterProps) => {
+  const width = useMediaQuery()
 
+  return (
     <Box
-      sx={{
-        padding: 3,
-        display: "flex",
-        justifyContent: "space-between"
-      }}
+      component="footer"
+      sx={style.footer}
     >
       <Typography
         component={Link}
-        href="/policy"
-        sx={{
-          flex: 1,
-          textDecoration: "none",
-          transition: transition("color"),
-          color: "primary.700",
-          "&:hover": {
-            color: "primary.900"
-          }
-        }}
+        href="?contact"
+        scroll={false}
+        sx={style.cta}
       >
-        {policyButton}
+        <Typography sx={style.ctaTitle}>
+          {ctaTitle}
+        </Typography>
+        <Typography sx={style.ctaText}>
+          {ctaText}
+        </Typography>
+        <ArrowUpRight
+          size={width.under.tablet ? 72 : 160}
+          strokeWidth={width.under.tablet ? 1.2 : 1}
+          strokeLinecap="butt"
+          strokeLinejoin="miter"
+          //@ts-expect-error // lucide icon has a weird type, using this for now
+          style={width.under.tablet ? style.ctaIconMobile : style.ctaIcon}
+        />
       </Typography>
 
-      <NavigationSocial
-        labels={{
-          socialMail,
-          socialLinkedin,
-          socialGithub,
-          socialDribble
-        }}
-        secondary
-      />
-
-      <Typography
-        sx={{
-          flex: 1,
-          fontFamily: "anivers",
-          fontWeight: "bold",
-          textAlign: "right",
-          color: "primary.700"
-        }}
+      <Box
+        component="nav"
+        sx={style.nav}
       >
-        {copyrights}
-      </Typography>
+        <Typography
+          component={Link}
+          href="/policy"
+          sx={style.link}
+        >
+          {policyButton}
+        </Typography>
+
+        <NavigationSocial
+          labels={{
+            socialMail,
+            socialLinkedin,
+            socialGithub,
+            socialDribble
+          }}
+          secondary
+        />
+
+        <Typography sx={style.copyrights}>
+          {copyrights}
+        </Typography>
+      </Box>
     </Box>
-  </Box>
-)
+  )
+}
 
 export default Footer
