@@ -8,17 +8,15 @@ import config from "queries/Project/config.gql"
 import { Box, Typography } from "@mui/joy"
 import ExtendedTypography from "components/ExtendedTypography/ExtendedTypography"
 import Link from "next/link"
-import { ArrowUpRight, Undo2 } from "lucide-react"
 import localiseDate from "util/localiseDate"
 import { transition } from "theme/utils"
 import { Image as DatoImage } from "react-datocms"
 import Gallery from "sections/Project/Gallery/Gallery"
 import OptionalSection from "sections/Project/OptionalSection/OptionalSection"
-import StatsURL from "sections/Project/StatsURL/StatsURL"
-import StatsClient from "sections/Project/StatsClient/StatsClient"
-import StatsGeneric from "sections/Project/StatsGeneric/StatsGeneric"
 import StatsWip from "sections/Project/StatsWip/StatsWip"
 import { locales, matchLocale } from "i18n"
+import mq from "theme/mediaQueries"
+import LinkArrow from "assets/icons/LinkArrow"
 
 export const generateStaticParams = async () => {
   const { allProjects } = await api("query allProjectSlugs { allProjects { slug } }")
@@ -65,6 +63,164 @@ export const generateMetadata = async ({
   }
 }
 
+
+const style = {
+  container: {
+    gap: 6,
+    paddingBottom: 6,
+
+    [mq.under.tablet]: {
+      gap: 3
+    }
+  },
+  header: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 3,
+    paddingLeft: 3,
+    paddingRight: 3,
+  },
+  returnLink: {
+    fontSize: 28,
+    fontWeight: 100,
+    textTransform: "uppercase",
+    display: "flex",
+    gap: 1.5,
+    alignItems: "center",
+    position: "absolute",
+    left: -30,
+    top: "50%",
+    transform: "translate(-100%, -50%)",
+    color: "primary.500",
+    textDecoration: "none"
+  },
+  title: {
+    color: "primary.500",
+    fontSize: 72,
+    fontWeight: 800,
+
+    [mq.under.laptop]: {
+      fontSize: 48,
+    },
+    [mq.under.tablet]: {
+      fontSize: 36,
+    }
+  },
+  info: {
+    display: "grid",
+    gridTemplateColumns: "2fr 1fr 1fr",
+    gridTemplateRows: "1fr",
+    gridTemplateAreas:
+      "\"description . info\"",
+    gridGap: 60,
+
+    [mq.under.laptop]: {
+      gridTemplateColumns: "1fr 1fr",
+      gridTemplateRows: "1fr",
+      gridTemplateAreas:
+        "\"description info\"",
+    },
+    [mq.under.tablet]: {
+      gridTemplateColumns: "1fr",
+      gridTemplateRows: "1fr auto",
+      gridTemplateAreas:
+        `"info"
+        "description"`,
+      gridGap: 30,
+    }
+  },
+  text: {
+    fontFamily: "anivers",
+    fontSize: 28,
+    gridArea: "description",
+    display: "flex",
+
+    [mq.under.tablet]: {
+      fontSize: 18
+    }
+  },
+  stats: {
+    gridArea: "info",
+    display: "flex",
+    flexDirection: "column",
+    gap: 3,
+
+    [mq.under.tablet]: {
+      gap: 1
+    }
+  },
+  stat: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+  },
+  statTitle: {
+    fontSize: 24,
+    fontWeight: 100,
+    textTransform: "lowercase",
+
+    [mq.under.tablet]: {
+      fontSize: 16
+    }
+  },
+  statText: {
+    fontFamily: "anivers",
+    fontSize: 21,
+
+    [mq.under.tablet]: {
+      fontSize: 14
+    }
+  },
+  statLink: {
+    fontFamily: "anivers",
+    fontSize: 21,
+    display: "flex",
+    alignItems: "center",
+    color: "primary.500",
+    "&:hover": {
+      color: "primary.600"
+    },
+    textDecoration: "none",
+
+    [mq.under.tablet]: {
+      fontSize: 14
+    }
+  },
+  statIcon: {
+    strokeWidth: 1.5
+  },
+
+  splash: {
+    display: "flex",
+    justifyContent: "center"
+  },
+
+  nextProjectLink: {
+    margin: "0 auto",
+
+    transition: transition("color"),
+    fontSize: 36,
+    fontWeight: 100,
+    textTransform: "uppercase",
+    textDecoration: "none",
+    display: "flex",
+    alignItems: "flex-start",
+    gap: 1,
+    "&:hover": {
+      color: "primary.600"
+    },
+
+    [mq.under.tablet]: {
+      fontSize: 24,
+    }
+  },
+  nextProjectIcon: {
+    position: "relative",
+    top: "3px",
+    strokeWidth: 1
+  }
+}
+
 const Project = async ({
   params: {
     slug,
@@ -81,7 +237,6 @@ const Project = async ({
       clientTitle,
       urlTitle,
       returnToPortfolioButton,
-      nextProjectButton,
       wip
     },
     project: {
@@ -114,108 +269,83 @@ const Project = async ({
   return (
     <Section
       maxWidth="1480px"
-      sx={{
-        gap: 6,
-        paddingBottom: 6
-      }}
+      sx={style.container}
     >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 3
-        }}
-      >
-        <Box
-          sx={{
-            position: "relative"
-          }}
-        >
-          <Typography
-            component={Link}
-            href="/portfolio"
-            fontSize={28}
-            fontWeight={100}
-            textTransform="uppercase"
-            sx={{
-              display: "flex",
-              gap: 1.5,
-              alignItems: "center",
-              position: "absolute",
-              left: -30,
-              top: "50%",
-              transform: "translate(-100%, -50%)",
-              color: "primary.500",
-              textDecoration: "none"
-            }}
-          >
-            {returnToPortfolioButton}
-            <Undo2 />
-          </Typography>
+      <Box sx={style.header}>
+        <Typography sx={style.title}>
+          {title}
+        </Typography>
 
-          <Typography
-            sx={{
-              color: "primary.500"
-            }}
-            fontSize={72}
-            fontWeight={800}
-          >
-            {title}
-          </Typography>
-        </Box>
-
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: "2fr 1fr 1fr",
-            gridTemplateRows: "1fr",
-            gridTemplateAreas:
-              "\"description . info\"",
-            gridGap: 6,
-          }}
-        >
-          <ExtendedTypography
-            fontFamily="anivers"
-            fontSize={28}
-            sx={{
-              gridArea: "description",
-              display: "flex"
-            }}
-          >
+        <Box sx={style.info}>
+          <ExtendedTypography sx={style.text}>
             {text}
           </ExtendedTypography>
 
-          <Box
-            sx={{
-              gridArea: "info",
-              display: "flex",
-              flexDirection: "column",
-              gap: 3
-            }}
-          >
+          <Box sx={style.stats}>
             {isWip && <StatsWip wip={wip} />}
 
-            <StatsGeneric stats={stats} />
+            {stats.map(([title, content]) => (
+              <Box
+                key={title}
+                sx={style.stat}
+              >
+                <Typography sx={style.statTitle}>
+                  {title}
+                </Typography>
 
-            <StatsClient
-              client={client}
-              clientTitle={clientTitle}
-            />
+                <Typography sx={style.statText}>
+                  {content}
+                </Typography>
+              </Box>
+            ))}
 
-            <StatsURL
-              url={url}
-              urlTitle={urlTitle}
-            />
+            {client && (
+              <Box sx={style.stat}>
+                <Typography sx={style.statTitle}>
+                  {clientTitle}
+                </Typography>
+
+                {client.url ? (
+                  <Typography
+                    component={Link}
+                    href={client.url}
+                    fontFamily="anivers"
+                    fontSize={21}
+                    sx={style.statLink}
+                  >
+                    {client.name}
+                    <LinkArrow sx={style.statIcon} />
+                  </Typography>
+                ) : (
+                  <Typography sx={style.statText}>
+                    {client.name}
+                  </Typography>
+                )}
+              </Box>
+            )}
+
+            {url && (
+              <Box sx={style.stat}>
+                <Typography sx={style.statTitle}>
+                  {urlTitle}
+                </Typography>
+
+                <Typography
+                  component={Link}
+                  href={url}
+                  sx={style.statLink}
+                >
+                  {url}
+                  <LinkArrow sx={style.statIcon} />
+
+                </Typography>
+              </Box>
+            )}
           </Box>
         </Box>
       </Box>
 
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center"
-        }}
-      >
+      <Box sx={style.splash}>
         <DatoImage data={splash.responsiveImage} />
       </Box>
 
@@ -225,33 +355,12 @@ const Project = async ({
 
       <Typography
         component={Link}
-        href=""
-        sx={{
-          margin: "0 auto",
-          cursor: "pointer",
-          transition: transition("color"),
-          display: "flex",
-          gap: 2,
-          color: "primary.500",
-          "&:hover": {
-            color: "primary.600"
-          },
-          textDecoration: "none"
-        }}
-        fontSize={36}
-        fontWeight={100}
-        textTransform="uppercase"
+        href="/portfolio"
+        sx={style.nextProjectLink}
       >
-        {nextProjectButton}
+        {returnToPortfolioButton}
 
-        <ArrowUpRight
-          size={48}
-          strokeWidth={1}
-          style={{
-            position: "relative",
-            top: "3px"
-          }}
-        />
+        <LinkArrow sx={style.nextProjectIcon} />
       </Typography>
     </Section >
   )

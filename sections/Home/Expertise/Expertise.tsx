@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/joy"
+import LinkArrow from "assets/icons/LinkArrow"
 import Section from "components/Section/Section"
 import SectionTitle from "components/SectionTitle/SectionTitle"
-import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 import mq from "theme/mediaQueries"
 import { transition } from "theme/utils"
@@ -110,7 +110,7 @@ const style = {
     width: "100%",
     gap: 9,
     padding: 3,
-    alignItems: "center",
+    justifyContent: "center",
 
     [mq.under.tablet]: {
       flexDirection: "column",
@@ -129,6 +129,15 @@ const style = {
     "&:hover": {
       color: "primary.600"
     },
+
+    [mq.under.tablet]: {
+      fontSize: 24
+    }
+  },
+  footerIcon: {
+    strokeWidth: 1,
+    position: "relative",
+    top: 3
   }
 }
 
@@ -217,14 +226,7 @@ const Expertise = ({
         <Typography>
           {resumeButton}
         </Typography>
-        <ArrowUpRight
-          size={48}
-          strokeWidth={1}
-          style={{
-            position: "relative",
-            top: "3px"
-          }}
-        />
+        <LinkArrow sx={style.footerIcon} />
       </Typography>
       <Typography
         component={Link}
@@ -234,14 +236,7 @@ const Expertise = ({
         <Typography>
           {projectsButton}
         </Typography>
-        <ArrowUpRight
-          size={48}
-          strokeWidth={1}
-          style={{
-            position: "relative",
-            top: "3px"
-          }}
-        />
+        <LinkArrow sx={style.footerIcon} />
       </Typography>
     </Box>
   </Section>

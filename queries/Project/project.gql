@@ -6,7 +6,6 @@ query Portfolio($slug: String!, $locale: SiteLocale = en) {
     clientTitle
     urlTitle
     returnToPortfolioButton
-    nextProjectButton
     wip {
       id
       title

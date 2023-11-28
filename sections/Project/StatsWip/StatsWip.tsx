@@ -1,5 +1,6 @@
 import { Box, Chip } from "@mui/joy"
 import { TrafficCone } from "lucide-react"
+import mq from "theme/mediaQueries"
 
 type StatsWipProps = {
   wip: {
@@ -16,7 +17,11 @@ const StatsWip = ({ wip }: StatsWipProps) => (
       sx={{
         display: "flex",
         alignItems: "center",
-        gap: .5
+        gap: .5,
+
+        [mq.under.tablet]: {
+          fontSize: 12
+        }
       }}
     >
       <TrafficCone size={16} />
