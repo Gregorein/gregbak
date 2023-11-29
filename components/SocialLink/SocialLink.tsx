@@ -41,7 +41,7 @@ export const SocialLink = ({
           ...(secondary ? {
             color: "primary.200",
             "&:hover": {
-              color: "primary.50"
+              color: "primary.plainActiveBg"
             }
           } : {
             "&:hover": {

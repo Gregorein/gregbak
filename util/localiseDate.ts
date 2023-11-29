@@ -1,4 +1,4 @@
-const localiseDate = (date: string, full=false) => new Date(date).toLocaleDateString("en", {
+const localiseDate = (date: string, locale="en", full=false) => new Date(date).toLocaleDateString(locale, {
     ...(full? {day: "numeric"} : {}),
     year: "numeric",
     month: "long",

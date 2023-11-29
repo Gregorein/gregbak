@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/joy"
+import { Box } from "@mui/joy"
 import { Image as DatoImage } from "react-datocms"
 
 import api from "util/datocms"
@@ -10,12 +10,9 @@ import resume from "queries/Resume/resume.gql"
 import ExtendedTypography from "components/ExtendedTypography/ExtendedTypography"
 import SectionTitle from "components/SectionTitle/SectionTitle"
 import SubSection from "components/SubSection/SubSection"
-import Link from "next/link"
 import TestimonialsDisplay from "components/TestimonialsDisplay/TestimonialsDisplay"
 import Skills from "sections/Resume/Skills/Skills"
-import NavigationSide from "components/NavigationSide/NavigationSide"
 import AchievementList from "components/AchievementList/AchievementList"
-import { FileBadge } from "lucide-react"
 import { transition } from "theme/utils"
 import Experience from "sections/Resume/Experience/Experience"
 import Tools from "sections/Resume/Tools/Tools"
@@ -23,6 +20,8 @@ import Projects from "sections/Resume/Projects/Projects"
 
 import { unstable_setRequestLocale } from "next-intl/server"
 import { locales, matchLocale } from "i18n"
+import mq from "theme/mediaQueries"
+import NavigationAside from "components/NavigationAside/NavigationAside"
 
 export const generateStaticParams = async () => locales.map(locale => ({ locale }))
 
@@ -49,6 +48,45 @@ export const generateMetadata = async ({
 
   return {
     title
+  }
+}
+
+const style = {
+  container: {
+    gap: 6,
+    paddingTop: "calc(50vh - 350px)",
+    paddingBottom: 12,
+
+    [mq.under.tablet]: {
+      paddingTop: 3
+    }
+  },
+
+  about: {
+    transition: transition("width"),
+    border: "1px solid",
+    borderColor: "primary.500",
+    p: 3,
+    width: 325,
+
+    [mq.under.tablet]: {
+      width: 250,
+    }
+  },
+  aboutText: {
+    fontSize: 21,
+    paddingLeft: 3,
+    paddingRight: 3,
+    fontFamily: "anivers",
+
+    [mq.under.tablet]: {
+      fontSize: 18
+    }
+  },
+  aboutTextBold: {
+    fontSize: 36,
+    fontFamily: "europa",
+    color: "primary.500"
   }
 }
 
@@ -99,7 +137,8 @@ const Resume = async ({
       cvButton,
       cv: {
         url: cvUrl
-      }
+      },
+      navigationButton
     },
   } = await api(resume, {
     variables: {
@@ -110,82 +149,31 @@ const Resume = async ({
   return (
     <Section
       centered
-      maxWidth="1480px"
-      sx={{
-        gap: 6,
-        paddingTop: "calc(50vh - 350px)",
-        paddingBottom: 12
-      }}
+      sx={style.container}
     >
-      <Box
-        component="aside"
-        sx={{
-          width: "325px",
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-1065px, -50%)",
-          display: "flex",
-          flexDirection: "column",
-          gap: 3
-        }}
-      >
-        <NavigationSide
-          links={[
-            aboutSlug,
-            awardsSlug,
-            contributionsSlug,
-            projectsSlug,
-            skillsSlug,
-            toolsSlug,
-            testimonialsSlug,
-            experienceSlug,
-          ]}
-        />
-
-        <Typography
-          component={Link}
-          href={cvUrl}
-          fontSize={24}
-          fontFamily="europa"
-          sx={{
-            cursor: "pointer",
-            transition: transition("color"),
-            display: "flex",
-            gap: 2,
-            alignItems: "center",
-            color: "primary.500",
-            "&:hover": {
-              color: "primary.600"
-            },
-            textDecoration: "none"
-          }}
-        >
-          {cvButton} <FileBadge />
-        </Typography>
-      </Box>
+      <NavigationAside aboutSlug={aboutSlug}
+        awardsSlug={awardsSlug}
+        contributionsSlug={contributionsSlug}
+        cvButton={cvButton}
+        cvUrl={cvUrl}
+        experienceSlug={experienceSlug}
+        projectsSlug={projectsSlug}
+        skillsSlug={skillsSlug}
+        testimonialsSlug={testimonialsSlug}
+        toolsSlug={toolsSlug}
+        navigationButton={navigationButton}
+      />
 
       <Box
-        sx={{
-          border: "1px solid",
-          borderColor: "primary.500",
-          padding: 3
-        }}
+        sx={style.about}
         id={aboutSlug}
       >
         <DatoImage data={avatar.responsiveImage} />
       </Box>
 
       <ExtendedTypography
-        fontSize={21}
-        fontFamily="anivers"
-        boldProps={{
-          fontSize: 36,
-          fontFamily: "europa",
-          sx: {
-            color: "primary.500"
-          }
-        }}
+        sx={style.aboutText}
+        boldProps={{ sx: style.aboutTextBold }}
       >
         {aboutText}
       </ExtendedTypography>
@@ -193,13 +181,19 @@ const Resume = async ({
       <SubSection id={awardsSlug}>
         <SectionTitle textAlign="center">{awardsTitle}</SectionTitle>
 
-        <AchievementList entries={awardsEntries} />
+        <AchievementList
+          entries={awardsEntries}
+          locale={locale}
+        />
       </SubSection>
 
       <SubSection id={contributionsSlug}>
         <SectionTitle textAlign="center">{contributionsTitle}</SectionTitle>
 
-        <AchievementList entries={contributionsEntries} />
+        <AchievementList
+          entries={contributionsEntries}
+          locale={locale}
+        />
       </SubSection>
 
       <Projects
@@ -223,7 +217,7 @@ const Resume = async ({
 
       <SubSection
         id={testimonialsSlug}
-        sx={{ width: "710px" }}
+        sx={{ maxWidth: 840 }}
       >
         <SectionTitle textAlign="center">{testimonialsTitle}</SectionTitle>
 

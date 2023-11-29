@@ -262,7 +262,7 @@ const Project = async ({
 
   const stats: string[][] = [
     [servicesTitle, categories.filter(category => category.id !== wip.id).map(category => category.title).join(", ")],
-    [dateTitle, date.map(dateRange => localiseDate(dateRange.start) + (dateRange.end ? ` — ${localiseDate(dateRange.end)}` : "")).join(", ")],
+    [dateTitle, date.map(dateRange => localiseDate(dateRange.start, locale) + (dateRange.end ? ` — ${localiseDate(dateRange.end, locale)}` : "")).join(", ")],
     [toolsTitle, tools.map(tool => tool.title).join(", ")],
   ]
 

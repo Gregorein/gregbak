@@ -7,6 +7,7 @@ import { Radar } from "components/Radar/Radar"
 import SectionTitle from "components/SectionTitle/SectionTitle"
 import SubSection from "components/SubSection/SubSection"
 import { useState } from "react"
+import mq from "theme/mediaQueries"
 
 type SkillsProps = {
   skillsEntries: {
@@ -18,6 +19,59 @@ type SkillsProps = {
   skillsTitle: string;
 }
 
+const style = {
+  container: {
+    display: "flex",
+    gap: 6,
+    alignItems: "center",
+
+    [mq.under.laptop]: {
+      flexDirection: "column",
+      gap: 3
+    }
+  },
+  description: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 1,
+  },
+  title: {
+    fontSize: 36,
+    fontWeight: 800,
+
+    [mq.under.laptop]: {
+      fontSize: 24
+    },
+    [mq.under.tablet]: {
+      fontSize: 21
+    }
+  },
+  level: {
+    fontSize: 18,
+    fontWeight: 100,
+    textTransform: "lowercase",
+    color: "primary.500",
+
+    [mq.under.laptop]: {
+      fontSize: 14
+    },
+    [mq.under.tablet]: {
+      fontSize: 12
+    }
+  },
+  text: {
+    fontSize: 24,
+    fontFamily: "anivers",
+
+    [mq.under.laptop]: {
+      fontSize: 18
+    },
+    [mq.under.tablet]: {
+      fontSize: 16
+    }
+  },
+}
+
 const Skills = (
   {
     skillsEntries,
@@ -25,8 +79,6 @@ const Skills = (
     skillsText,
     skillsTitle
   }: SkillsProps) => {
-
-
   const [activeEntry, setActiveEntry] = useState<RadarEntry | undefined>(undefined)
   const handlePointClick = (entry: RadarEntry | undefined) => {
     setActiveEntry(entry)
@@ -35,13 +87,7 @@ const Skills = (
     <SubSection id={skillsSlug}>
       <SectionTitle textAlign="center">{skillsTitle}</SectionTitle>
 
-      <Box
-        sx={{
-          display: "flex",
-          gap: 6,
-          alignItems: "center"
-        }}
-      >
+      <Box sx={style.container}>
         <Radar
           data={skillsEntries}
           onPointClick={handlePointClick}
@@ -51,41 +97,21 @@ const Skills = (
         {activeEntry
           ? (
             <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 1,
-              }}
+              sx={style.description}
             >
-              <Typography
-                fontSize={36}
-                fontWeight={800}
-              >
+              <Typography sx={style.title}>
                 {activeEntry.title}
               </Typography>
 
-              <Typography
-                fontSize={18}
-                fontWeight={100}
-                textTransform="lowercase"
-                sx={{
-                  color: "primary.500"
-                }}
-              >
+              <Typography sx={style.level}>
                 {activeEntry.level.text}
               </Typography>
-              <Typography
-                fontSize={24}
-                fontFamily="anivers"
-              >
+              <Typography sx={style.text}>
                 {activeEntry.text}
               </Typography>
             </Box>
           ) : (
-            <ExtendedTypography
-              fontSize={24}
-              fontFamily="anivers"
-            >
+            <ExtendedTypography sx={style.text}>
               {skillsText}
             </ExtendedTypography>
           )}

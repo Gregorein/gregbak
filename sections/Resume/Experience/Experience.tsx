@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/joy"
 import SectionTitle from "components/SectionTitle/SectionTitle"
 import SubSection from "components/SubSection/SubSection"
+import mq from "theme/mediaQueries"
 import ExperienceProjects from "./ExperienceProjects"
 
 type ExperienceProps = {
@@ -23,32 +24,46 @@ type ExperienceProps = {
   }[];
 }
 
+const style = {
+  container: {
+    display: "grid",
+    gridTemplateColumns: "repeat(4, 1fr)",
+    gridTemplateRows: "auto",
+    gridGap: 60,
+    justifyContent: "space-between",
+
+    [mq.under.laptop]: {
+      gridTemplateColumns: "1fr 1fr",
+      gridTemplateRows: "auto auto",
+    },
+    [mq.under.tablet]: {
+      gridTemplateColumns: "auto",
+      gridTemplateRows: "auto",
+    }
+  },
+  entries: {
+    display: "flex",
+    gap: 3,
+    flexDirection: "column"
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 100,
+    textAlign: "center"
+  }
+}
+
 const Experience = ({ experienceEntries, experienceSlug, experienceTitle }: ExperienceProps) => (
   <SubSection id={experienceSlug}>
     <SectionTitle textAlign="center">{experienceTitle}</SectionTitle>
 
-    <Box
-      sx={{
-        display: "flex",
-        gap: 6,
-        justifyContent: "space-between"
-      }}
-    >
+    <Box sx={style.container}>
       {experienceEntries.map(({ title, projects }) => (
         <Box
           key={title}
-          sx={{
-            width: "325px",
-            display: "flex",
-            gap: 3,
-            flexDirection: "column"
-          }}
+          sx={style.entries}
         >
-          <Typography
-            fontSize={24}
-            fontWeight={100}
-            textAlign="center"
-          >
+          <Typography sx={style.title}>
             {title}
           </Typography>
           <ExperienceProjects projects={projects} />

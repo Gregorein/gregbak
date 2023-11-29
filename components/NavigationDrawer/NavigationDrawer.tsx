@@ -52,7 +52,7 @@ const style: Style = {
   drawerHeader: {
     display: "flex",
     p: 3,
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
   },
   drawerContent: {
     display: "flex",
@@ -85,8 +85,11 @@ const style: Style = {
     textDecoration: "none",
     color: "primary.500",
     "&:hover": {
-      color: "primary.50"
-    }
+      color: "primary.plainActiveBg"
+    },
+    "&:active": {
+      color: "primary.plainActiveBg"
+    },
   },
   languageLink: {
     fontSize: 21,
@@ -95,7 +98,7 @@ const style: Style = {
     textDecoration: "none",
     color: "primary.500",
     "&:hover": {
-      color: "primary.50"
+      color: "primary.plainActiveBg"
     }
   }
 }
@@ -140,20 +143,23 @@ const NavigationDrawer = ({
       <Drawer
         open={open}
         onClose={hideDrawer}
-        anchor="top"
+        anchor="right"
         slotProps={{
-          content: {
+          root: {
             sx: {
-              ...(width.under.tablet ? {
-                height: "100vh"
-              } : {})
+              "--zIndex-modal": "9001"
             }
-          }
+          },
+          // content: {
+          //   sx: {
+          //     ...(width.under.tablet ? {
+          //       height: "100vh"
+          //     } : {})
+          //   }
+          // }
         }}
       >
         <Box sx={style.drawerHeader}>
-          <LogoLink />
-
           <Button
             variant="soft"
             sx={style.drawerButton}

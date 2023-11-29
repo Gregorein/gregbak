@@ -3,8 +3,10 @@ add loading page
 add contact form https://react-hook-form.com/ to mail
 fix NavigationSide going too low on scroll
 ExtendedTypography add support for links
-
+eslint fix broken prop rules
+add ios special region colors
 add head to home splash
+add eslint rules for ts (remove semis)
 
 check TODOs
 

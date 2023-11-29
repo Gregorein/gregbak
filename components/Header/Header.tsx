@@ -48,37 +48,14 @@ const style: Style = {
     top: 0,
     left: 0,
     right: 0,
-    zIndex: 10,
+    zIndex: 9000,
     backdropFilter: "brightness( var(--palette-background-header) ) blur(50px)",
 
-    "&::before": {
-      content: "'desktop'",
-      display: "block",
-      position: "absolute",
-
-      top: 0,
-      left: 0,
-    },
-
-    [mq.under.desktop]: {
-
-      "&::before": {
-        content: "'laptop'"
-      }
-    },
     [mq.under.laptop]: {
-      gap: 3,
-
-      "&::before": {
-        content: "'tablet'"
-      }
+      gap: 3
     },
     [mq.under.tablet]: {
-      justifyContent: "space-between",
-
-      "&::before": {
-        content: "'mobile'"
-      }
+      justifyContent: "space-between"
     }
   }
 }

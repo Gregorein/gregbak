@@ -4,11 +4,11 @@ import { ArrowUpRight } from "lucide-react"
 import useMediaQuery from "util/useMediaQuery"
 
 type LinkArrowType = {
-  sx: object
+  sx?: object
 }
 
 const LinkArrow = ({
-  sx
+  sx = {}
 }: LinkArrowType) => {
   const width = useMediaQuery()
 

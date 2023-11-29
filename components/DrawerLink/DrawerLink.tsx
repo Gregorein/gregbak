@@ -36,7 +36,7 @@ export const DrawerLink = ({
       textDecoration: "none",
       color: "primary.500",
       "&:hover": {
-        color: "primary.50"
+        color: "primary.plainActiveBg"
       }
     }}
   >

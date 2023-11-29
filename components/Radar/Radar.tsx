@@ -1,10 +1,12 @@
 "use client"
 
-import { Button, ButtonGroup } from "@mui/joy"
+import { Button, ButtonGroup, CircularProgress } from "@mui/joy"
 import { Box, Tooltip } from "@mui/joy"
 import * as d3 from "d3"
 import { transition } from "theme/utils"
 import { Fragment, useState } from "react"
+import useMediaQuery from "util/useMediaQuery"
+import useMounted from "util/useMounted"
 
 const polarToCartesian = (angle: number, distance: number) => {
   const x = distance * Math.cos(angle)
@@ -34,19 +36,35 @@ export type RadarEntry = {
 type RadarProps = {
   onPointClick?: (entry: RadarEntry | undefined) => void
   activeEntry?: RadarEntry
-  size?: number
   data: {
     title: string
     entries: RadarEntry[]
   }[]
 }
 
+const style = {
+  loading: {
+    "--CircularProgress-size": 710,
+    "--CircularProgress-trackThickness": "60px",
+    "--CircularProgress-progressThickness": "1px"
+  },
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 1.5,
+    alignItems: "center"
+  },
+}
+
 export const Radar = ({
-  size = 710,
   data,
   onPointClick,
   activeEntry
 }: RadarProps) => {
+  const isMounted = useMounted()
+  const width = useMediaQuery()
+
+
   const [activeLayer, setActiveLayer] = useState<number>(undefined)
   const [activeCoordinates, setCoordinates] = useState<[number, number]>(undefined)
 
@@ -59,6 +77,18 @@ export const Radar = ({
       setCoordinates(coordinates)
     }
   }
+
+  if (!isMounted) {
+    return (
+      <CircularProgress
+        variant="soft"
+        color="neutral"
+        sx={style.loading}
+      />
+    )
+  }
+
+  const size = width.under.tablet ? window.innerWidth : 710
 
   const handleToggleLayer = (layer: number | undefined) => {
     if (activeLayer === layer) {
@@ -110,7 +140,7 @@ export const Radar = ({
           cy={y}
           r={activeEntry === entry ? 15 : 7.5}
           fill={`var(--palette-${variant[l]}-500)`}
-          fillOpacity={activeLayer !== l ? 0.3 : 1}
+          fillOpacity={(activeEntry !== entry || activeLayer !== l) ? 0.3 : 1}
           sx={{
             cursor: "pointer",
             transition: transition("r", "fillOpacity"),
@@ -167,14 +197,7 @@ export const Radar = ({
   })
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 1,
-        alignItems: "center"
-      }}
-    >
+    <Box sx={style.container}>
       <svg
         height={size}
         width={size}

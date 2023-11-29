@@ -8,6 +8,8 @@ const SubSection = ({ sx, ...props }: BoxProps) => (
       width: "100%",
       flexDirection: "column",
       gap: 3,
+      paddingLeft: 3,
+      paddingRight: 3,
       ...sx
     }}
     {...props}

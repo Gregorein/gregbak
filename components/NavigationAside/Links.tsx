@@ -5,13 +5,15 @@ import { useEffect, useState } from "react"
 import { transition } from "theme/utils"
 import useDebounce from "util/useDebounce"
 
-type NavigationSideProps = {
+type LinksProps = {
   links: string[]
+  callback?: () => void
 }
 
-const NavigationSide = ({
+const Links = ({
   links,
-}: NavigationSideProps) => {
+  callback,
+}: LinksProps) => {
   const [visibleLinks, setVisibleLinks] = useState<string[]>([])
 
   const handleScrollCheck = () => {
@@ -43,6 +45,8 @@ const NavigationSide = ({
       behavior: "smooth",
       top
     })
+
+    callback && callback()
   }
 
   useEffect(() => {
@@ -87,4 +91,4 @@ const NavigationSide = ({
   )
 }
 
-export default NavigationSide
+export default Links

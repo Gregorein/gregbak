@@ -37,7 +37,7 @@ const style: Style = {
     margin: "0 auto",
     marginBottom: 24,
     cursor: "pointer",
-    color: "primary.50",
+    color: "primary.plainActiveBg",
     whiteSpace: "pre",
     textDecoration: "none",
 
