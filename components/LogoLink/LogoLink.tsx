@@ -1,7 +1,7 @@
 "use client"
 
 import { Box, Typography } from "@mui/joy"
-import Logo from "assets/icons/Logo"
+import Logo from "icons/Logo"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { transition } from "theme/utils"
