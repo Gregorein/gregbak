@@ -1,20 +1,8 @@
-ostyluj /policy
-add loading page
-add contact form https://react-hook-form.com/ to mail
-fix NavigationSide going too low on scroll
-ExtendedTypography add support for links
-eslint fix broken prop rules
-add ios special region colors
 add head to home splash
-add eslint rules for ts (remove semis)
-
-check TODOs
-
 implement notice snackbars
-check robots
-check sitemap
 finish SEO and OG https://www.datocms.com/docs/next-js/seo-management https://nextjs.org/docs/app/api-reference/functions/
 finish error pages https://nextjs.org/docs/app/building-your-application/routing/error-handlinggenerate-metadata#opengraph
+check TODOs
 run tests on https://search.google.com/test/mobile-friendly and lighthouse etc
 add more projects:
   mity antykoncepcji
@@ -26,17 +14,17 @@ add animations https://blog.logrocket.com/advanced-page-transitions-next-js-fram
 check reader modes everywhere
 check if "use client"s can be removed
 add skills explanations https://www.forbes.com/advisor/business/soft-skills-examples/
-transform all types[] into Array<> or Record<>?
-extract & type query returns
+extract & type query returns, add types to queries 
 add skill explanations
-
-add types to queries 
 add tests: https://vitest.dev/guide/
 add prefixers: https://github.com/postcss/autoprefixer https://github.com/postcss/postcss
 https://www.npmjs.com/package/@next/bundle-analyzer
 suspense ? https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming
-
+add eslint rules for ts (remove semis), eslint fix broken prop rules
+optimise https://nextjs.org/docs/app/building-your-application/optimizing
+fix flashing (when mui/joy have a solution)
+get locales from api
 https://nextjs.org/docs/app/building-your-application/rendering
 https://medium.com/techzap/deploying-strapi-on-heroku-ac48e663afd8
 https://docs.strapi.io/dev-docs/quick-start
-add cookies for a navigationMani badge on portfolio if there are new unchecked projects
+add cookies for a navigationMani badge on portfolio if there are new unchecked projec

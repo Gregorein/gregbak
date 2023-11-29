@@ -1,0 +1,18 @@
+query SitemapConfig {
+  allProjects(first: "100") {
+    slug
+    updatedAt
+  }
+  home {
+    updatedAt
+  }
+  resume {
+    updatedAt
+  }
+  portfolio {
+    updatedAt
+  }
+  policy {
+    updatedAt
+  }
+}

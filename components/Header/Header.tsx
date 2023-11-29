@@ -12,7 +12,6 @@ import useMediaQuery from "util/useMediaQuery"
 
 type HeaderProps = {
   labels: {
-    navContact: string
     navResume: string
     navPortfolio: string
 
@@ -48,7 +47,7 @@ const style: Style = {
     top: 0,
     left: 0,
     right: 0,
-    zIndex: 9000,
+    zIndex: 1000,
     backdropFilter: "brightness( var(--palette-background-header) ) blur(50px)",
 
     [mq.under.laptop]: {
@@ -66,7 +65,6 @@ const Header = ({
 }: HeaderProps) => {
   const width = useMediaQuery()
   const {
-    navContact,
     navResume,
     navPortfolio,
 
@@ -95,13 +93,11 @@ const Header = ({
       {!width.under.tablet && (
         <NavigationMain
           labels={{
-            navContact,
             navResume,
             navPortfolio
           }}
         />
       )}
-
       {width.over.tablet && (
         <NavigationSocial
           labels={{

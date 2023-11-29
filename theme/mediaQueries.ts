@@ -1,13 +1,11 @@
-export type BreakpointType = "mobile" | "tablet" | "laptop" | "desktop"
+export type BreakpointVariant = "mobile" | "tablet" | "laptop" | "desktop"
 
-export const breakpoints: Record<BreakpointType, number> = {
+export const breakpoints: Record<BreakpointVariant, number> = {
   mobile: 0,
   tablet: 768,
   laptop: 1366,
   desktop: 1920,
 }
-
-export type MediaQueriesType = Record<"under"|"over", Record<BreakpointType, string>>
 
 const mq = (() => {
   const under = {}
@@ -21,7 +19,7 @@ const mq = (() => {
   return {
     over,
     under
-  } as MediaQueriesType
+  } as Record<"under"|"over", Record<BreakpointVariant, string>>
 })()
 
 export default mq

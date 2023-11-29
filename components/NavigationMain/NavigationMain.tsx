@@ -3,7 +3,6 @@ import NavLink from "components/NavLink/NavLink"
 
 type NavigationMainProps = {
   labels: {
-    navContact: string
     navResume: string
     navPortfolio: string
   }
@@ -11,7 +10,6 @@ type NavigationMainProps = {
 
 const NavigationMain = ({
   labels: {
-    navContact,
     navResume,
     navPortfolio
   }
@@ -32,11 +30,6 @@ const NavigationMain = ({
       href="/portfolio"
       title={navPortfolio}
     // badge="" // TODO add unseen projects badge 
-    />
-    <NavLink
-      href="?contact"
-      title={navContact}
-      scroll={false}
     />
   </Box>
 )

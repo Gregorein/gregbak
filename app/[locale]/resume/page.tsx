@@ -58,7 +58,8 @@ const style = {
     paddingBottom: 12,
 
     [mq.under.tablet]: {
-      paddingTop: 3
+      paddingTop: 9,
+      gap: 3
     }
   },
 
@@ -232,7 +233,7 @@ const Resume = async ({
         experienceTitle={experienceTitle}
         experienceEntries={experienceEntries}
       />
-    </Section >
+    </Section>
   )
 }
 

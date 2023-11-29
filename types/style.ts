@@ -1,6 +1,8 @@
 import type { SxProps } from "@mui/joy/styles/types"
 
 
-type Style = Record<string, SxProps>
+type Style = {
+  [key: string]: SxProps
+}
 
 export default Style

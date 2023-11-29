@@ -10,7 +10,7 @@ import Header from "components/Header/Header"
 import Footer from "components/Footer/Footer"
 import Main from "components/Main/Main"
 import api from "util/datocms"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 
 import seo from "queries/root/seo.gql"
 import config from "queries/root/config.gql"
@@ -57,30 +57,38 @@ export const generateMetadata = async ({
       template: `%s | ${title}`
     },
     description,
-    // TODO: finish openGraph
-    // openGraph: {
-    //   type: "website",
-    //   title,
-    //   description,
-    //   siteName,
-    //   images: [
-    //     {
-    //       url
-    //     }
-    //   ]
-    // },
     applicationName: siteName,
     authors: {
       name: "Greg Bak",
       url: "gregbak.com"
     },
     publisher: "Greg Bak",
-    themeColor: "#060506",
-    colorScheme: "dark",
-    viewport: "initial-scale=1, width=device-width",
+
     creator: "Greg Bak",
-    robots: "index, follow"
+    robots: "index, follow",
+
   }
+  // TODO: finish openGraph
+  // openGraph: {
+  //   type: "website",
+  //   title,
+  //   description,
+  //   siteName,
+  //   images: [
+  //     {
+  //       url
+  //     }
+  //   ]
+  // },
+
+}
+
+export const viewport: Viewport = {
+  themeColor: "#060506",
+  colorScheme: "dark",
+  initialScale: 1,
+  width: "device-width",
+  viewportFit: "cover"
 }
 
 const RootLayout = async ({
@@ -95,7 +103,6 @@ const RootLayout = async ({
     config: {
       maintenance,
 
-      navContact,
       navResume,
       navPortfolio,
 
@@ -175,7 +182,6 @@ const RootLayout = async ({
         <body>
           <Header
             labels={{
-              navContact,
               navResume,
               navPortfolio,
 

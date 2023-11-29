@@ -1,7 +1,6 @@
 query Config($locale:SiteLocale = en) {
   config(locale: $locale) {
     maintenance
-    navContact
     navResume
     navPortfolio
     socialMail

@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from "react"
-import type { BreakpointType } from "theme/mediaQueries"
+import type { BreakpointVariant } from "theme/mediaQueries"
 import { breakpoints } from "theme/mediaQueries"
 
 const useMediaQuery = () => {
@@ -28,7 +28,7 @@ const useMediaQuery = () => {
   return {
     over,
     under
-  } as Record<"under" | "over", Record<BreakpointType, boolean>>
+  } as Record<"under" | "over", Record<BreakpointVariant, boolean>>
 }
 
 export default useMediaQuery

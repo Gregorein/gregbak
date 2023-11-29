@@ -98,9 +98,9 @@ export const Radar = ({
     }
   }
 
-  const RADIUS_INNER = (size / 2) / 5
-  const RADIUS_OUTER = (size / 2) - 15
-  const RING_SIZE = size / 8 + 7.5
+  const RADIUS_INNER = (size / 2) / 4
+  const RADIUS_OUTER = (size / 2) - 25
+  const RING_SIZE = size / 4
 
   const values = data.map(layer => layer.entries.map(({ level: { value } }) => value)).flat()
   const domain = [Math.min.apply(null, values), Math.max.apply(null, values)]
@@ -138,14 +138,14 @@ export const Radar = ({
           component="circle"
           cx={x}
           cy={y}
-          r={activeEntry === entry ? 15 : 7.5}
+          r={activeEntry === entry ? 20 : 10}
           fill={`var(--palette-${variant[l]}-500)`}
-          fillOpacity={(activeEntry !== entry || activeLayer !== l) ? 0.3 : 1}
+          fillOpacity={(activeEntry === entry || activeLayer == l) ? 1 : 0.6}
           sx={{
             cursor: "pointer",
             transition: transition("r", "fillOpacity"),
             "&:hover": {
-              r: activeEntry === entry ? 15 : 10
+              r: activeEntry === entry ? 25 : 15
             }
           }}
           onClick={() => handlePointClick(entry, [x, y])}
@@ -162,6 +162,9 @@ export const Radar = ({
             variant="plain"
             placement="top"
             arrow
+            sx={{
+              zIndex: 1
+            }}
           >
             {Point}
           </Tooltip>
@@ -222,11 +225,14 @@ export const Radar = ({
               arrow
               variant="plain"
               placement="top"
+              sx={{
+                zIndex: 1
+              }}
             >
               <circle
                 cx={activeCoordinates[0]}
                 cy={activeCoordinates[1]}
-                r={7}
+                r={10}
                 style={{ pointerEvents: "none" }}
                 stroke="transparent"
                 opacity="0"

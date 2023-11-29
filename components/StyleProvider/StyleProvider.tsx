@@ -49,6 +49,8 @@ const StyleProvider = ({ children }: StyleProviderProps) => {
     }
   })
 
+  const defaultMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+
   useServerInsertedHTML(() => {
     const names = flush()
 
@@ -77,8 +79,8 @@ const StyleProvider = ({ children }: StyleProviderProps) => {
     <CacheProvider value={cache}>
       <CssVarsProvider
         theme={theme}
-        defaultMode="system"
-        modeStorageKey="appTheme"
+        defaultMode={defaultMode}
+        modeStorageKey="appMode"
         disableTransitionOnChange
       >
         <CssBaseline />

@@ -18,9 +18,9 @@ type ExperienceProjectsProps = {
 
 const ExperienceProject = ({ projects }: ExperienceProjectsProps) => (
   <>
-    {projects.map(project => (
+    {projects.map((project, i) => (
       <Box
-        key={project.title}
+        key={i}
         sx={{
           display: "flex",
           flexDirection: "column"

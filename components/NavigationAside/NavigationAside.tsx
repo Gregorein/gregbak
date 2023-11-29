@@ -2,7 +2,7 @@
 
 import { Box, Button, Drawer, Link, Typography } from "@mui/joy"
 import { FileBadge } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import mq from "theme/mediaQueries"
 import { transition } from "theme/utils"
 import useMediaQuery from "util/useMediaQuery"
@@ -25,9 +25,8 @@ type NavigationAsideProps = {
 const style = {
   vertical: {
     position: "fixed",
-    top: "50%",
     right: "50%",
-    transform: "translate(-640px, -50%)",
+    transform: "translate(-640px, 50%)",
     display: "flex",
     flexDirection: "column",
     gap: 3,
@@ -37,7 +36,7 @@ const style = {
     top: 90,
     left: 0,
     right: 0,
-    zIndex: 8999,
+    zIndex: 1000,
 
     display: "flex",
     justifyContent: "space-between",
@@ -74,12 +73,42 @@ const style = {
 }
 
 const NavigationAside = ({ aboutSlug, awardsSlug, contributionsSlug, cvButton, cvUrl, experienceSlug, projectsSlug, skillsSlug, testimonialsSlug, toolsSlug, navigationButton }: NavigationAsideProps) => {
+  // using this instead of position sticky because it doesn't fit properly in this layout
+  const [bottom, updateBottom] = useState("50%")
+  const asideRef = useRef<HTMLBaseElement>(null)
+  const calculateBottom = () => {
+    if (!asideRef.current) {
+      return
+    }
+
+    const diff =
+      (window.scrollY + (window.innerHeight + asideRef.current.clientHeight) / 2) -
+      asideRef.current.parentElement.clientHeight
+
+    if (diff > 0) {
+      updateBottom(`calc(50% + ${diff}px)`)
+      return
+    }
+    if (bottom !== "50%") {
+      updateBottom("50%")
+    }
+  }
+  useEffect(() => {
+    window.addEventListener("scroll", calculateBottom)
+    calculateBottom()
+
+    return () => {
+      window.removeEventListener("scroll", calculateBottom)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const width = useMediaQuery()
   const [open, setOpen] = useState(false)
   const toggleNavigation = () => setOpen(!open)
   const hideDrawer = () => setOpen(false)
 
-  return width.under.laptop ? (
+  return width.under.desktop ? (
     <>
       <Box
         component="aside"
@@ -101,17 +130,11 @@ const NavigationAside = ({ aboutSlug, awardsSlug, contributionsSlug, cvButton, c
           {navigationButton}
         </Button>
       </Box>
+
       <Drawer
         open={open}
         onClose={hideDrawer}
         anchor="right"
-        slotProps={{
-          root: {
-            sx: {
-              "--zIndex-modal": "9001"
-            }
-          },
-        }}
       >
         <Box sx={style.menu}>
           <Links
@@ -132,8 +155,12 @@ const NavigationAside = ({ aboutSlug, awardsSlug, contributionsSlug, cvButton, c
     </>
   ) : (
     <Box
+      ref={asideRef}
       component="aside"
-      sx={style.vertical}
+      sx={{
+        ...style.vertical,
+        bottom,
+      }}
     >
       <Links
         links={[

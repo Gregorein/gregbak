@@ -1,7 +1,7 @@
  import type { PaletteRange } from "@mui/joy/styles"
 import { extendTheme } from "@mui/joy/styles"
 import palette from "theme/palette"
-import breakpoints from "./mediaQueries"
+import {breakpoints} from "./mediaQueries"
 
 declare module "@mui/joy/styles" {
   interface ColorPalettePropOverrides {
@@ -70,7 +70,7 @@ const extendedTheme = extendTheme({
           darkChannel: "111 74 32",
         },
         background: {
-          header: "1.1",
+          header: "1.0",
           radar: "var(--palette-neutral-100)"
         }
       }
@@ -125,7 +125,6 @@ const extendedTheme = extendTheme({
     code: "Fira Code"
   },
   breakpoints: {
-    //@ts-expect-error //TODO: type this better (skipping for now)
     values: breakpoints
   }
 })

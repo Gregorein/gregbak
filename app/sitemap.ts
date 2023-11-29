@@ -1,27 +1,63 @@
 import type { MetadataRoute } from "next"
  
-const sitemap = (): MetadataRoute.Sitemap => {
-  return [
+import sitemapConfig from "queries/root/sitemapConfig.gql"
+import api from "util/datocms"
+import {locales} from "i18n"
+
+const generateSitemap = async () => {
+  const {
+    allProjects,
+    home,
+    resume,
+    portfolio,
+    policy,
+  } = await api(sitemapConfig)
+
+  const rootUrl = "https://gregbak.com"
+
+  const defaultSitemap = [
     {
-      url: "https://gregbak.com",
-      lastModified: new Date(),
+      url: "",
+      lastModified: home.updatedAt,
       changeFrequency: "monthly",
       priority: 1,
     },
     {
-      url: "https://gregbak.com/resume",
-      lastModified: new Date(),
+      url: "/resume",
+      lastModified: resume.updatedAt,
       changeFrequency: "monthly",
       priority: 0.75,
     },
     {
-      url: "https://gregbak.com/portfolio",
-      lastModified: new Date(),
+      url: "/portfolio",
+      lastModified: portfolio.updatedAt,
       changeFrequency: "weekly",
       priority: 0.5,
     },
-    // TODO: add dynamic pages from portfolio/projects
+    {
+      url: "/policy",
+      lastModified: policy.updatedAt,
+      changeFrequency: "monthly",
+      priority: 0.25,
+    },
+    ...allProjects.map(({slug, updatedAt}) => ({
+        url: `/portfolio/${slug}`,
+        lastModified: updatedAt,
+        changeFrequency: "monthly",
+        priority: 0.5,
+    }))
   ]
+
+  const sitemap = defaultSitemap.map(
+    entry => locales.map(
+      locale => ({
+        ...entry,
+        url: `${rootUrl}/${locale}${entry.url}`
+      })
+    )
+  ).flat()
+  
+  return sitemap as MetadataRoute.Sitemap
 }
 
-export default sitemap
+export default generateSitemap

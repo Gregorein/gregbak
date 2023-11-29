@@ -31,15 +31,15 @@ const style: Style = {
   cta: {
     display: "flex",
     position: "relative",
-    width: "750px",
     flexDirection: "column",
     paddingTop: 18,
     margin: "0 auto",
     marginBottom: 24,
     cursor: "pointer",
-    color: "primary.plainActiveBg",
+    color: "primary.50",
     whiteSpace: "pre",
     textDecoration: "none",
+    textAlign: "center",
 
     [mq.under.tablet]: {
       width: "unset",
@@ -140,7 +140,7 @@ const Footer = ({
     >
       <Typography
         component={Link}
-        href="?contact"
+        href="mailto:contact@gregbak.com"
         scroll={false}
         sx={style.cta}
       >
@@ -155,7 +155,6 @@ const Footer = ({
           strokeWidth={width.under.tablet ? 1.2 : 1}
           strokeLinecap="butt"
           strokeLinejoin="miter"
-          //@ts-expect-error // lucide icon has a weird type, using this for now
           style={width.under.tablet ? style.ctaIconMobile : style.ctaIcon}
         />
       </Typography>

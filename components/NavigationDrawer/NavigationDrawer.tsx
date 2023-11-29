@@ -12,27 +12,32 @@ import Link from "next/link"
 
 type NavigationDrawerType = {
   labels: {
-    closeMenu: string;
-    codeButton: string;
-    cookiesButton: string;
-    languagesMenu: string;
-    menuActionsTitle: string;
-    menuNavigationTitle: string;
-    menuSocialTitle: string;
-    navContact: string;
-    navPortfolio: string;
-    navResume: string;
-    socialDribble: string;
-    socialGithub: string;
-    socialLinkedin: string;
-    socialMail: string;
+    closeMenu: string
+
+    codeButton: string
+    cookiesButton: string
+
+    languagesMenu: string
+
+    menuActionsTitle: string
+    menuNavigationTitle: string
+    menuSocialTitle: string
+
+    navPortfolio: string
+    navResume: string
+
+    socialDribble: string
+    socialGithub: string
+    socialLinkedin: string
+    socialMail: string
+
     uiToggle: {
-      text: string;
-    }[];
+      text: string
+    }[]
   }
   locales: {
-    code: string;
-    title: string;
+    code: string
+    title: string
   }[];
 }
 
@@ -105,19 +110,24 @@ const style: Style = {
 const NavigationDrawer = ({
   labels: {
     closeMenu,
+
     codeButton,
     cookiesButton,
+
     languagesMenu,
+
     menuActionsTitle,
     menuNavigationTitle,
     menuSocialTitle,
-    navContact,
+
     navPortfolio,
     navResume,
+
     socialDribble,
     socialGithub,
     socialLinkedin,
     socialMail,
+
     uiToggle
   },
   locales
@@ -143,20 +153,6 @@ const NavigationDrawer = ({
         open={open}
         onClose={hideDrawer}
         anchor="right"
-        slotProps={{
-          root: {
-            sx: {
-              "--zIndex-modal": "9001"
-            }
-          },
-          // content: {
-          //   sx: {
-          //     ...(width.under.tablet ? {
-          //       height: "100vh"
-          //     } : {})
-          //   }
-          // }
-        }}
       >
         <Box sx={style.drawerHeader}>
           <Button
@@ -191,15 +187,6 @@ const NavigationDrawer = ({
                       href="/portfolio"
                       title={navPortfolio}
                       // badge="" // TODO add unseen projects badge 
-                      icon={<ChevronRight />}
-                    />
-                  </ListItem>
-                  <ListItem>
-                    <DrawerLink
-                      callback={hideDrawer}
-                      href="?contact"
-                      title={navContact}
-                      scroll={false}
                       icon={<ChevronRight />}
                     />
                   </ListItem>

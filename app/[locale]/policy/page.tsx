@@ -56,7 +56,14 @@ const Policy = async ({
   })
 
   return (
-    <Section height="calc(100vh - 30px)">
+    <Section
+      height="calc(100vh - 30px)"
+      sx={{
+        p: 3,
+        gap: 3,
+        maxWidth: 768
+      }}
+    >
       <SectionTitle>{title}</SectionTitle>
       <ExtendedTypography>{text}</ExtendedTypography>
     </Section>
