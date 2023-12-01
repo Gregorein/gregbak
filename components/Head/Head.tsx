@@ -4,12 +4,12 @@ import { Box } from "@mui/system"
 import { Canvas, useLoader, useFrame } from "@react-three/fiber"
 import mq from "theme/mediaQueries"
 import { transition } from "theme/utils"
-import type { Mesh } from "three"
 import { MeshPhysicalMaterial, Object3D, TextureLoader, Vector2, Vector3 } from "three"
 import { useGLTF } from "@react-three/drei"
 import { useColorScheme } from "@mui/joy"
 import { useEffect, useRef } from "react"
 import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader"
+import type { BufferGeometry, Group } from "three/src/Three"
 
 const style = {
   container: {
@@ -66,7 +66,11 @@ const style = {
 
 // useGLTF.preload("head/head.glb")
 interface GLB extends GLTF {
-  nodes?: object
+  nodes?: {
+    [key: string]: {
+      geometry: BufferGeometry
+    }
+  }
 }
 interface DeviceOrientationEventiOS extends DeviceOrientationEvent {
   requestPermission?: () => Promise<"granted" | "denied">;
@@ -126,7 +130,7 @@ const Sculpture = () => {
 
   const position = new Vector3(0, -0.1, 0)
   const lookOriginRef = useRef(new Object3D())
-  const headRef = useRef<Mesh>()
+  const headRef = useRef<Group>()
   const lookPosRef = useRef({
     x: 0,
     y: 0
