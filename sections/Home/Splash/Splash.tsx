@@ -44,7 +44,8 @@ const style: Style = {
     color: "primary.500",
     fontSize: 64,
     fontWeight: 800,
-    // zIndex: 1,
+    zIndex: 1,
+    lineHeight: 1,
 
     [mq.under.laptop]: {
       fontSize: 48
@@ -56,7 +57,7 @@ const style: Style = {
     flexDirection: "column",
     justifyContent: "flex-end",
     gap: 1,
-    // zIndex: 1,
+    zIndex: 1,
   },
   profession: {
     fontSize: 24,
@@ -64,6 +65,9 @@ const style: Style = {
     whiteSpace: "pre",
 
     [mq.under.laptop]: {
+      fontSize: 21
+    },
+    [mq.under.tablet]: {
       fontSize: 16
     }
   },
@@ -72,19 +76,27 @@ const style: Style = {
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-end",
-    // zIndex: 1,
+    zIndex: 1,
 
     [mq.under.laptop]: {
-      paddingTop: 1.5
+      paddingTop: 0.5
+    },
+    [mq.under.tablet]: {
+      paddingTop: 1
     }
   },
   experience: {
     display: "flex",
     alignItems: "center",
     gap: 1,
+    marginBottom: -0.5,
 
     [mq.under.laptop]: {
-      gap: 0.5
+      gap: 0.5,
+      marginBottom: -0.75,
+    },
+    [mq.under.tablet]: {
+      marginBottom: -1,
     }
   },
   experienceCount: {
@@ -92,6 +104,9 @@ const style: Style = {
     fontWeight: 100,
 
     [mq.under.laptop]: {
+      fontSize: 36
+    },
+    [mq.under.tablet]: {
       fontSize: 28
     }
   },
@@ -101,6 +116,9 @@ const style: Style = {
     whiteSpace: "pre",
 
     [mq.under.laptop]: {
+      fontSize: 21
+    },
+    [mq.under.tablet]: {
       fontSize: 12
     }
   },
@@ -109,7 +127,7 @@ const style: Style = {
     display: "flex",
     alignItems: "flex-end",
     justifyContent: "flex-end",
-    // zIndex: 1,
+    zIndex: 1,
   },
 }
 
@@ -168,6 +186,7 @@ const Splash = ({
           <CtaButton
             title={splashButton}
             target={target}
+            textAlign="right"
           />
         </Box>
 

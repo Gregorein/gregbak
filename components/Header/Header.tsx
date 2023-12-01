@@ -77,10 +77,6 @@ const Header = ({
     codeButton,
     uiToggle,
     languagesMenu,
-    // closeMenu,
-    // menuNavigationTitle,
-    // menuSocialTitle,
-    // menuActionsTitle
   } = labels
 
   return (
@@ -89,8 +85,6 @@ const Header = ({
       sx={style.header}
     >
       <LogoLink />
-
-      <Box id="test">TEST</Box>
 
       {!width.under.tablet && (
         <NavigationMain

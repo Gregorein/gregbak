@@ -23,7 +23,7 @@ const style = {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: "850px",
-    height: "850px",
+    aspectRatio: "1 / 1",
 
     borderRadius: "50%",
     border: "2px solid",
@@ -32,34 +32,24 @@ const style = {
 
     [mq.under.laptop]: {
       width: "650px",
-      height: "650px",
     },
     [mq.under.tablet]: {
-      opacity: 0
+      opacity: 0,
+      width: "50%",
     }
   },
   canvas: {
+    transition: transition("top"),
     position: "absolute",
 
     maxWidth: "100vw",
     width: "100%",
-    height: "1100px",
+    height: "min(1100px, 100vh)",
     left: 0,
-    top: 0,
-    // left: "50%",
-    // transform: "translate(-50%, -25%)",
+    top: "25%",
 
-    background: "rgba(255, 0, 255, 0.3)",
-
-    [mq.under.laptop]: {
-      // height: "900px",
-      // width: "900px",
-      // transform: "translate(-50%, -25%)",
-    },
     [mq.under.tablet]: {
-      // height: "800px",
-      // width: "800px",
-      // transform: "translate(-50%, -33%)",
+      top: "30%"
     },
   }
 }
@@ -148,27 +138,40 @@ const Sculpture = () => {
   }
   const handleOrientation = ({ rotationRate }: DeviceMotionEvent) => {
     const x = rotationRate.beta
-    const y = rotationRate.gamma
+    const y = rotationRate.alpha
 
-    document.querySelector("#test").textContent = `x: ${x} y: ${y}`
-
-    // lookPosRef.current = {
-    //   x,
-    //   y
-    // }
+    lookPosRef.current = {
+      x,
+      y
+    }
   }
 
-  useEffect(() => {
-    if (typeof (DeviceOrientationEvent as unknown as DeviceOrientationEventiOS).requestPermission === "function") {
+  const permissionRef = useRef(false)
+  const handlePermission = () => {
+    if (
+      !permissionRef.current &&
+      typeof (DeviceOrientationEvent as unknown as DeviceOrientationEventiOS).requestPermission === "function"
+    ) {
       (DeviceOrientationEvent as unknown as DeviceOrientationEventiOS).requestPermission()
         .then(permissionState => {
           if (permissionState === "granted") {
-            window.addEventListener("deviceorientation", handleOrientation, true)
+            window.addEventListener("devicemotion", handleOrientation, true)
+            permissionRef.current = true
+            document.querySelector("#splash").removeEventListener("click", handlePermission)
           }
         })
+        .catch(error => {
+          console.error(error)
+          permissionRef.current = true
+          document.querySelector("#splash").removeEventListener("click", handlePermission)
+        })
     }
+  }
 
+  useEffect(() => {
+    // pointer or mousefrom the useFrame state don't work nicely with my current DOM structure so I use mousemove instead
     window.addEventListener("mousemove", handleMousePos)
+    document.querySelector("#splash").addEventListener("click", handlePermission, true)
 
     lookOriginRef.current.position.set(position.x, position.y, position.z)
 
@@ -179,14 +182,24 @@ const Sculpture = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const amount = 0.2
-  const step = 0.01
   useFrame(() => {
-    // pointer or mousefrom the useFrame state don't work nicely with my current DOM structure
-    const x = lookPosRef.current.x * amount
-    const y = lookPosRef.current.y * amount + position.y
+    let step = 0
+    let x = 0
+    let y = 0
+    if (permissionRef.current === true) { // gyro motion
+      const mobileMovementRange = 2.0
+      x = lookPosRef.current.x * mobileMovementRange
+      y = lookPosRef.current.y * mobileMovementRange
+      step = 0.0005
+    } else { // pointer motion
+      const mouseMovementRange = 0.1
+      x = lookPosRef.current.x * mouseMovementRange
+      y = lookPosRef.current.y * mouseMovementRange
+      step = 0.005
+    }
 
-    lookOriginRef.current.lookAt(x, y, 1)
+
+    lookOriginRef.current.lookAt(x, y + position.y, 1)
     const lookQuat = lookOriginRef.current.quaternion.clone()
 
     headRef.current.quaternion.slerp(lookQuat, step)

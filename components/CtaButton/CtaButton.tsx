@@ -1,5 +1,6 @@
 "use client"
 
+import type { TypographyProps } from "@mui/joy"
 import { Typography } from "@mui/joy"
 import ExtendedTypography from "components/ExtendedTypography/ExtendedTypography"
 import { ArrowDown } from "lucide-react"
@@ -12,7 +13,7 @@ import useMediaQuery from "util/useMediaQuery"
 type CtaButtonProps = {
   title: string
   target: string
-}
+} & TypographyProps
 
 const style: Style = {
   text: {
@@ -40,7 +41,7 @@ const style: Style = {
   }
 }
 
-const CtaButton = ({ title, target }: CtaButtonProps) => {
+const CtaButton = ({ title, target, ...typographyProps }: CtaButtonProps) => {
   const width = useMediaQuery()
 
   const handleScrollTo = () => {
@@ -54,6 +55,7 @@ const CtaButton = ({ title, target }: CtaButtonProps) => {
     <Typography
       sx={style.text}
       onClick={handleScrollTo}
+      {...typographyProps}
     >
       <ExtendedTypography>
         {title}

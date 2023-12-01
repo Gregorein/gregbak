@@ -6,6 +6,7 @@ import {
   CssBaseline,
   CssVarsProvider
 } from "@mui/joy"
+import dynamic from "next/dynamic"
 import { useServerInsertedHTML } from "next/navigation"
 
 import type { ReactNode } from "react"
@@ -90,4 +91,7 @@ const StyleProvider = ({ children }: StyleProviderProps) => {
   )
 }
 
-export default StyleProvider
+export default process.env.NODE_ENV === "production" ? dynamic(() => Promise.resolve(StyleProvider), {
+  ssr: false,
+}) : StyleProvider
+
