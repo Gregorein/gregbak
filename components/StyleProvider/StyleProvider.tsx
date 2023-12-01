@@ -49,7 +49,7 @@ const StyleProvider = ({ children }: StyleProviderProps) => {
     }
   })
 
-  const defaultMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+  const defaultMode = window ? window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light" : "dark"
 
   useServerInsertedHTML(() => {
     const names = flush()

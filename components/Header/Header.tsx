@@ -90,6 +90,8 @@ const Header = ({
     >
       <LogoLink />
 
+      <Box id="test">TEST</Box>
+
       {!width.under.tablet && (
         <NavigationMain
           labels={{

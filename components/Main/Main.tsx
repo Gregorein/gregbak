@@ -9,7 +9,8 @@ const Main = ({ children }: MainProps) => (
   <Box
     component="main"
     sx={{
-      minHeight: `calc(100vh - ${90 + 570}px)`
+      minHeight: `calc(100vh - ${90 + 570}px)`,
+      overflow: "hidden",
     }}
   >
     {children}

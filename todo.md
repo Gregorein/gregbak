@@ -1,5 +1,4 @@
-add head to home splash
-implement notice snackbars
+overflow on main/ splash
 finish SEO and OG https://www.datocms.com/docs/next-js/seo-management https://nextjs.org/docs/app/api-reference/functions/
 finish error pages https://nextjs.org/docs/app/building-your-application/routing/error-handlinggenerate-metadata#opengraph
 check TODOs
@@ -10,6 +9,7 @@ add more projects:
   gregbak V4
   kompastradycji
 
+implement notice snackbars
 add animations https://blog.logrocket.com/advanced-page-transitions-next-js-framer-motion/
 check reader modes everywhere
 check if "use client"s can be removed
@@ -27,4 +27,5 @@ get locales from api
 https://nextjs.org/docs/app/building-your-application/rendering
 https://medium.com/techzap/deploying-strapi-on-heroku-ac48e663afd8
 https://docs.strapi.io/dev-docs/quick-start
-add cookies for a navigationMani badge on portfolio if there are new unchecked projec
+add cookies for a navigationMain badge on portfolio if there are new unchecked projects
+properly resculpt the head

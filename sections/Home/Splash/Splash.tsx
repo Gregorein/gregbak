@@ -23,9 +23,7 @@ type SplashProps = {
 
 const style: Style = {
   container: {
-    overflowX: "hidden",
     display: "grid",
-    position: "relative",
     p: 3,
     height: "100%",
     maxHeight: 850,
@@ -46,6 +44,7 @@ const style: Style = {
     color: "primary.500",
     fontSize: 64,
     fontWeight: 800,
+    // zIndex: 1,
 
     [mq.under.laptop]: {
       fontSize: 48
@@ -56,7 +55,8 @@ const style: Style = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-end",
-    gap: 1
+    gap: 1,
+    // zIndex: 1,
   },
   profession: {
     fontSize: 24,
@@ -72,6 +72,7 @@ const style: Style = {
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-end",
+    // zIndex: 1,
 
     [mq.under.laptop]: {
       paddingTop: 1.5
@@ -108,6 +109,7 @@ const style: Style = {
     display: "flex",
     alignItems: "flex-end",
     justifyContent: "flex-end",
+    // zIndex: 1,
   },
 }
 
@@ -128,6 +130,7 @@ const Splash = ({
     <Section
       centered
       maxWidth="1680px"
+      id="splash"
     >
       <Box sx={style.container}>
         <Typography
