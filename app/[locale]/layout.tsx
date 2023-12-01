@@ -1,6 +1,9 @@
 import type { ReactNode } from "react"
 import { Analytics } from "@vercel/analytics/react"
-import StyleProvider from "components/StyleProvider/StyleProvider"
+// import StyleProvider from "components/StyleProvider/StyleProvider"
+const StyleProvider = dynamic(() => import("components/StyleProvider/StyleProvider"), {
+  ssr: false
+})
 
 import { unstable_setRequestLocale } from "next-intl/server"
 
@@ -16,6 +19,7 @@ import seo from "queries/root/seo.gql"
 import config from "queries/root/config.gql"
 import ColorSchemeInit from "components/ColorSchemeInit/ColorSchemeInit"
 import { locales, matchLocale } from "i18n"
+import dynamic from "next/dynamic"
 
 export const generateStaticParams = async () => locales.map(locale => ({ locale }))
 
