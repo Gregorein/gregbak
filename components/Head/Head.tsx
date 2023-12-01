@@ -14,7 +14,6 @@ import type { BufferGeometry, Group } from "three/src/Three"
 const style = {
   container: {
     pointerEvents: "none",
-    overflow: "visible"
   },
   halo: {
     transition: transition("opacity", "width", "height"),
@@ -92,7 +91,6 @@ const Sculpture = () => {
     map: darkColor,
     alphaMap: darkAlpha,
     normalMap: darkNormal,
-    normalScale: new Vector2(1.25, 1.25),
   })
 
   const lightMaterial = new MeshPhysicalMaterial({
@@ -192,7 +190,7 @@ const Sculpture = () => {
       y = lookPosRef.current.y * mobileMovementRange
       step = 0.0005
     } else { // pointer motion
-      const mouseMovementRange = 0.1
+      const mouseMovementRange = 0.2
       x = lookPosRef.current.x * mouseMovementRange
       y = lookPosRef.current.y * mouseMovementRange
       step = 0.005
@@ -253,11 +251,11 @@ const Head = () => {
           }}
           onCreated={() => { }}
         >
-          <ambientLight intensity={isDark ? 0.25 : 0.9} />
+          <ambientLight intensity={isDark ? 0.75 : 1.5} />
           <directionalLight
             color="white"
             intensity={isDark ? 0.75 : 1.5}
-            position={[-10, 10, 10]}
+            position={[-10, 1, 1]}
           />
 
           <Sculpture />
