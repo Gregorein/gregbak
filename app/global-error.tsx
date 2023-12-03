@@ -2,6 +2,7 @@
 
 import { Button, Typography } from "@mui/joy"
 import Section from "components/Section/Section"
+import { RefreshCw } from "lucide-react"
 
 type GlobalErrorProps = {
   error
@@ -20,7 +21,7 @@ const GlobalError = ({
         <Typography>
           {JSON.stringify(error)}
         </Typography>
-        <Button onClick={reset}>Try again</Button>
+        <Button onClick={reset}><RefreshCw /></Button>
       </Section>
     </body>
   </html>

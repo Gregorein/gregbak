@@ -35,13 +35,14 @@ export const generateMetadata = async ({
   const {
     _site: {
       globalSeo: {
-        //TODO: finish global seo
         fallbackSeo: {
           description,
           title,
-          // image: {
-          //   url
-          // }
+          image: {
+            url,
+            width,
+            height
+          }
         },
         siteName
       }
@@ -67,21 +68,20 @@ export const generateMetadata = async ({
 
     creator: "Greg Bak",
     robots: "index, follow",
-
+    openGraph: {
+      type: "website",
+      title,
+      description,
+      siteName,
+      images: [
+        {
+          url,
+          width,
+          height
+        }
+      ]
+    }
   }
-  // TODO: finish openGraph
-  // openGraph: {
-  //   type: "website",
-  //   title,
-  //   description,
-  //   siteName,
-  //   images: [
-  //     {
-  //       url
-  //     }
-  //   ]
-  // },
-
 }
 
 export const viewport: Viewport = {
@@ -102,8 +102,6 @@ const RootLayout = async ({
 
   const {
     config: {
-      maintenance,
-
       navResume,
       navPortfolio,
 
@@ -134,10 +132,6 @@ const RootLayout = async ({
       locale
     }
   })
-
-  if (maintenance) {
-    // TODO implement maintenance mode
-  }
 
   return (
     <html lang={locale}>

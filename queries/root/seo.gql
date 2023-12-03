@@ -6,6 +6,8 @@ query SEO($locale:SiteLocale = en) {
         title
         image {
           url
+          width
+          height
         }
       }
       siteName

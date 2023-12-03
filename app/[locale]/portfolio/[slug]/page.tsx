@@ -17,6 +17,7 @@ import StatsWip from "sections/Project/StatsWip/StatsWip"
 import { locales, matchLocale } from "i18n"
 import mq from "theme/mediaQueries"
 import LinkArrow from "assets/icons/LinkArrow"
+import { notFound } from "next/navigation"
 
 export const generateStaticParams = async () => {
   const { allProjects } = await api("query allProjectSlugs { allProjects { slug } }")
@@ -44,6 +45,15 @@ export const generateMetadata = async ({
     locale
   }
 }: ProjectProps) => {
+  const data = await api(config, {
+    variables: {
+      slug,
+      locale
+    }
+  })
+
+  if (data.project === null) notFound()
+
   const {
     project: {
       title
@@ -51,12 +61,7 @@ export const generateMetadata = async ({
     portfolio: {
       title: portfolioTitle
     }
-  } = await api(config, {
-    variables: {
-      slug,
-      locale
-    }
-  })
+  } = data
 
   return {
     title: `${title} | ${portfolioTitle}`
@@ -229,6 +234,15 @@ const Project = async ({
 }: ProjectProps) => {
   unstable_setRequestLocale(matchLocale(locale))
 
+  const data = await api(project, {
+    variables: {
+      slug,
+      locale
+    },
+  })
+
+  if (data.project === null) notFound()
+
   const {
     portfolio: {
       servicesTitle,
@@ -251,12 +265,7 @@ const Project = async ({
       date,
       client,
     }
-  } = await api(project, {
-    variables: {
-      slug,
-      locale
-    },
-  })
+  } = data
 
   const isWip = categories.find(category => category.id === wip.id) !== undefined
 

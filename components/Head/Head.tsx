@@ -38,7 +38,7 @@ const style = {
     }
   },
   canvas: {
-    transition: "top ease 1s, opacity ease 1s",
+    transition: "top ease 2s, opacity ease 2s",
     position: "absolute",
 
     maxWidth: "100vw",
@@ -47,10 +47,10 @@ const style = {
     left: 0,
     opacity: 0,
 
-    top: "33%",
+    top: "27%",
 
     [mq.under.tablet]: {
-      top: "50%"
+      top: "33%"
     },
   },
   visible: {

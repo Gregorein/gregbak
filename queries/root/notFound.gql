@@ -1,0 +1,6 @@
+query NotFound($locale:SiteLocale = en) {
+  config(locale: $locale) {
+    notFoundTitle
+    notFoundText
+  }
+}
