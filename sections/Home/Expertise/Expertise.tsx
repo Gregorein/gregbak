@@ -207,7 +207,7 @@ const Expertise = ({
 
           <Typography
             component={Link}
-            href="?contact"
+            href="mailto:contact@gregbak.com"
             scroll={false}
             sx={style.groupLink}
           >
