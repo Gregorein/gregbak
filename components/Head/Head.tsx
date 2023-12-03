@@ -53,7 +53,6 @@ const style = {
   }
 }
 
-// useGLTF.preload("head/head.glb")
 interface GLB extends GLTF {
   nodes?: {
     [key: string]: {
@@ -185,15 +184,15 @@ const Sculpture = () => {
     let x = 0
     let y = 0
     if (permissionRef.current === true) { // gyro motion
-      const mobileMovementRange = 2.0
+      const mobileMovementRange = 4.0
       x = lookPosRef.current.x * mobileMovementRange
       y = lookPosRef.current.y * mobileMovementRange
-      step = 0.0005
+      step = 0.001
     } else { // pointer motion
-      const mouseMovementRange = 0.2
+      const mouseMovementRange = 0.4
       x = lookPosRef.current.x * mouseMovementRange
       y = lookPosRef.current.y * mouseMovementRange
-      step = 0.005
+      step = 0.001
     }
 
 
@@ -246,7 +245,7 @@ const Head = () => {
           camera={{
             fov: 30,
             near: 0.1,
-            far: 10,
+            far: 20,
             position: [0, 1, 5]
           }}
           onCreated={() => { }}

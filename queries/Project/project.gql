@@ -13,7 +13,10 @@ query Portfolio($slug: String!, $locale: SiteLocale = en) {
   }
 
   project(filter: {slug: {eq: $slug}}, locale: $locale) {
-    url
+    urls {
+      title
+      url
+    }
     categories {
       id
       title

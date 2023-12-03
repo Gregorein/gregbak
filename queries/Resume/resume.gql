@@ -89,7 +89,15 @@ query Resume($locale:SiteLocale = en) {
         stack {
           title
         }
+        date {
+          end
+          start
+        }
         clients {
+          date {
+            end
+            start
+          }
           name
           url
         }

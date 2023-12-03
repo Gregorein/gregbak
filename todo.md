@@ -1,9 +1,10 @@
-overflow on main/ splash
+check head materials to be more popping
 finish SEO and OG https://www.datocms.com/docs/next-js/seo-management https://nextjs.org/docs/app/api-reference/functions/
 finish error pages https://nextjs.org/docs/app/building-your-application/routing/error-handlinggenerate-metadata#opengraph
 check TODOs
 run tests on https://search.google.com/test/mobile-friendly and lighthouse etc
 add more projects:
+  add my head project
   mity antykoncepcji
   amdg.agency
   gregbak V4

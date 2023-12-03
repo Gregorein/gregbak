@@ -4,8 +4,7 @@
   "description": "personal portfolio of Greg Bak",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "https": "next dev --experimental-https",
+    "dev": "next dev --experimental-https",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -25,7 +24,6 @@
     "@mux/mux-player-react": "^2.2.0",
     "@react-three/drei": "^9.89.0",
     "@react-three/fiber": "^8.15.11",
-    "@react-three/postprocessing": "^2.15.11",
     "@vercel/analytics": "^1.1.1",
     "d3": "^7.8.5",
     "framer-motion": "^10.16.12",

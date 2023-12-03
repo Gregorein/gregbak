@@ -9,7 +9,9 @@ module.exports = {
     })
     return config
   },
-  transpilePackages: ["three"]
+  transpilePackages: [
+    "three"
+  ]
   /*
     disabled until Vercel fixes i18n on app router:
       https://github.com/vercel/next.js/issues/58583,

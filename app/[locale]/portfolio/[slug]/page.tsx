@@ -240,7 +240,7 @@ const Project = async ({
       wip
     },
     project: {
-      url,
+      urls,
       categories,
       tools,
       title,
@@ -324,21 +324,24 @@ const Project = async ({
               </Box>
             )}
 
-            {url && (
+            {urls.length > 0 && (
               <Box sx={style.stat}>
                 <Typography sx={style.statTitle}>
                   {urlTitle}
                 </Typography>
 
-                <Typography
-                  component={Link}
-                  href={url}
-                  sx={style.statLink}
-                >
-                  {url}
-                  <LinkArrow sx={style.statIcon} />
+                {urls.map(({ title, url }) => (
+                  <Typography
+                    key={url}
+                    component={Link}
+                    href={url}
+                    sx={style.statLink}
+                  >
+                    {title}
+                    <LinkArrow sx={style.statIcon} />
 
-                </Typography>
+                  </Typography>
+                ))}
               </Box>
             )}
           </Box>

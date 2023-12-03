@@ -35,10 +35,10 @@ const style: Style = {
   leftSlogan: {
     color: "background.level2",
     lineHeight: 1.25,
-    fontSize: 144,
+    fontSize: 96,
 
     [mq.under.laptop]: {
-      fontSize: 96
+      fontSize: 72
     },
     [mq.under.tablet]: {
       fontSize: 56
@@ -65,11 +65,11 @@ const style: Style = {
     }
   },
   rightSlogan: {
-    fontSize: 144,
+    fontSize: 96,
     lineHeight: 1.25,
 
     [mq.under.laptop]: {
-      fontSize: 96
+      fontSize: 72
     },
     [mq.under.tablet]: {
       fontSize: 56
