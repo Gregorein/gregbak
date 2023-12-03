@@ -98,7 +98,7 @@ export const Radar = ({
     }
   }
 
-  const RADIUS_INNER = (size / 2) / 4
+  const RADIUS_INNER = (size / 2) / 2
   const RADIUS_OUTER = (size / 2) - 25
   const RING_SIZE = size / 4
 
@@ -117,7 +117,7 @@ export const Radar = ({
 
   const d = d3
     .lineRadial()
-    .curve(d3.curveCardinalClosed.tension(0.5))
+    .curve(d3.curveCardinalClosed.tension(0.25))
 
   const paths = data.map((layer, l) => {
     const labels = []

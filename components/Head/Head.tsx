@@ -7,7 +7,7 @@ import { transition } from "theme/utils"
 import { MeshPhysicalMaterial, Object3D, TextureLoader, Vector2, Vector3 } from "three"
 import { useGLTF } from "@react-three/drei"
 import { useColorScheme } from "@mui/joy"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader"
 import type { BufferGeometry, Group } from "three/src/Three"
 
@@ -38,13 +38,23 @@ const style = {
     }
   },
   canvas: {
-    transition: transition("top"),
+    transition: "top ease 1s, opacity ease 1s",
     position: "absolute",
 
     maxWidth: "100vw",
     width: "100%",
     height: "min(1100px, 100vh)",
     left: 0,
+    opacity: 0,
+
+    top: "33%",
+
+    [mq.under.tablet]: {
+      top: "50%"
+    },
+  },
+  visible: {
+    opacity: 1,
     top: "25%",
 
     [mq.under.tablet]: {
@@ -189,7 +199,7 @@ const Sculpture = () => {
       y = lookPosRef.current.y * mobileMovementRange
       step = 0.001
     } else { // pointer motion
-      const mouseMovementRange = 0.4
+      const mouseMovementRange = 0.2
       x = lookPosRef.current.x * mouseMovementRange
       y = lookPosRef.current.y * mouseMovementRange
       step = 0.001
@@ -233,12 +243,22 @@ const Sculpture = () => {
 const Head = () => {
   const { mode } = useColorScheme()
   const isDark = mode === "dark"
+  const [isReady, setReady] = useState(false)
+
+  const handleCreated = () => {
+    setReady(true)
+  }
 
   return (
     <Box sx={style.container}>
       <Box sx={style.halo} />
 
-      <Box sx={style.canvas}>
+      <Box
+        sx={{
+          ...style.canvas,
+          ...(isReady ? style.visible : {})
+        }}
+      >
         <Canvas
           eventSource={document.body}
           style={{ pointerEvents: "none" }}
@@ -248,7 +268,7 @@ const Head = () => {
             far: 20,
             position: [0, 1, 5]
           }}
-          onCreated={() => { }}
+          onCreated={handleCreated}
         >
           <ambientLight intensity={isDark ? 0.75 : 1.5} />
           <directionalLight
