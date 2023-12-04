@@ -11,12 +11,15 @@ import { useServerInsertedHTML } from "next/navigation"
 import type { ReactNode } from "react"
 import { useState } from "react"
 import theme from "theme/theme"
+import useMounted from "util/useMounted"
 
 export type ProvidersProps = {
   children: ReactNode
 }
 
 const Providers = ({ children }: ProvidersProps) => {
+  const isMounted = useMounted()
+
   const [{ cache, flush }] = useState(() => {
     const cache = createCache({
       key: "joy"
@@ -49,8 +52,6 @@ const Providers = ({ children }: ProvidersProps) => {
     }
   })
 
-  const defaultMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
-
   useServerInsertedHTML(() => {
     const names = flush()
 
@@ -74,6 +75,10 @@ const Providers = ({ children }: ProvidersProps) => {
       />
     )
   })
+
+  if (!isMounted) return null
+
+  const defaultMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
 
   return (
     <CacheProvider value={cache}>
