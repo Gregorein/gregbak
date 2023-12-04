@@ -50,8 +50,8 @@ const NavThemeToggle = ({ titleOn, titleOff }: NavThemeToggleProps) => {
         }}
       >
         {isDark
-          ? <Moon />
-          : <SunDim />
+          ? <SunDim />
+          : <Moon />
         }
       </Box>
     </Tooltip>

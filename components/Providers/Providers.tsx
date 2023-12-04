@@ -13,11 +13,11 @@ import type { ReactNode } from "react"
 import { useState } from "react"
 import theme from "theme/theme"
 
-export type StyleProviderProps = {
+export type ProvidersProps = {
   children: ReactNode
 }
 
-const StyleProvider = ({ children }: StyleProviderProps) => {
+const Providers = ({ children }: ProvidersProps) => {
   const [{ cache, flush }] = useState(() => {
     const cache = createCache({
       key: "joy"
@@ -91,7 +91,7 @@ const StyleProvider = ({ children }: StyleProviderProps) => {
   )
 }
 
-export default process.env.NODE_ENV === "production" ? dynamic(() => Promise.resolve(StyleProvider), {
+export default process.env.NODE_ENV === "production" ? dynamic(() => Promise.resolve(Providers), {
   ssr: false,
-}) : StyleProvider
+}) : Providers
 

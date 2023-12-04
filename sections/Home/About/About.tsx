@@ -1,6 +1,7 @@
-import { Box, Typography } from "@mui/joy"
+import { Box } from "@mui/joy"
 
 import CtaButton from "components/CtaButton/CtaButton"
+import ExtendedTypography from "components/ExtendedTypography/ExtendedTypography"
 import Section from "components/Section/Section"
 import SectionTitle from "components/SectionTitle/SectionTitle"
 import mq from "theme/mediaQueries"
@@ -51,43 +52,33 @@ const About = ({
   },
   id,
   target
-}: AboutProps) => {
-  const [firstParagraph, ...restOfText] = aboutText.split("\n\n")
+}: AboutProps) => (
+  <Section
+    id={id}
+    centered
+    trim
+  >
+    <Box sx={style.container}>
+      <SloganLeft words={aboutSloganLeft} />
 
-  return (
-    <Section
-      id={id}
-      centered
-      trim
-    >
-      <Box sx={style.container}>
-        <SloganLeft words={aboutSloganLeft} />
+      <SectionTitle>
+        {aboutTitle}
+      </SectionTitle>
 
-        <SectionTitle>
-          {aboutTitle}
-        </SectionTitle>
+      <ExtendedTypography
+        fontFamily="anivers"
+        fontSize={18}
+      >
+        {aboutText}
+      </ExtendedTypography>
+      <CtaButton
+        title={aboutButton}
+        target={target}
+      />
 
-        <Typography
-          fontFamily="anivers"
-          fontSize={18}
-        >
-          {firstParagraph}
-          {restOfText.map(paragraph => (
-            <>
-              <br /><br />
-              {paragraph}
-            </>
-          ))}
-        </Typography>
-        <CtaButton
-          title={aboutButton}
-          target={target}
-        />
-
-        <SloganRight words={aboutSloganRight} />
-      </Box>
-    </Section >
-  )
-}
+      <SloganRight words={aboutSloganRight} />
+    </Box>
+  </Section >
+)
 
 export default About

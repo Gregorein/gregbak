@@ -1,9 +1,4 @@
-https://search.google.com/test/mobile-friendly 
-https://web.dev/articles/vitals#tools_to_measure_and_report_core_web_vitals
-
-implement notice snackbars
 add animations https://blog.logrocket.com/advanced-page-transitions-next-js-framer-motion/
-check reader modes everywhere
 check if "use client"s can be removed
 add skills explanations https://www.forbes.com/advisor/business/soft-skills-examples/
 extract & type query returns, add types to queries 
@@ -14,7 +9,5 @@ https://www.npmjs.com/package/@next/bundle-analyzer
 add eslint rules for ts (remove semis), eslint fix broken prop rules
 https://medium.com/techzap/deploying-strapi-on-heroku-ac48e663afd8
 https://docs.strapi.io/dev-docs/quick-start
-add cookies for a navigationMain badge on portfolio if there are new unchecked projects
 properly resculpt the head
-unseen projects badge
 project filters as search params

@@ -1,8 +1,6 @@
 import type { ReactNode } from "react"
 import { Analytics } from "@vercel/analytics/react"
 
-import StyleProvider from "components/StyleProvider/StyleProvider"
-
 import { unstable_setRequestLocale } from "next-intl/server"
 
 import "normalize.css"
@@ -17,6 +15,8 @@ import seo from "queries/root/seo.gql"
 import config from "queries/root/config.gql"
 import ColorSchemeInit from "components/ColorSchemeInit/ColorSchemeInit"
 import { locales, matchLocale } from "i18n"
+import Notifications from "components/Notifications/Notifications"
+import Providers from "components/Providers/Providers"
 
 export const generateStaticParams = async () => locales.map(locale => ({ locale }))
 
@@ -126,7 +126,9 @@ const RootLayout = async ({
       menuSocialTitle,
       menuActionsTitle
     },
-    allLocales
+    projectCounter,
+    allLocales,
+    allNotices
   } = await api(config, {
     variables: {
       locale
@@ -135,7 +137,7 @@ const RootLayout = async ({
 
   return (
     <html lang={locale}>
-      <StyleProvider>
+      <Providers>
         <head>
           <ColorSchemeInit />
           <link
@@ -175,6 +177,9 @@ const RootLayout = async ({
           />
         </head>
         <body>
+          <Notifications
+            notifications={allNotices}
+          />
           <Header
             labels={{
               navResume,
@@ -194,6 +199,7 @@ const RootLayout = async ({
               menuSocialTitle,
               menuActionsTitle
             }}
+            projectCounter={projectCounter}
             locales={allLocales}
           />
           <Main>
@@ -215,7 +221,7 @@ const RootLayout = async ({
           />
           <Analytics />
         </body>
-      </StyleProvider>
+      </Providers>
     </html>
   )
 }

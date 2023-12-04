@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Button, DialogContent, Drawer, IconButton, List, ListItem, ListSubheader, Typography, useColorScheme } from "@mui/joy"
+import { Badge, Box, Button, DialogContent, Drawer, IconButton, List, ListItem, ListSubheader, Typography, useColorScheme } from "@mui/joy"
 import { ChevronRight, Cookie, Dribbble, FileCode2, Github, Languages, Linkedin, MailIcon, Menu, Moon, MoreVertical, Settings, Share2, SunDim, X } from "lucide-react"
 import DrawerLink from "components/DrawerLink/DrawerLink"
 import type Style from "types/style"
@@ -9,6 +9,7 @@ import { useState } from "react"
 import { transition } from "theme/utils"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
+import useProjectCounter from "util/useProjectCounter"
 
 type NavigationDrawerType = {
   labels: {
@@ -35,10 +36,11 @@ type NavigationDrawerType = {
       text: string
     }[]
   }
+  projectCount: number
   locales: {
     code: string
     title: string
-  }[];
+  }[]
 }
 
 const style: Style = {
@@ -130,8 +132,11 @@ const NavigationDrawer = ({
 
     uiToggle
   },
+  projectCount,
   locales
 }: NavigationDrawerType) => {
+  const { count } = useProjectCounter()
+
   const width = useMediaQuery()
 
   const [open, setOpen] = useState(false)
@@ -181,14 +186,20 @@ const NavigationDrawer = ({
                       icon={<ChevronRight />}
                     />
                   </ListItem>
+
                   <ListItem>
-                    <DrawerLink
-                      callback={hideDrawer}
-                      href="/portfolio"
-                      title={navPortfolio}
-                      // badge="" // TODO add unseen projects badge 
-                      icon={<ChevronRight />}
-                    />
+                    <Badge
+                      invisible={!count(projectCount)}
+                      badgeContent={count(projectCount)}
+                      color="neutral"
+                    >
+                      <DrawerLink
+                        callback={hideDrawer}
+                        href="/portfolio"
+                        title={navPortfolio}
+                        icon={<ChevronRight />}
+                      />
+                    </Badge>
                   </ListItem>
                 </List>
               </ListItem>
@@ -268,8 +279,8 @@ const NavigationDrawer = ({
                     sx={style.themeToggle}
                   >
                     {isDark
-                      ? <><Moon />{uiToggle[0].text}</>
-                      : <><SunDim />{uiToggle[1].text}</>
+                      ? <><SunDim />{uiToggle[0].text}</>
+                      : <><Moon />{uiToggle[1].text}</>
                     }
                   </Typography>
                 </ListItem>

@@ -32,6 +32,9 @@ type HeaderProps = {
     menuSocialTitle: string
     menuActionsTitle: string
   }
+  projectCounter: {
+    count: number
+  }
   locales: {
     code: string
     title: string
@@ -61,6 +64,9 @@ const style: Style = {
 
 const Header = ({
   labels,
+  projectCounter: {
+    count
+  },
   locales,
 }: HeaderProps) => {
   const width = useMediaQuery()
@@ -92,6 +98,7 @@ const Header = ({
             navResume,
             navPortfolio
           }}
+          projectCount={count}
         />
       )}
       {width.over.tablet && (
@@ -121,6 +128,7 @@ const Header = ({
         <NavigationDrawer
           labels={labels}
           locales={locales}
+          projectCount={count}
         />
       )}
     </Box>

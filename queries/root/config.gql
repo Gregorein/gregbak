@@ -21,8 +21,22 @@ query Config($locale:SiteLocale = en) {
     menuSocialTitle
     menuActionsTitle
   }
+  projectCounter:_allProjectsMeta {
+    count
+  }
   allLocales(locale: $locale) {
     title
     code
+  }
+  allNotices(locale: $locale, filter: {active: {eq: "true"}}) {
+    id
+    title
+    text
+    cookie
+    variant
+    actions {
+      title
+      url
+    }
   }
 }

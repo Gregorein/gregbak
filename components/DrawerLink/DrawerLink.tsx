@@ -1,4 +1,4 @@
-import { Typography } from "@mui/joy"
+import { Box, Typography } from "@mui/joy"
 import Link from "next/link"
 import type { ReactNode } from "react"
 import { transition } from "theme/utils"
@@ -40,7 +40,17 @@ export const DrawerLink = ({
       }
     }}
   >
-    {icon}{title}
+    <Box
+      sx={{
+        width: 24,
+        height: "100%",
+        display: "flex",
+        alignItems: "center"
+      }}
+    >
+      {icon}
+    </Box>
+    {title}
   </Typography>
 )
 

@@ -8,25 +8,33 @@ declare module "@mui/joy/styles" {
     secondary: true
   }
 
+  interface PaletteRangeOverrides {
+    softActiveColor: true
+  }
+
   interface Palette {
     secondary: PaletteRange
   }
 
   interface PaletteBackgroundOverrides {
-    header: true,
+    header: true
     radar: true
   }
 
+  interface PaletteTextOverrides {
+    notification: true
+  }
+
   interface BreakpointOverrides {
-    xs: false; // removes the `xs` breakpoint
-    sm: false;
-    md: false;
-    lg: false;
-    xl: false;
-    mobile: true; // adds the `mobile` breakpoint
-    tablet: true;
-    laptop: true;
-    desktop: true;
+    xs: false // removes the default breakpoints
+    sm: false
+    md: false
+    lg: false
+    xl: false
+    mobile: true // adds the custom breakpoints
+    tablet: true
+    laptop: true
+    desktop: true
   }
 }
 
@@ -61,17 +69,21 @@ const extendedTheme = extendTheme({
           softColor: "var(--palette-secondary-700)",
           softBg: "var(--palette-secondary-100)",
           softHoverBg: "var(--palette-secondary-200)",
+          softActiveColor: "magenta",
           softActiveBg: "var(--palette-secondary-300)",
           softDisabledColor: "var(--palette-secondary-400)",
           softDisabledBg: "var(--palette-secondary-50)",
           
-          mainChannel: "200, 137, 65",
-          lightChannel: "237 216 192",
-          darkChannel: "111 74 32",
+          mainChannel: "64 192 199",
+          lightChannel: "190 234 236",
+          darkChannel: "32 105 109",
         },
         background: {
           header: "1.0",
-          radar: "var(--palette-neutral-100)"
+          radar: "var(--palette-neutral-100)",
+        },
+        text: {
+          notification: "var(--palette-neutral-900)"
         }
       }
     },
@@ -107,13 +119,16 @@ const extendedTheme = extendTheme({
           softDisabledColor: "var(--palette-secondary-500)",
           softDisabledBg: "var(--palette-secondary-800)",
 
-          mainChannel: "200, 137, 65",
-          lightChannel: "237 216 192",
-          darkChannel: "111 74 32",
+          mainChannel: "64 192 199",
+          lightChannel: "190 234 236",
+          darkChannel: "32 105 109",
         },
         background: {
           header: "0.6",
           radar: "var(--palette-primary-900)"
+        },
+        text: {
+          notification: "var(--palette-neutral-50)"
         }
       }
     },

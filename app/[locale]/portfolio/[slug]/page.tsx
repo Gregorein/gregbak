@@ -18,6 +18,7 @@ import { locales, matchLocale } from "i18n"
 import mq from "theme/mediaQueries"
 import LinkArrow from "assets/icons/LinkArrow"
 import { notFound } from "next/navigation"
+import ProjectViewCheck from "components/ProjectViewCheck/ProjectViewCheck"
 
 export const generateStaticParams = async () => {
   const { allProjects } = await api("query allProjectSlugs { allProjects { slug } }")
@@ -67,7 +68,6 @@ export const generateMetadata = async ({
     title: `${title} | ${portfolioTitle}`
   }
 }
-
 
 const style = {
   container: {
@@ -254,6 +254,7 @@ const Project = async ({
       wip
     },
     project: {
+      id,
       urls,
       categories,
       tools,
@@ -280,6 +281,8 @@ const Project = async ({
       maxWidth="1480px"
       sx={style.container}
     >
+      <ProjectViewCheck id={id} />
+
       <Box sx={style.header}>
         <Typography sx={style.title}>
           {title}
