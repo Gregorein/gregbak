@@ -78,7 +78,7 @@ const Sculpture = () => {
   const { mode } = useColorScheme()
   const isDark = mode === "dark"
 
-  const { nodes }: GLB = useGLTF("/head/head.glb")
+  const { nodes } = useGLTF("/head/head.glb") as unknown as GLB
   const [
     darkColor,
     darkNormal,
