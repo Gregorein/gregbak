@@ -6,7 +6,6 @@ import {
   CssBaseline,
   CssVarsProvider
 } from "@mui/joy"
-import dynamic from "next/dynamic"
 import { useServerInsertedHTML } from "next/navigation"
 
 import type { ReactNode } from "react"
@@ -91,7 +90,4 @@ const Providers = ({ children }: ProvidersProps) => {
   )
 }
 
-export default process.env.NODE_ENV === "production" ? dynamic(() => Promise.resolve(Providers), {
-  ssr: false,
-}) : Providers
-
+export default Providers
