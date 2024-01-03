@@ -4,7 +4,8 @@
   "description": "personal portfolio of Greg Bak",
   "private": true,
   "scripts": {
-    "dev": "next dev --experimental-https",
+    "https": "next dev --experimental-https",
+    "http": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -30,7 +31,7 @@
     "lodash": "^4.17.21",
     "lucide-react": "^0.294.0",
     "negotiator": "^0.6.3",
-    "next": "^14.0.4-canary.39",
+    "next": "^14.0.4",
     "next-intl": "^3.2.1",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",

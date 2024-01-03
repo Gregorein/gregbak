@@ -13,7 +13,7 @@ type AchievementListProps = {
     date: {
       end?: string
       start?: string
-    }
+    }[]
     url?: string
   }[],
   locale: string
@@ -107,9 +107,11 @@ const AchievementList = ({
         >
           {entry.title} {entry.url && <LinkArrow />}
         </Typography>
-        <Typography sx={style.date}>
-          {localiseDate(entry.date[0].end || entry.date[0].start, locale)}
-        </Typography>
+        {entry.date.length > 0 && (
+          <Typography sx={style.date}>
+            {localiseDate(entry.date[0].end || entry.date[0].start, locale)}
+          </Typography>
+        )}
         <Typography sx={style.text}>
           {entry.text}
         </Typography>
@@ -117,5 +119,4 @@ const AchievementList = ({
     ))}
   </Box>
 )
-
 export default AchievementList

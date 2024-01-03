@@ -83,6 +83,7 @@ const Skills = (
   const handlePointClick = (entry: RadarEntry | undefined) => {
     setActiveEntry(entry)
   }
+
   return (
     <SubSection id={skillsSlug}>
       <SectionTitle textAlign="center">{skillsTitle}</SectionTitle>

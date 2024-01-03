@@ -137,46 +137,46 @@ const RootLayout = async ({
 
   return (
     <html lang={locale}>
-      <Providers>
-        <head>
-          <ColorSchemeInit />
-          <link
-            rel="icon"
-            type="image/ico"
-            sizes="32x32"
-            href="/favicon.ico"
-          />
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="favicon/apple-touch-icon.png"
-          />
-          <link
-            rel="manifest"
-            href="favicon/site.webmanifest"
-          />
-          <link
-            rel="mask-icon"
-            href="favicon/safari-pinned-tab.svg"
-            color="#C88941"
-          />
+      <head>
+        <ColorSchemeInit />
+        <link
+          rel="icon"
+          type="image/ico"
+          sizes="32x32"
+          href="/favicon.ico"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="favicon/apple-touch-icon.png"
+        />
+        <link
+          rel="manifest"
+          href="favicon/site.webmanifest"
+        />
+        <link
+          rel="mask-icon"
+          href="favicon/safari-pinned-tab.svg"
+          color="#C88941"
+        />
 
-          <meta
-            name="msapplication-TileColor"
-            content="#060506"
-          />
+        <meta
+          name="msapplication-TileColor"
+          content="#060506"
+        />
 
-          <meta
-            name="format-detection"
-            content="telephone=no, date=no, email=no, address=no"
-          />
+        <meta
+          name="format-detection"
+          content="telephone=no, date=no, email=no, address=no"
+        />
 
-          <link
-            rel="stylesheet"
-            href="https://use.typekit.net/vrv7gnc.css"
-          />
-        </head>
-        <body>
+        <link
+          rel="stylesheet"
+          href="https://use.typekit.net/vrv7gnc.css"
+        />
+      </head>
+      <body>
+        <Providers>
           <Notifications
             notifications={allNotices}
           />
@@ -220,8 +220,8 @@ const RootLayout = async ({
             }}
           />
           <Analytics />
-        </body>
-      </Providers>
+        </Providers>
+      </body>
     </html>
   )
 }
