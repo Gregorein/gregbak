@@ -5,7 +5,9 @@ query Config($locale:SiteLocale = en) {
     socialMail
     socialLinkedin
     socialGithub
-    socialDribble
+		socialTwitter
+		socialTwitch
+		socialPatreon
     cookiesButton
     codeButton
     languagesMenu

@@ -21,209 +21,215 @@ import Providers from "components/Providers/Providers"
 export const generateStaticParams = async () => locales.map(locale => ({ locale }))
 
 type RootLayoutProps = {
-  children: ReactNode
-  params: {
-    locale: string
-  }
+	children: ReactNode
+	params: {
+		locale: string
+	}
 }
 
 export const generateMetadata = async ({
-  params: {
-    locale
-  }
+	params: {
+		locale
+	}
 }: RootLayoutProps): Promise<Metadata> => {
-  const {
-    _site: {
-      globalSeo: {
-        fallbackSeo: {
-          description,
-          title,
-          image: {
-            url,
-            width,
-            height
-          }
-        },
-        siteName
-      }
-    }
-  } = await api(seo, {
-    variables: {
-      locale
-    }
-  })
+	const {
+		_site: {
+			globalSeo: {
+				fallbackSeo: {
+					description,
+					title,
+					image: {
+						url,
+						width,
+						height
+					}
+				},
+				siteName
+			}
+		}
+	} = await api(seo, {
+		variables: {
+			locale
+		}
+	})
 
-  return {
-    title: {
-      default: title,
-      template: `%s | ${title}`
-    },
-    description,
-    applicationName: siteName,
-    authors: {
-      name: "Greg Bak",
-      url: "gregbak.com"
-    },
-    publisher: "Greg Bak",
+	return {
+		title: {
+			default: title,
+			template: `%s | ${title}`
+		},
+		description,
+		applicationName: siteName,
+		authors: {
+			name: "Greg Bak",
+			url: "gregbak.com"
+		},
+		publisher: "Greg Bak",
 
-    creator: "Greg Bak",
-    robots: "index, follow",
-    openGraph: {
-      type: "website",
-      title,
-      description,
-      siteName,
-      images: [
-        {
-          url,
-          width,
-          height
-        }
-      ]
-    }
-  }
+		creator: "Greg Bak",
+		robots: "index, follow",
+		openGraph: {
+			type: "website",
+			title,
+			description,
+			siteName,
+			images: [
+				{
+					url,
+					width,
+					height
+				}
+			]
+		}
+	}
 }
 
 export const viewport: Viewport = {
-  themeColor: "#060506",
-  colorScheme: "dark",
-  initialScale: 1,
-  width: "device-width",
-  viewportFit: "cover"
+	themeColor: "#060506",
+	colorScheme: "dark",
+	initialScale: 1,
+	width: "device-width",
+	viewportFit: "cover"
 }
 
 const RootLayout = async ({
-  children,
-  params: {
-    locale
-  }
+	children,
+	params: {
+		locale
+	}
 }: RootLayoutProps) => {
-  unstable_setRequestLocale(matchLocale(locale))
+	unstable_setRequestLocale(matchLocale(locale))
 
-  const {
-    config: {
-      navResume,
-      navPortfolio,
+	const {
+		config: {
+			navResume,
+			navPortfolio,
 
-      socialMail,
-      socialLinkedin,
-      socialGithub,
-      socialDribble,
+			socialMail,
+			socialLinkedin,
+			socialGithub,
+			socialTwitter,
+			socialTwitch,
+			socialPatreon,
 
-      cookiesButton,
-      codeButton,
-      uiToggle,
-      languagesMenu,
+			cookiesButton,
+			codeButton,
+			uiToggle,
+			languagesMenu,
 
-      ctaText,
-      ctaTitle,
+			ctaText,
+			ctaTitle,
 
-      policyButton,
-      copyrights,
+			policyButton,
+			copyrights,
 
-      closeMenu,
-      menuNavigationTitle,
-      menuSocialTitle,
-      menuActionsTitle
-    },
-    projectCounter,
-    allLocales,
-    allNotices
-  } = await api(config, {
-    variables: {
-      locale
-    }
-  })
+			closeMenu,
+			menuNavigationTitle,
+			menuSocialTitle,
+			menuActionsTitle
+		},
+		projectCounter,
+		allLocales,
+		allNotices
+	} = await api(config, {
+		variables: {
+			locale
+		}
+	})
 
-  return (
-    <html lang={locale}>
-      <head>
-        <ColorSchemeInit />
-        <link
-          rel="icon"
-          type="image/ico"
-          sizes="32x32"
-          href="/favicon.ico"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="favicon/apple-touch-icon.png"
-        />
-        <link
-          rel="manifest"
-          href="favicon/site.webmanifest"
-        />
-        <link
-          rel="mask-icon"
-          href="favicon/safari-pinned-tab.svg"
-          color="#C88941"
-        />
+	return (
+		<html lang={locale}>
+			<head>
+				<ColorSchemeInit />
+				<link
+					rel="icon"
+					type="image/ico"
+					sizes="32x32"
+					href="/favicon.ico"
+				/>
+				<link
+					rel="apple-touch-icon"
+					sizes="180x180"
+					href="favicon/apple-touch-icon.png"
+				/>
+				<link
+					rel="manifest"
+					href="favicon/site.webmanifest"
+				/>
+				<link
+					rel="mask-icon"
+					href="favicon/safari-pinned-tab.svg"
+					color="#C88941"
+				/>
 
-        <meta
-          name="msapplication-TileColor"
-          content="#060506"
-        />
+				<meta
+					name="msapplication-TileColor"
+					content="#060506"
+				/>
 
-        <meta
-          name="format-detection"
-          content="telephone=no, date=no, email=no, address=no"
-        />
+				<meta
+					name="format-detection"
+					content="telephone=no, date=no, email=no, address=no"
+				/>
 
-        <link
-          rel="stylesheet"
-          href="https://use.typekit.net/vrv7gnc.css"
-        />
-      </head>
-      <body>
-        <Providers>
-          <Notifications
-            notifications={allNotices}
-          />
-          <Header
-            labels={{
-              navResume,
-              navPortfolio,
+				<link
+					rel="stylesheet"
+					href="https://use.typekit.net/vrv7gnc.css"
+				/>
+			</head>
+			<body>
+				<Providers>
+					<Notifications
+						notifications={allNotices}
+					/>
+					<Header
+						labels={{
+							navResume,
+							navPortfolio,
 
-              socialMail,
-              socialLinkedin,
-              socialGithub,
-              socialDribble,
+							socialMail,
+							socialLinkedin,
+							socialGithub,
+							socialTwitter,
+							socialTwitch,
+							socialPatreon,
 
-              cookiesButton,
-              codeButton,
-              uiToggle,
-              languagesMenu,
-              closeMenu,
-              menuNavigationTitle,
-              menuSocialTitle,
-              menuActionsTitle
-            }}
-            projectCounter={projectCounter}
-            locales={allLocales}
-          />
-          <Main>
-            {children}
-          </Main>
-          <Footer
-            labels={{
-              socialMail,
-              socialLinkedin,
-              socialGithub,
-              socialDribble,
+							cookiesButton,
+							codeButton,
+							uiToggle,
+							languagesMenu,
+							closeMenu,
+							menuNavigationTitle,
+							menuSocialTitle,
+							menuActionsTitle
+						}}
+						projectCounter={projectCounter}
+						locales={allLocales}
+					/>
+					<Main>
+						{children}
+					</Main>
+					<Footer
+						labels={{
+							socialMail,
+							socialLinkedin,
+							socialGithub,
+							socialTwitch,
+							socialTwitter,
+							socialPatreon,
 
-              ctaText,
-              ctaTitle,
+							ctaText,
+							ctaTitle,
 
-              policyButton,
-              copyrights
-            }}
-          />
-          <Analytics />
-        </Providers>
-      </body>
-    </html>
-  )
+							policyButton,
+							copyrights
+						}}
+					/>
+					<Analytics />
+				</Providers>
+			</body>
+		</html>
+	)
 }
 
 export default RootLayout
