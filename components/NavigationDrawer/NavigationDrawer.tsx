@@ -1,7 +1,7 @@
 "use client"
 
 import { Badge, Box, Button, DialogContent, Drawer, IconButton, List, ListItem, ListSubheader, Typography, useColorScheme } from "@mui/joy"
-import { PiggyBank, Twitter, Twitch, ChevronRight, Cookie, Dribbble, FileCode2, Github, Languages, Linkedin, MailIcon, Menu, Moon, MoreVertical, Settings, Share2, SunDim, X } from "lucide-react"
+import { PiggyBank, Twitter, Twitch, ChevronRight, Cookie, FileCode2, Github, Languages, Linkedin, MailIcon, Menu, Moon, MoreVertical, Settings, Share2, SunDim, X } from "lucide-react"
 import DrawerLink from "components/DrawerLink/DrawerLink"
 import type Style from "types/style"
 import useMediaQuery from "util/useMediaQuery"
